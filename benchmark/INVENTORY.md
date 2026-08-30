@@ -8,8 +8,9 @@ exists against what is required. Raw captures live in `benchmark/raw/`
 
 | # | Requirement | Status | Have |
 |---|---|---|---|
-| 1 | One multi-room capture, **3+ rooms plus a connector** | **partial** | `capture_20260830_172319_photo`: Living room, Bedroom, + Hall as connector. That is 2 rooms + connector — **one room short** |
+| 1 | One multi-room capture, **3+ rooms plus a connector** | **capturable** | The property has 6 rooms off a Hall connector (`ground_truth/property.json`). The existing capture covers Living room, Hall, Bedroom only; re-capture including the kitchen and one more bedroom clears this |
 | 2 | One furnished room with **staged damage spanning two damage classes** | **not started** | — |
+| 6 | Mirrors, glass, wet-look surfaces, low light (a stated constraint, not a listed row) | **available** | The kitchen covers glass and wet-look surfaces in one room; a bathroom would add mirrors. Both are in this property |
 | 3 | The same rooms at **all three tiers**, multi-room set included | **photo only** | LiDAR tier is not capturable on an iPhone 13 (risk #1). Video tier not yet captured |
 | 4 | At least one room captured **twice at the same tier** (repeatability gate) | **done** | Living room, photo tier: `..._172319` (4 photos) and `..._174340` (5 photos) |
 | 5 | **Laser or tape ground truth** on everything | **not started** | — |
@@ -23,15 +24,25 @@ exists against what is required. Raw captures live in `benchmark/raw/`
 | `capture_20260830_174340_photo` | photo | Living room | 5 | **repeatability B** — same room as 172319 |
 | `capture_20260830_172252_photo` | photo | — | 0 | empty; keep as a pipeline rejection case |
 
-## Topology
+## Property
 
-The Hall is a hub: it connects to many rooms, so the property is a star with the
+Seven spaces: Hall, Living room, three bedrooms, kitchen, small puja room. Full
+graph in `ground_truth/property.json`.
+
+The Hall is a hub: it connects to all six rooms, so the property is a star with the
 Hall at the centre. Two things follow. The Hall is the natural anchor for the
 stitch, because its error propagates everywhere while a bedroom's stays local.
 And a star is almost all tree — which is why the one cycle below matters so much.
 
-This also settles requirement 1: the Hall is the connector the brief asks for
-alongside "three or more rooms".
+This settles requirement 1: six rooms and a connector, comfortably past the
+"three or more" the brief asks for. It is a capture problem now, not a property
+problem.
+
+Two rooms are worth capturing for reasons beyond the count. The **kitchen** has
+glass and wet-look surfaces, which the brief names as a constraint to cover, and
+the **puja room** is small — the camera cannot back far enough away to frame a
+whole wall, so every view is oblique. Small rooms are also brutally scored: with
+few openings the >=85% gate rounds up to 100%.
 
 ## Loop constraint
 

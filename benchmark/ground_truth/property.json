@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "property_id": "home_01",
+  "recorded_at": "2026-08-31",
+  "source": "operator description, 2026-08-31",
+  "status": "topology_recorded_geometry_pending",
+  "rooms": [
+    {
+      "id": "hall",
+      "name": "Hall",
+      "role": "connector",
+      "geometry": "unmeasured"
+    },
+    {
+      "id": "living_room",
+      "name": "Living room",
+      "role": "room",
+      "geometry": "ground_truth/living_room.json"
+    },
+    {
+      "id": "bedroom_1",
+      "name": "Bedroom 1",
+      "role": "room",
+      "geometry": "unmeasured"
+    },
+    {
+      "id": "bedroom_2",
+      "name": "Bedroom 2",
+      "role": "room",
+      "geometry": "unmeasured"
+    },
+    {
+      "id": "bedroom_3",
+      "name": "Bedroom 3",
+      "role": "room",
+      "geometry": "unmeasured"
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "role": "room",
+      "geometry": "unmeasured"
+    },
+    {
+      "id": "puja_room",
+      "name": "Puja room",
+      "role": "room",
+      "geometry": "unmeasured",
+      "note": "Small. Tight rooms are the hard case at the photo tier: the camera cannot back far enough away to frame a whole wall, so every view is oblique and close."
+    }
+  ],
+  "edges": [
+    {
+      "a": "hall",
+      "b": "living_room",
+      "via": "archway_a",
+      "opening_type": "archway",
+      "confirmed": true
+    },
+    {
+      "a": "hall",
+      "b": "living_room",
+      "via": "archway_b",
+      "opening_type": "archway",
+      "confirmed": true
+    },
+    {
+      "a": "hall",
+      "b": "bedroom_1",
+      "via": null,
+      "opening_type": "unknown",
+      "confirmed": false
+    },
+    {
+      "a": "hall",
+      "b": "bedroom_2",
+      "via": null,
+      "opening_type": "unknown",
+      "confirmed": false
+    },
+    {
+      "a": "hall",
+      "b": "bedroom_3",
+      "via": null,
+      "opening_type": "unknown",
+      "confirmed": false
+    },
+    {
+      "a": "hall",
+      "b": "kitchen",
+      "via": null,
+      "opening_type": "unknown",
+      "confirmed": false
+    },
+    {
+      "a": "hall",
+      "b": "puja_room",
+      "via": null,
+      "opening_type": "unknown",
+      "confirmed": false
+    }
+  ],
+  "topology": {
+    "shape": "star with one cycle",
+    "hall_degree": 7,
+    "cycles": 1,
+    "cycle_note": "The only cycle in the property is Living room to Hall and back, through archways A and B. Every other room hangs off the Hall by a single edge, and a single edge cannot contradict itself. That one cycle is the property's only means of catching its own stitching error."
+  },
+  "open_questions": [
+    "Bathrooms are not listed. A three-bedroom home has at least one; do they open off the Hall or off the bedrooms? They matter beyond topology: the brief requires mirrors, glass and wet-look surfaces to be covered, and a bathroom is where all three occur at once.",
+    "Is there a main entrance door onto the Hall? It would raise the Hall's opening count and it is an opening the pipeline must detect like any other.",
+    "Which opening type connects the Hall to each bedroom, the kitchen and the puja room - hinged door or open archway? Only archways give the photo tier a through-view, so this decides which adjacencies are recoverable at that tier and which are not."
+  ]
+}
