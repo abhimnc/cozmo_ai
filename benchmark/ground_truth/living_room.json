@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "room_id": "living_room",
-  "status": "consistent",
+  "status": "complete",
   "measured_at": "2026-08-31",
   "method": "tape",
   "source": "operator-confirmed table, superseding the handwritten note in capture_20260830_234933_photo",
@@ -13,7 +13,8 @@
     "v5 2026-08-31: third door added on wall B, 1.850 m high x 2.013 m wide. Four openings total.",
     "v6 2026-08-31: the wall B and wall C openings are archways, not doors. Wall D keeps the only real door. Two archways means two adjacencies out of this room.",
     "v7 2026-08-31: openings relaid. Walls A, B, D carry openings; wall C carries only the window. Wall A has the largest opening (1.850 x 2.013 m). A and B are archways, D is the hinged door. This layout also resolves the 40 cm exactly.",
-    "v8 2026-08-31: wall B archway measured at 1.850 x 0.855 m, confirming the inferred width. Both archways lead to the Hall, from different directions, so Living room and Hall are connected twice."
+    "v8 2026-08-31: wall B archway measured at 1.850 x 0.855 m, confirming the inferred width. Both archways lead to the Hall, from different directions, so Living room and Hall are connected twice.",
+    "v9 2026-08-31: operator confirmed archway A is 1.850 m high x 2.013 m wide (wider than tall, as recorded) and the 0.20 m wall thickness. Every Living room figure is now measured or operator-confirmed; none is inferred."
   ],
   "units_note": "Source values are centimetres, recorded here in metres.",
   "precision_m": 0.001,
@@ -65,7 +66,8 @@
       "wall_id": "A",
       "width_m": 2.013,
       "height_m": 1.85,
-      "note": "Largest opening in the room, 2.013 m of wall A's 5.057 m run. Open archway leading to the Hall. Height/width order still worth confirming - it is the only opening here wider than it is tall."
+      "note": "Largest opening in the room, 2.013 m of wall A's 5.057 m run, and the only opening here wider than it is tall - confirmed by the operator rather than assumed, since the proportion is unusual enough to have been a transposed height and width. Open archway leading to the Hall.",
+      "orientation_confirmed": true
     },
     {
       "id": "archway_b",
@@ -90,15 +92,13 @@
     "capture_20260830_174340_photo#01_living_room"
   ],
   "open_questions": [
-    "Confirm the wall A archway is 1.850 m high x 2.013 m wide and not the reverse.",
-    "Direct tape reading across one reveal, to confirm the derived 0.20 m wall thickness.",
-    "Tape uncertainty: re-measure one wall and one opening three times to get a spread.",
-    "Ground truth for the Hall, so the loop constraint can actually be scored rather than only described."
+    "Tape uncertainty: re-measure one wall and one opening three times and take the spread. Until then we cannot quote a ground-truth interval, and any pipeline error smaller than that spread is unmeasurable.",
+    "Ground truth for the Hall, so the double-archway loop can be scored rather than only described."
   ],
   "method_note": "Tape. Uncertainty is not yet quantified: a single-pass tape run over a ~5 m wall carries sag, corner placement and reading error, and the opening gate is 2 cm. Cheapest way to pin it is to re-measure one wall and one opening three times and take the spread \u2014 until then we cannot honestly quote a ground-truth interval, and any pipeline error smaller than that spread is unmeasurable.",
   "openings_note": "Four openings: window on C, archways on A and B, hinged door on D. Two archways is two adjacencies out of this room. With four openings the >=85% opening-width gate rounds up to 100% - three of four is 75% and fails - so every opening must land within 2 cm and a phantom fifth fails the row on its own.",
   "wall_thickness_m": 0.2,
-  "wall_thickness_note": "Derived, not directly measured: the 40 cm floor-versus-wall gap divided by two door reveals. A 20 cm wall is thick, consistent with masonry construction and with the 3.294 m ceiling. Worth confirming with a direct tape reading across one door reveal, since it now carries weight in the scoring.",
+  "wall_thickness_note": "Confirmed at 0.20 m. It was originally derived from the 40 cm floor-versus-wall gap divided by two reveals, so confirming it independently closes that reasoning rather than leaving a measured quantity resting on an inference. Consistent with masonry construction and the 3.294 m ceiling.",
   "floor_vs_wall": {
     "resolved": true,
     "explanation": "The long floor run is measured wall B face to wall D face. B carries an archway and D carries a door, so there is an opening at each end of that run, each with a 0.20 m reveal. 457.7 + 20 + 20 = 497.7, which is wall C exactly.",
@@ -125,5 +125,14 @@
     "note": "The Living room touches the Hall twice, through two different archways on two perpendicular walls. Walls A and B are adjacent, so the Hall wraps the corner between them and the Living room is a corner room.",
     "loop_constraint": "This is the most useful property in the benchmark so far. Two independent connections between the same pair of rooms form a closed cycle: place the Hall relative to the Living room through archway A, then again through archway B, and the two placements must agree. Any disagreement is stitching error, measured rather than asserted. It gives us a real loop-closure residual at the photo tier, where there are no poses to close a loop with, and it is exactly the ablation the drift-accountability gate asks for - stitch with the second constraint on and off, and report the footprint both ways.",
     "modelling_consequence": "The room adjacency graph is a multigraph, not a tree: two edges join the same pair. A stitcher that assumes one opening per room pair, or that stops after finding the first connection, will silently discard the only loop in the property and with it the only way to measure its own drift."
+  },
+  "wall_thickness_source": "operator_confirmed",
+  "completeness": {
+    "walls": "4 of 4 measured",
+    "ceiling": "measured, flat across all four corners",
+    "openings": "4 of 4 measured, each assigned to a wall, types confirmed",
+    "wall_thickness": "confirmed",
+    "adjacency": "2 edges recorded, both to the Hall",
+    "remaining": "tape uncertainty is still unquantified; the Hall end of the loop is unmeasured"
   }
 }
