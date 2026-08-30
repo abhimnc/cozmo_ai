@@ -29,14 +29,8 @@ struct CaptureView: View {
         .sheet(isPresented: $showingInstructions) {
             instructionSheet.presentationDetents([.medium])
         }
-        .alert("Room name", isPresented: $showingRoomPrompt) {
-            TextField("e.g. Living Room", text: $roomName)
-            Button("Add") { controller.markRoom(named: roomName); roomName = "" }
-            Button("Cancel", role: .cancel) { roomName = "" }
-        } message: {
-            Text(tier == .photo
-                 ? "Photos you take next are filed under this room."
-                 : "Marks the moment you entered this room.")
+        .sheet(isPresented: $showingRoomPrompt) {
+            roomPicker.presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $showingFinishSheet) { finishSheet.presentationDetents([.medium]) }
     }
@@ -120,6 +114,62 @@ struct CaptureView: View {
             }
         }
         .foregroundStyle(.white)
+    }
+
+    /// Names are picked from what has been used before, not retyped.
+    /// Re-typing is how "Bedroom 1" came to mean two different rooms across two
+    /// captures of this property.
+    private var roomPicker: some View {
+        let used = Set(controller.rooms.map { $0.name.lowercased() })
+        let offered = (RoomNameStore.recent + RoomNameStore.suggestions)
+            .reduce(into: [String]()) { acc, name in
+                if !acc.contains(where: { $0.caseInsensitiveCompare(name) == .orderedSame }) {
+                    acc.append(name)
+                }
+            }
+
+        return NavigationStack {
+            List {
+                Section("New name") {
+                    HStack {
+                        TextField("e.g. Living Room", text: $roomName)
+                        Button("Add") { addRoom(roomName) }
+                            .disabled(roomName.trimmingCharacters(in: .whitespaces).isEmpty)
+                    }
+                }
+                Section("Used before") {
+                    ForEach(offered, id: \.self) { name in
+                        Button {
+                            addRoom(name)
+                        } label: {
+                            HStack {
+                                Text(name)
+                                Spacer()
+                                if used.contains(name.lowercased()) {
+                                    Text("already in this capture")
+                                        .font(.caption2).foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                        .disabled(used.contains(name.lowercased()))
+                    }
+                }
+            }
+            .navigationTitle(tier == .photo ? "Next room" : "Mark room")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { roomName = ""; showingRoomPrompt = false }
+                }
+            }
+        }
+    }
+
+    private func addRoom(_ name: String) {
+        controller.markRoom(named: name)
+        RoomNameStore.remember(name)
+        roomName = ""
+        showingRoomPrompt = false
     }
 
     private var instructionSheet: some View {

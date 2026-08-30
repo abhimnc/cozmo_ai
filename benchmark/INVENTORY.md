@@ -16,13 +16,32 @@ exists against what is required. Raw captures live in `benchmark/raw/`
 | 4 | At least one room captured **twice at the same tier** (repeatability gate) | **done** | Living room, photo tier: `..._172319` (4 photos) and `..._174340` (5 photos) |
 | 5 | **Laser or tape ground truth** on everything | **not started** | — |
 
+## Room identity does not survive a retype
+
+`Bedroom 1` appears in both single-floor captures and means a **different
+physical room** in each. Nothing in the bundle links a room across captures: the
+name is whatever the operator typed, and it was typed twice with different
+intent.
+
+This matters because two scored outputs depend on room identity holding. The
+repeatability gate is "two captures of the same room at the same tier", and the
+stitched plan is scored on rooms being in the right place. Any tool that joined
+captures by name would have silently merged two bedrooms' photos into one room.
+
+Fixed in the capture app: room names are now offered back from previous captures
+rather than retyped, most-recent-first, with names already used in the current
+capture greyed out. Until a re-capture, the two existing captures must be
+treated as having **disjoint** bedroom sets.
+
 ## Captures on hand
 
 | Capture | Tier | Rooms | Photos | Purpose |
 |---|---|---|---|---|
-| `capture_20260830_172319_photo` | photo | Living room, Hall, Bedroom | 11 | multi-room stitch; repeatability A |
-| `capture_20260830_173700_photo` | photo | Hall2, Living room 2 | 8 | EXIF validation; second space |
-| `capture_20260830_174340_photo` | photo | Living room | 5 | **repeatability B** — same room as 172319 |
+| `capture_20260831_023857_photo` | photo | Living Room, Hall, Kitchen, 3 bedrooms | 23 | **the multi-room set.** Contains the Hall, so every room has a connector and the set is stitchable |
+| `capture_20260831_030010_photo` | photo | 2 bathrooms, 3 bedrooms | 24 | per-room detail. **Not stitchable alone**: no Hall and no Living room, so none of these five rooms touch each other |
+| `capture_20260830_172319_photo` | photo | Living room, Hall, Bedroom | 11 | superseded — mixes two floors |
+| `capture_20260830_173700_photo` | photo | Hall2, Living room 2 | 8 | superseded — the second floor |
+| `capture_20260830_174340_photo` | photo | Living room | 5 | repeatability partner for the old set |
 | `capture_20260830_172252_photo` | photo | — | 0 | empty; keep as a pipeline rejection case |
 
 ## Property

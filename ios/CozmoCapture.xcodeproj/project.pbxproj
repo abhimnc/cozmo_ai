@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0504DA8CD0375A23086F6677 /* DeviceCapabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A592EDA6EF1AA50E65251D /* DeviceCapabilities.swift */; };
+		3CCD731CF8854C1DCED01B66 /* RoomNameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779E6D5020A6D5CF24355454 /* RoomNameStore.swift */; };
 		4955F58D2EF4DA81E082B9F8 /* CozmoCaptureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3AD99FE573E2F2B1615C19 /* CozmoCaptureApp.swift */; };
 		4F45B6FACE9CDA3E8A96ACF2 /* VideoRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBF813F77AD4A972638295 /* VideoRecorder.swift */; };
 		4FEB397D4618FA6F123C4137 /* BundleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43529E94457C378B90610A31 /* BundleListView.swift */; };
@@ -27,6 +28,7 @@
 		59E53B7BEE8143BC96F195D7 /* CaptureTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureTier.swift; sourceTree = "<group>"; };
 		5EECBFE354206321FE1225A6 /* CozmoCapture.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CozmoCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74A592EDA6EF1AA50E65251D /* DeviceCapabilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCapabilities.swift; sourceTree = "<group>"; };
+		779E6D5020A6D5CF24355454 /* RoomNameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomNameStore.swift; sourceTree = "<group>"; };
 		BA210DCDA3A139970A46203D /* CaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureView.swift; sourceTree = "<group>"; };
 		BD8C0C05738CFFCDB5F1D917 /* FrameWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameWriter.swift; sourceTree = "<group>"; };
 		CAEBF813F77AD4A972638295 /* VideoRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecorder.swift; sourceTree = "<group>"; };
@@ -34,7 +36,7 @@
 		D240D1ACB6699A844A092368 /* CaptureBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureBundle.swift; sourceTree = "<group>"; };
 		E9A626CE52113AB26A79882D /* ARPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPreview.swift; sourceTree = "<group>"; };
 		F9C3B3BE9D031099D471C09C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		"TEMP_7B5EF86C-30BE-406E-85D2-B1A5E7E81812" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		"TEMP_DF5A0970-68E6-48AD-B450-AEB4095C85BA" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -81,6 +83,7 @@
 				59E53B7BEE8143BC96F195D7 /* CaptureTier.swift */,
 				74A592EDA6EF1AA50E65251D /* DeviceCapabilities.swift */,
 				BD8C0C05738CFFCDB5F1D917 /* FrameWriter.swift */,
+				779E6D5020A6D5CF24355454 /* RoomNameStore.swift */,
 				CAEBF813F77AD4A972638295 /* VideoRecorder.swift */,
 			);
 			path = Capture;
@@ -97,10 +100,10 @@
 			path = CozmoCapture;
 			sourceTree = "<group>";
 		};
-		"TEMP_0E0271BC-F1AA-45EC-B01A-92574FC16040" /* ios */ = {
+		"TEMP_B39CA979-CD6F-4368-863E-219F5B91D9CA" /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				"TEMP_7B5EF86C-30BE-406E-85D2-B1A5E7E81812" /* Signing.xcconfig */,
+				"TEMP_DF5A0970-68E6-48AD-B450-AEB4095C85BA" /* Signing.xcconfig */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				4955F58D2EF4DA81E082B9F8 /* CozmoCaptureApp.swift in Sources */,
 				0504DA8CD0375A23086F6677 /* DeviceCapabilities.swift in Sources */,
 				E354850B3A52A8EA6C9001FE /* FrameWriter.swift in Sources */,
+				3CCD731CF8854C1DCED01B66 /* RoomNameStore.swift in Sources */,
 				ED46C2DC355F5D58F35DBFCA /* RootView.swift in Sources */,
 				4F45B6FACE9CDA3E8A96ACF2 /* VideoRecorder.swift in Sources */,
 			);
@@ -183,7 +187,7 @@
 /* Begin XCBuildConfiguration section */
 		B86C8506216D0A0D838820D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_7B5EF86C-30BE-406E-85D2-B1A5E7E81812" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_DF5A0970-68E6-48AD-B450-AEB4095C85BA" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -203,7 +207,7 @@
 		};
 		B9E9C04AD143530229A7E1FA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_7B5EF86C-30BE-406E-85D2-B1A5E7E81812" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_DF5A0970-68E6-48AD-B450-AEB4095C85BA" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
