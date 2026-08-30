@@ -46,6 +46,57 @@ Consequences to handle in the pipeline:
 read its EXIF, to pin down Apple's convention empirically rather than by
 argument.
 
+## Photo tier: geometric focal length — **does not work yet**
+
+**Attempt.** Recover focal length from vanishing points, independently of EXIF,
+to check the 4% 35 mm-convention ambiguity recorded above. A rectangular room
+has three orthogonal edge directions; two orthogonal vanishing points determine
+f through `v1 . v2 + f^2 = 0`.
+
+**Result on the 5-photo Living room capture, against a known 3024 px:**
+
+| Approach | Photos usable | Median error | Worst |
+|---|---|---|---|
+| Greedy 3 strongest vanishing points | 5 of 5 | +35.7% | +76% |
+| Joint Manhattan search, orthogonality enforced | 5 of 5 | +10.7% | +436% |
+| …plus physical focal bound (0.4-2.5 image widths) | 5 of 5 | +10.7% | +124% |
+| …plus per-axis support floor | 1 of 5 | −14.8% | −14.8% |
+
+A threshold sweep over the axis-support and explained-fraction gates found no
+setting that keeps more than one photo of five inside anything near ±8%.
+
+**Diagnosis.** Two failures were found and fixed, and one remains.
+
+1. *Fixed.* Choosing the three strongest line families and checking orthogonality
+   afterwards does not work indoors: the strongest families are furniture, rugs
+   and curtain folds. Orthogonality has to constrain the search.
+2. *Fixed.* Scoring a frame by its union of inliers rewards large focal lengths.
+   As f grows every vanishing point recedes, families become near-parallel, and
+   the angular test accepts more of the image — so a frame at twice the true
+   focal length out-scores the correct one. Visible as a bimodal result, one
+   cluster near truth and one near 2x.
+3. *Open.* Per-image estimation is simply ill-conditioned on furnished rooms.
+   A single photo often shows one wall well and the others obliquely, so one
+   axis is weakly supported and its vanishing point poorly located.
+
+**Consequence, stated rather than hidden.** EXIF remains the photo tier's only
+scale source, and the 4% convention ambiguity is **unresolved**. Photo-tier
+intervals must carry it. Claiming ±8% wall lengths while half that budget sits
+in an unchecked focal-length assumption would be exactly the confident garbage
+the brief caps scores for.
+
+**The next thing to try, and why it should work.** Every photo in a capture comes
+from the same phone, so they share *one* focal length. Estimating it jointly
+across a room's 5-11 photos — one unknown against many images — is far better
+conditioned than solving each image alone and averaging. The per-image estimator
+built here becomes the residual term in that joint fit rather than the answer.
+
+**What is kept in the meantime.** The rejection behaviour. The estimator now
+refuses roughly four photos in five rather than reporting a number it cannot
+support. That is worth more than a plausible average: the brief scores
+calibration at every tier, and an honest abstention costs less than a confident
+error.
+
 ## Ground-truth side
 
 ### Ceiling flatness — **withdrawn**
@@ -57,6 +108,27 @@ gives a uniform 329.4 cm, so the spread was an artefact of the superseded
 numbers rather than a property of the room. The full 1.5 cm gate is available.
 Recorded rather than deleted because the reasoning still applies to any room
 whose ceiling genuinely is not flat, and we should check for it per room.
+
+## Ground-truth uncertainty — **deliberately unquantified**
+
+Tape uncertainty has not been measured: the repeat-three-times exercise was
+deferred on 2026-08-31. The consequence is precise and should be stated in the
+benchmark report rather than left implicit.
+
+A single-pass tape run over a 5 m wall carries sag, corner-placement and reading
+error. We do not know its spread, so we cannot claim a pipeline error smaller
+than that spread has been *measured* — only that it was observed. Against a 2 cm
+opening gate and a 1.5 cm ceiling gate, plausible tape spread is the same order
+as the tolerance itself.
+
+What this permits and forbids:
+
+- **Permitted:** reporting pipeline-versus-ground-truth differences as observed
+  numbers, and comparing tiers against each other, since all share one key.
+- **Forbidden:** quoting a ground-truth interval, or claiming a sub-centimetre
+  result is distinguishable from the key's own noise.
+
+Cost to close: measuring one wall and one opening three times each.
 
 ## Known capture-side issues
 

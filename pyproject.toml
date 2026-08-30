@@ -5,6 +5,9 @@ description = "Handheld capture to dimensioned floor plan, damage regions and re
 requires-python = ">=3.11"
 dependencies = [
     "jsonschema>=4.21",
+    "numpy>=1.26",
+    "opencv-python-headless>=4.9",
+    "pillow>=10.2",
 ]
 
 [project.scripts]
