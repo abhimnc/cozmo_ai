@@ -14,7 +14,8 @@
     "v6 2026-08-31: the wall B and wall C openings are archways, not doors. Wall D keeps the only real door. Two archways means two adjacencies out of this room.",
     "v7 2026-08-31: openings relaid. Walls A, B, D carry openings; wall C carries only the window. Wall A has the largest opening (1.850 x 2.013 m). A and B are archways, D is the hinged door. This layout also resolves the 40 cm exactly.",
     "v8 2026-08-31: wall B archway measured at 1.850 x 0.855 m, confirming the inferred width. Both archways lead to the Hall, from different directions, so Living room and Hall are connected twice.",
-    "v9 2026-08-31: operator confirmed archway A is 1.850 m high x 2.013 m wide (wider than tall, as recorded) and the 0.20 m wall thickness. Every Living room figure is now measured or operator-confirmed; none is inferred."
+    "v9 2026-08-31: operator confirmed archway A is 1.850 m high x 2.013 m wide (wider than tall, as recorded) and the 0.20 m wall thickness. Every Living room figure is now measured or operator-confirmed; none is inferred.",
+    "v10 2026-08-31: annotated sketch (capture_20260831_021355_photo) shows archway_b leads to the bathroom below the Living room, not to the Hall. Supersedes the earlier statement that both archways lead to the Hall."
   ],
   "units_note": "Source values are centimetres, recorded here in metres.",
   "precision_m": 0.001,
@@ -58,7 +59,8 @@
       "width_m": 1.413,
       "height_m": 1.109,
       "sill_height_m": null,
-      "note": "Wall C's only opening. A window does not reach the floor, so it takes no reveal off any floor run."
+      "note": "Wall C's only opening. A window does not reach the floor, so it takes no reveal off any floor run.",
+      "leads_to": "exterior"
     },
     {
       "id": "archway_a",
@@ -67,7 +69,8 @@
       "width_m": 2.013,
       "height_m": 1.85,
       "note": "Largest opening in the room, 2.013 m of wall A's 5.057 m run, and the only opening here wider than it is tall - confirmed by the operator rather than assumed, since the proportion is unusual enough to have been a transposed height and width. Open archway leading to the Hall.",
-      "orientation_confirmed": true
+      "orientation_confirmed": true,
+      "leads_to": "hall"
     },
     {
       "id": "archway_b",
@@ -76,7 +79,8 @@
       "width_m": 0.855,
       "height_m": 1.85,
       "width_source": "measured",
-      "note": "Measured, confirming the earlier inference. Same size as the wall D door: 1.850 x 0.855 m. Leads to the Hall."
+      "note": "Leads to the bathroom below the Living room, per the annotated sketch. An earlier description had both archways going to the Hall; the sketch's door arrows and the Hall's own opening list both contradict that, and the Hall has no 0.855 m opening anywhere.",
+      "leads_to": "bathroom_2"
     },
     {
       "id": "door_d",
@@ -84,7 +88,8 @@
       "wall_id": "D",
       "width_m": 0.855,
       "height_m": 1.85,
-      "note": "The only hinged door. Closed-leaf openings carry no through-view, so this one gives the photo tier no adjacency evidence."
+      "note": "The only hinged door. Closed-leaf openings carry no through-view, so this one gives the photo tier no adjacency evidence.",
+      "leads_to": "balcony"
     }
   ],
   "applies_to_captures": [
@@ -117,15 +122,18 @@
         "wall_id": "A"
       },
       {
-        "to_room": "hall",
+        "to_room": "bathroom_2",
         "via": "archway_b",
         "wall_id": "B"
+      },
+      {
+        "to_room": "balcony",
+        "via": "door_d",
+        "wall_id": "D"
       }
     ],
-    "note": "The Living room touches the Hall twice, through two different archways on two perpendicular walls. Walls A and B are adjacent, so the Hall wraps the corner between them and the Living room is a corner room.",
-    "loop_constraint": "This is the most useful property in the benchmark so far. Two independent connections between the same pair of rooms form a closed cycle: place the Hall relative to the Living room through archway A, then again through archway B, and the two placements must agree. Any disagreement is stitching error, measured rather than asserted. It gives us a real loop-closure residual at the photo tier, where there are no poses to close a loop with, and it is exactly the ablation the drift-accountability gate asks for - stitch with the second constraint on and off, and report the footprint both ways.",
-    "modelling_consequence": "The room adjacency graph is a multigraph, not a tree: two edges join the same pair. A stitcher that assumes one opening per room pair, or that stops after finding the first connection, will silently discard the only loop in the property and with it the only way to measure its own drift.",
-    "topology_note": "The Hall is a hub connecting many rooms, so the property is a star. Every other room likely touches the Hall exactly once, and single-edge placements cannot contradict themselves. The Living room's two archways are therefore probably the only cycle in the whole property, and the only place the stitch can be caught being wrong."
+    "note": "All four openings now have a destination. Three lead somewhere, one is a window.",
+    "loop_note": "The property's cycle survives, in a better form. It is no longer two parallel archways between the same pair, but a triangle: Hall to Living room, Living room to bathroom_2, bathroom_2 back to the Hall. A three-room cycle is the stronger test - it constrains an intermediate room's placement too, so the residual reflects error accumulated over two hops rather than one."
   },
   "wall_thickness_source": "operator_confirmed",
   "completeness": {

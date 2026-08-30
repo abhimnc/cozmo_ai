@@ -103,13 +103,14 @@
       "cross_checked": "201.3 x 185.0 cm from both rooms, agreeing to 0.0 cm"
     },
     {
-      "a": "hall",
-      "b": "living_room",
+      "a": "living_room",
+      "b": "bathroom_2",
       "via": "archway_b",
       "opening_type": "archway",
       "confirmed": true,
-      "hall_side": "arch_d1",
-      "cross_checked": "predicted 85.5 x 185.0 cm from the Living room side; Hall side untaped"
+      "hall_side": null,
+      "cross_checked": "predicted 85.5 x 185.0 cm from the Living room side; Hall side untaped",
+      "note": "Living room to bathroom_2. Not a Hall edge - corrected from the annotated sketch."
     },
     {
       "a": "hall",
@@ -191,8 +192,8 @@
   "topology": {
     "shape": "star with one cycle",
     "hall_degree": 10,
-    "cycles": "1 if archway_b reaches the Hall, otherwise 0 - see discrepancy above",
-    "cycle_note": "The only cycle in the property is Living room to Hall and back, through archways A and B. Every other room hangs off the Hall by a single edge, and a single edge cannot contradict itself. That one cycle is the property's only means of catching its own stitching error.",
+    "cycles": 1,
+    "cycle_note": "A triangle: hall - living_room - bathroom_2 - hall. The 2.013 m archway can only sit on wall C segment C1 (4.889 m) since C2 is 1.591 m and narrower than the archway itself, which places the 0.787 m bathroom archway on C2. The stepped wall is therefore what creates the cycle.",
     "all_hall_connections_are_archways": true,
     "archway_note": "Every Hall connection is an open archway. At the photo tier this is the best possible case: an archway carries a through-view, so every adjacency in the property has direct image evidence and none has to be guessed. A property behind closed doors would leave most edges structurally invisible at this tier.",
     "benchmark_gap": "The flip side is that the benchmark now contains no closed-door adjacency at all, so the photo tier's worst failure mode goes unmeasured. Staging one - close the Living room's wall D door, or hang a sheet over an archway, and re-capture - would cost one extra capture and turn an unmeasured weakness into a reported interval.",
@@ -204,9 +205,8 @@
     "unassigned_note": "Three Hall openings have no named destination and three bedrooms have no named opening. The pairing is near-certain but is not stated, and adjacency is scored."
   },
   "open_questions": [
-    "Where does the Living room's archway_b (0.855 m, on its wall B) actually lead? The Hall has no opening of that size. This decides whether the property has a loop at all.",
-    "Which way does the Hall's wall C step go - does segment C2 push outward or cut a bay inward? 1.92 m2, an 11% swing on Hall floor area, and the polygon cannot close without it.",
-    "Are the balcony and parking space inside the stitched floor plan, or excluded as exterior?"
+    "Confirm the triangle: does the bathroom below the Living room open onto both the Living room and the Hall? The sketch and the wall arithmetic both say yes, and it is the property's only cycle, so it is worth one look.",
+    "Which way does the Hall's wall C step go? If the bathroom is shallower than the Living room the Hall widens at C2, adding 1.92 m2; if deeper, it loses the same. 11% of Hall floor area."
   ],
   "layout_from_sketch": {
     "hall": "central, the connector",
@@ -228,15 +228,5 @@
       "bedroom_1, through the recess"
     ],
     "note": "Wall A's four archways map onto the four rooms in the east column, in order. That is what confirms arch_a3 and arch_a4 as the two eastern bedrooms rather than leaving them unassigned."
-  },
-  "discrepancy_living_room_archway_b": {
-    "what": "The Living room records two archways: archway_a at 2.013 m, and archway_b at 0.855 m, both said to lead to the Hall. The Hall's wall C carries only two openings - the 2.013 m Living room archway and a 0.787 m archway to bathroom_2. There is no 0.855 m opening anywhere on the Hall.",
-    "candidates": [
-      "archway_b leads to the balcony entry passage rather than the Hall, which the sketch hints at with the 'to enter' arrow above the Living room.",
-      "archway_b is the Hall's arch_a3 at 0.875 m - but that is on wall A, on the opposite side of the Hall from the Living room, so this is geometrically implausible.",
-      "The Hall's wall list is missing an opening."
-    ],
-    "why_it_matters": "This is the property's only cycle. If archway_b does not reach the Hall, the room graph is a pure tree, no placement can contradict another, and the loop-closure residual the drift ablation depends on does not exist on this property.",
-    "status": "unresolved"
   }
 }
