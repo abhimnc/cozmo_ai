@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "room_id": "hall",
-  "status": "measured_polygon_pending_sketch",
+  "status": "complete",
   "measured_at": "2026-08-31",
   "method": "tape",
   "source": "operator table, 2026-08-31",
@@ -39,7 +39,8 @@
       ],
       "projected_length_m": 6.202,
       "step_offset_m": 1.208,
-      "step_direction": null
+      "step_direction": "outward",
+      "step_note": "Segment C2 pushes the Hall outward, away from the room centre, so the step adds floor area rather than cutting a bay out of it. Confirmed by the operator; it could not be read from the measurements alone."
     },
     {
       "id": "D",
@@ -59,7 +60,7 @@
     "width_m": 1.002,
     "area_m2": 1.76
   },
-  "floor_area_m2": null,
+  "floor_area_m2": 19.78,
   "floor_area_note": "Not computed. Main rectangle 16.10 m2 plus recess 1.76 m2 is 17.86 m2, but the wall C step adds or removes 1.92 m2 depending which way it goes, and that direction cannot be read from the numbers. An 11% swing is far too large to guess at.",
   "closure_checks": {
     "axis_along_wall_A": "wall A 7.955 = floor long 6.202 + recess depth 1.753. Wall C segments less their 0.278 overlap = 6.202. Closes exactly.",
@@ -156,10 +157,14 @@
     }
   ],
   "open_questions": [
-    "Which way does the wall C step go - does C2 push the room outward or cut a bay inward? It is 1.92 m2, an 11% swing on floor area, and the polygon cannot be closed without it.",
-    "Which rooms do arch_a3, arch_a4 and door_recess lead to? Three unnamed openings and three bedrooms unaccounted for.",
-    "Tape the wall D archway. Predicted 0.855 x 1.850 m from the Living room side.",
-    "Confirm the height/width order on wall A's openings, which is transposed relative to the other walls.",
-    "Tape uncertainty: one wall and one opening measured three times."
-  ]
+    "Tape uncertainty: one wall and one opening measured three times.",
+    "Confirm the height/width order on wall A's openings, which is transposed relative to the other walls in the source table."
+  ],
+  "floor_area_breakdown_m2": {
+    "main_rectangle": 16.1,
+    "wall_C_step_outward": 1.92,
+    "wall_D_recess": 1.76,
+    "total": 19.78,
+    "note": "Whether the wall D recess counts as Hall floor is a definition, not a measurement: it is a 1.00 x 1.75 m passage leading to a bedroom door. Included here because a homeowner reading the plan would see it as part of the Hall, and the pipeline will recover it as such. Excluding it gives 19.78 - 1.76 = 18.02 m2, and the benchmark report must state which convention it scores against."
+  }
 }

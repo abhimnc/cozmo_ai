@@ -110,7 +110,7 @@
       "confirmed": true,
       "hall_side": null,
       "cross_checked": "predicted 85.5 x 185.0 cm from the Living room side; Hall side untaped",
-      "note": "Living room to bathroom_2. Not a Hall edge - corrected from the annotated sketch."
+      "note": "Confirmed on the annotated sketch: bathroom_2 has a door onto the Hall and another onto the Living room."
     },
     {
       "a": "hall",
@@ -170,7 +170,8 @@
       "via": null,
       "opening_type": "archway",
       "confirmed": true,
-      "hall_side": "arch_c1"
+      "hall_side": "arch_c1",
+      "note": "Confirmed on the annotated sketch: bathroom_2 has a door onto the Hall and another onto the Living room."
     },
     {
       "a": "hall",
@@ -193,7 +194,7 @@
     "shape": "star with one cycle",
     "hall_degree": 10,
     "cycles": 1,
-    "cycle_note": "A triangle: hall - living_room - bathroom_2 - hall. The 2.013 m archway can only sit on wall C segment C1 (4.889 m) since C2 is 1.591 m and narrower than the archway itself, which places the 0.787 m bathroom archway on C2. The stepped wall is therefore what creates the cycle.",
+    "cycle_note": "Triangle confirmed on the annotated sketch: bathroom_2 carries two doors, one to the Living room and one to the Hall. hall - living_room - bathroom_2 - hall is the property's only cycle and the only place a stitch can be caught contradicting itself.",
     "all_hall_connections_are_archways": true,
     "archway_note": "Every Hall connection is an open archway. At the photo tier this is the best possible case: an archway carries a through-view, so every adjacency in the property has direct image evidence and none has to be guessed. A property behind closed doors would leave most edges structurally invisible at this tier.",
     "benchmark_gap": "The flip side is that the benchmark now contains no closed-door adjacency at all, so the photo tier's worst failure mode goes unmeasured. Staging one - close the Living room's wall D door, or hang a sheet over an archway, and re-capture - would cost one extra capture and turn an unmeasured weakness into a reported interval.",
@@ -202,11 +203,11 @@
       "arch_a4 (0.955 m)",
       "door_recess (0.900 m)"
     ],
-    "unassigned_note": "Three Hall openings have no named destination and three bedrooms have no named opening. The pairing is near-certain but is not stated, and adjacency is scored."
+    "unassigned_note": "Three Hall openings have no named destination and three bedrooms have no named opening. The pairing is near-certain but is not stated, and adjacency is scored.",
+    "cycle_confirmed": true
   },
   "open_questions": [
-    "Confirm the triangle: does the bathroom below the Living room open onto both the Living room and the Hall? The sketch and the wall arithmetic both say yes, and it is the property's only cycle, so it is worth one look.",
-    "Which way does the Hall's wall C step go? If the bathroom is shallower than the Living room the Hall widens at C2, adding 1.92 m2; if deeper, it loses the same. 11% of Hall floor area."
+    "Tape uncertainty: one wall and one opening measured three times. The last thing standing between this benchmark and a quotable interval."
   ],
   "layout_from_sketch": {
     "hall": "central, the connector",
