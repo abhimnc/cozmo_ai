@@ -158,6 +158,12 @@ struct CaptureView: View {
             .frame(maxWidth: .infinity)
             Button("Keep scanning") { showingFinishSheet = false }
                 .frame(maxWidth: .infinity)
+            Button("Discard capture", role: .destructive) {
+                controller.discard()
+                showingFinishSheet = false
+                dismiss()
+            }
+            .frame(maxWidth: .infinity)
         }
         .padding()
     }

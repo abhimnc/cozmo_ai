@@ -25,7 +25,7 @@
 		419561608AE3B927788F5E98 /* CaptureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureController.swift; sourceTree = "<group>"; };
 		43529E94457C378B90610A31 /* BundleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleListView.swift; sourceTree = "<group>"; };
 		59E53B7BEE8143BC96F195D7 /* CaptureTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureTier.swift; sourceTree = "<group>"; };
-		5EECBFE354206321FE1225A6 /* CozmoCapture.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CozmoCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EECBFE354206321FE1225A6 /* CozmoCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CozmoCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74A592EDA6EF1AA50E65251D /* DeviceCapabilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCapabilities.swift; sourceTree = "<group>"; };
 		BA210DCDA3A139970A46203D /* CaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureView.swift; sourceTree = "<group>"; };
 		BD8C0C05738CFFCDB5F1D917 /* FrameWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameWriter.swift; sourceTree = "<group>"; };
@@ -54,11 +54,20 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		463CA53230444A36001D5B97 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				"TEMP_021D0D5F-218F-4D3E-95A1-C80F705D913D" /* Signing.xcconfig */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		8F2262DD2FB10D416874846F = {
 			isa = PBXGroup;
 			children = (
 				BF771FEC79F22972ED130080 /* CozmoCapture */,
 				2368DEA94AFD0C3D9F0016DB /* Products */,
+				463CA53230444A36001D5B97 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,14 +106,6 @@
 			path = CozmoCapture;
 			sourceTree = "<group>";
 		};
-		"TEMP_BB61D226-8226-4135-830A-2E8DF7646FFB" /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				"TEMP_021D0D5F-218F-4D3E-95A1-C80F705D913D" /* Signing.xcconfig */,
-			);
-			path = ios;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,7 +136,6 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					11312693AA30DD07942D8ED9 = {
-						DevelopmentTeam = "$(COZMO_DEVELOPMENT_TEAM)";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -187,6 +187,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = WN2UZ65WXZ;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CozmoCapture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -206,6 +207,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = WN2UZ65WXZ;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CozmoCapture/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

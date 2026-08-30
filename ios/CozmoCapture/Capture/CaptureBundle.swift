@@ -79,6 +79,30 @@ struct CaptureBundle {
             .sorted { $0.id > $1.id }
     }
 
+    /// Deletes bundles that carry no manifest.
+    ///
+    /// The bundle directory is created when a capture *starts*, so backing out
+    /// of the capture screen leaves an empty shell behind. `existing()` already
+    /// hides them, but they still accumulate in the container we hand a grader
+    /// and they make `devicectl copy` look like it silently did nothing.
+    /// Returns how many were removed.
+    @discardableResult
+    static func purgeIncomplete() -> Int {
+        let fm = FileManager.default
+        guard let entries = try? fm.contentsOfDirectory(at: capturesRoot,
+                                                        includingPropertiesForKeys: nil,
+                                                        options: [.skipsHiddenFiles]) else { return 0 }
+        var removed = 0
+        for url in entries where url.hasDirectoryPath {
+            let manifest = url.appendingPathComponent("manifest.json")
+            if !fm.fileExists(atPath: manifest.path) {
+                try? fm.removeItem(at: url)
+                removed += 1
+            }
+        }
+        return removed
+    }
+
     func sizeOnDisk() -> Int64 {
         guard let e = FileManager.default.enumerator(at: root,
                                                      includingPropertiesForKeys: [.fileSizeKey]) else { return 0 }

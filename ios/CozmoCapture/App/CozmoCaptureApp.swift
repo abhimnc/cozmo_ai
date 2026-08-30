@@ -9,6 +9,7 @@ struct CozmoCaptureApp: App {
             RootView()
                 .environmentObject(controller)
                 .preferredColorScheme(.dark)
+                .onAppear { CaptureBundle.purgeIncomplete() }
         }
     }
 }

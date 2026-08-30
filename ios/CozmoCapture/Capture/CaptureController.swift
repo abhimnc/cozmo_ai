@@ -376,6 +376,19 @@ final class CaptureController: NSObject, ObservableObject, ARSessionDelegate {
         lastError = nil
         elapsed = 0
     }
+
+    /// Abandons the in-flight capture and removes its directory, rather than
+    /// leaving an empty bundle behind for someone to wonder about later.
+    func discard() {
+        timer?.invalidate()
+        session.pause()
+        writer?.finish()
+        if let bundle { try? FileManager.default.removeItem(at: bundle.root) }
+        bundle = nil
+        writer = nil
+        videoRecorder = nil
+        reset()
+    }
 }
 
 // MARK: - Side files
