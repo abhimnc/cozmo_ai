@@ -60,6 +60,12 @@
       "name": "Bathroom 2",
       "role": "room",
       "geometry": "unmeasured"
+    },
+    {
+      "id": "outside",
+      "name": "Outside",
+      "role": "exterior",
+      "geometry": "n/a"
     }
   ],
   "edges": [
@@ -68,14 +74,18 @@
       "b": "living_room",
       "via": "archway_a",
       "opening_type": "archway",
-      "confirmed": true
+      "confirmed": true,
+      "hall_side": "arch_c2",
+      "cross_checked": "201.3 x 185.0 cm from both rooms, agreeing to 0.0 cm"
     },
     {
       "a": "hall",
       "b": "living_room",
       "via": "archway_b",
       "opening_type": "archway",
-      "confirmed": true
+      "confirmed": true,
+      "hall_side": "arch_d1",
+      "cross_checked": "predicted 85.5 x 185.0 cm from the Living room side; Hall side untaped"
     },
     {
       "a": "hall",
@@ -103,38 +113,56 @@
       "b": "kitchen",
       "via": null,
       "opening_type": "archway",
-      "confirmed": true
+      "confirmed": true,
+      "hall_side": "arch_a2"
     },
     {
       "a": "hall",
       "b": "puja_room",
       "via": null,
       "opening_type": "archway",
-      "confirmed": true
+      "confirmed": true,
+      "hall_side": "arch_a1"
     },
     {
       "a": "hall",
       "b": "bathroom_1",
       "via": null,
       "opening_type": "archway",
-      "confirmed": true
+      "confirmed": true,
+      "hall_side": "arch_b1"
     },
     {
       "a": "hall",
       "b": "bathroom_2",
       "via": null,
       "opening_type": "archway",
-      "confirmed": true
+      "confirmed": true,
+      "hall_side": "arch_c1"
+    },
+    {
+      "a": "hall",
+      "b": "outside",
+      "via": "arch_b2",
+      "opening_type": "archway",
+      "confirmed": true,
+      "note": "Main entrance."
     }
   ],
   "topology": {
     "shape": "star with one cycle",
-    "hall_degree": 9,
+    "hall_degree": 10,
     "cycles": 1,
     "cycle_note": "The only cycle in the property is Living room to Hall and back, through archways A and B. Every other room hangs off the Hall by a single edge, and a single edge cannot contradict itself. That one cycle is the property's only means of catching its own stitching error.",
     "all_hall_connections_are_archways": true,
     "archway_note": "Every Hall connection is an open archway. At the photo tier this is the best possible case: an archway carries a through-view, so every adjacency in the property has direct image evidence and none has to be guessed. A property behind closed doors would leave most edges structurally invisible at this tier.",
-    "benchmark_gap": "The flip side is that the benchmark now contains no closed-door adjacency at all, so the photo tier's worst failure mode goes unmeasured. Staging one - close the Living room's wall D door, or hang a sheet over an archway, and re-capture - would cost one extra capture and turn an unmeasured weakness into a reported interval."
+    "benchmark_gap": "The flip side is that the benchmark now contains no closed-door adjacency at all, so the photo tier's worst failure mode goes unmeasured. Staging one - close the Living room's wall D door, or hang a sheet over an archway, and re-capture - would cost one extra capture and turn an unmeasured weakness into a reported interval.",
+    "unassigned_hall_openings": [
+      "arch_a3 (0.875 m)",
+      "arch_a4 (0.955 m)",
+      "door_recess (0.900 m)"
+    ],
+    "unassigned_note": "Three Hall openings have no named destination and three bedrooms have no named opening. The pairing is near-certain but is not stated, and adjacency is scored."
   },
   "open_questions": [
     "The Living room's wall D opening is a hinged door and is not one of the Hall connections, so it leads somewhere not yet in this graph - a main entrance, a balcony, or another room. It is an unrecorded edge, and on a stitched plan a missing edge is a scored error.",

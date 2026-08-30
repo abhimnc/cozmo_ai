@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "room_id": "hall",
+  "status": "measured_polygon_pending_sketch",
+  "measured_at": "2026-08-31",
+  "method": "tape",
+  "source": "operator table, 2026-08-31",
+  "units_note": "Source values in centimetres, recorded here in metres.",
+  "ceiling_height_m": 3.294,
+  "ceiling_note": "Identical to the Living room's 3.294 m, as expected for one storey.",
+  "rectangular": false,
+  "shape_note": "Neither rectangular nor convex. Wall C is stepped into two segments offset by 1.208 m, and a 1.002 m gap in wall D opens into a recess 1.753 m deep with its own door at the far end. This is the connector room and the hardest shape in the property.",
+  "walls": [
+    {
+      "id": "A",
+      "length_m": 7.955,
+      "height_m": 3.294
+    },
+    {
+      "id": "B",
+      "length_m": 2.596,
+      "height_m": 3.294
+    },
+    {
+      "id": "C",
+      "height_m": 3.294,
+      "stepped": true,
+      "segments": [
+        {
+          "id": "C1",
+          "length_m": 4.889,
+          "derivation": "795.5 - 175.3 - (159.1 - 27.8)"
+        },
+        {
+          "id": "C2",
+          "length_m": 1.591,
+          "note": "Offset 1.208 m from C1; carries the Living room archway."
+        }
+      ],
+      "projected_length_m": 6.202,
+      "step_offset_m": 1.208,
+      "step_direction": null
+    },
+    {
+      "id": "D",
+      "length_m": 1.594,
+      "height_m": 3.294,
+      "gap_m": 1.002,
+      "gap_note": "Opens into a recess 1.753 m deep with a door to another room at its far end."
+    }
+  ],
+  "floor_main_m": {
+    "long_m": 6.202,
+    "short_m": 2.596,
+    "area_m2": 16.1
+  },
+  "recess_m": {
+    "depth_m": 1.753,
+    "width_m": 1.002,
+    "area_m2": 1.76
+  },
+  "floor_area_m2": null,
+  "floor_area_note": "Not computed. Main rectangle 16.10 m2 plus recess 1.76 m2 is 17.86 m2, but the wall C step adds or removes 1.92 m2 depending which way it goes, and that direction cannot be read from the numbers. An 11% swing is far too large to guess at.",
+  "closure_checks": {
+    "axis_along_wall_A": "wall A 7.955 = floor long 6.202 + recess depth 1.753. Wall C segments less their 0.278 overlap = 6.202. Closes exactly.",
+    "axis_along_walls_B_D": "wall B 2.596 = wall D 1.594 + gap 1.002 = floor short 2.596. Closes exactly.",
+    "verdict": "Both axes close to the millimetre, which is strong evidence the tape work is sound even though the polygon cannot yet be drawn."
+  },
+  "dimension_order_note": "The source table gives wall A's openings as height x width and walls B, C and D's as width x height. Normalised below by plausibility: values near 180-201 are heights, values near 74-104 are widths. Worth confirming, since a transposed pair would fail the 2 cm gate outright.",
+  "openings": [
+    {
+      "id": "arch_a1",
+      "type": "archway",
+      "wall_id": "A",
+      "width_m": 0.752,
+      "height_m": 1.972,
+      "leads_to": "puja_room"
+    },
+    {
+      "id": "arch_a2",
+      "type": "archway",
+      "wall_id": "A",
+      "width_m": 1.035,
+      "height_m": 1.972,
+      "leads_to": "kitchen"
+    },
+    {
+      "id": "arch_a3",
+      "type": "archway",
+      "wall_id": "A",
+      "width_m": 0.875,
+      "height_m": 1.97,
+      "leads_to": null
+    },
+    {
+      "id": "arch_a4",
+      "type": "archway",
+      "wall_id": "A",
+      "width_m": 0.955,
+      "height_m": 1.97,
+      "leads_to": null
+    },
+    {
+      "id": "arch_b1",
+      "type": "archway",
+      "wall_id": "B",
+      "width_m": 0.976,
+      "height_m": 1.807,
+      "leads_to": "bathroom_1"
+    },
+    {
+      "id": "arch_b2",
+      "type": "archway",
+      "wall_id": "B",
+      "width_m": 0.744,
+      "height_m": 2.007,
+      "leads_to": "outside",
+      "note": "The main entrance."
+    },
+    {
+      "id": "arch_c1",
+      "type": "archway",
+      "wall_id": "C",
+      "width_m": 0.787,
+      "height_m": 1.805,
+      "leads_to": "bathroom_2"
+    },
+    {
+      "id": "arch_c2",
+      "type": "archway",
+      "wall_id": "C",
+      "width_m": 2.013,
+      "height_m": 1.85,
+      "leads_to": "living_room",
+      "cross_check": "Same physical opening as the Living room's archway_a. Measured from both rooms on different days: 201.3 x 185.0 cm both times, agreeing to 0.0 cm."
+    },
+    {
+      "id": "arch_d1",
+      "type": "archway",
+      "wall_id": "D",
+      "width_m": null,
+      "height_m": null,
+      "leads_to": "living_room",
+      "predicted_width_m": 0.855,
+      "predicted_height_m": 1.85,
+      "note": "Size not given. Predicted from the Living room's archway_b, the only unaccounted-for opening on that side. A tape reading here either confirms the property graph or exposes a missing room."
+    },
+    {
+      "id": "door_recess",
+      "type": "door",
+      "wall_id": "D_recess",
+      "width_m": 0.9,
+      "height_m": 1.974,
+      "leads_to": null,
+      "note": "At the far end of the 1.753 m recess."
+    }
+  ],
+  "open_questions": [
+    "Which way does the wall C step go - does C2 push the room outward or cut a bay inward? It is 1.92 m2, an 11% swing on floor area, and the polygon cannot be closed without it.",
+    "Which rooms do arch_a3, arch_a4 and door_recess lead to? Three unnamed openings and three bedrooms unaccounted for.",
+    "Tape the wall D archway. Predicted 0.855 x 1.850 m from the Living room side.",
+    "Confirm the height/width order on wall A's openings, which is transposed relative to the other walls.",
+    "Tape uncertainty: one wall and one opening measured three times."
+  ]
+}
