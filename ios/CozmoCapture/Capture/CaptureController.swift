@@ -171,9 +171,18 @@ final class CaptureController: NSObject, ObservableObject, ARSessionDelegate {
             }
             let image = CIImage(cvPixelBuffer: frame.capturedImage)
             let context = CIContext()
-            guard let cg = context.createCGImage(image, from: image.extent),
-                  let jpeg = UIImage(cgImage: cg, scale: 1, orientation: .right)
-                      .jpegData(compressionQuality: 0.95) else { return }
+            guard let cg = context.createCGImage(image, from: image.extent) else { return }
+
+            // 35 mm equivalent from the horizontal focal length, rounded to the
+            // whole millimetre a stock camera would report. See encodeJPEG.
+            let fx = frame.camera.intrinsics.columns.0.x
+            let focal35 = Int((fx * 36.0 / Float(cg.width)).rounded())
+
+            guard let jpeg = FrameWriter.encodeJPEG(cg,
+                                                    quality: 0.95,
+                                                    deviceModel: self.capabilities.marketingName,
+                                                    focal35: focal35,
+                                                    captured: Date()) else { return }
 
             writer.writePhoto(jpeg, room: room, sequence: sequence)
             // Recorded, but out of the photo tier's sensor budget: this is how we

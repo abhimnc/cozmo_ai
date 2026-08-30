@@ -1,7 +1,9 @@
 import ARKit
 import CoreImage
 import Foundation
+import ImageIO
 import UIKit
+import UniformTypeIdentifiers
 
 /// One row of `poses.jsonl`.
 ///
@@ -197,6 +199,64 @@ final class FrameWriter {
         if let data = try? encoder.encode(value) {
             try? data.write(to: url, options: .atomic)
         }
+    }
+
+    // MARK: - JPEG encoding with camera metadata
+
+    /// Encodes a JPEG carrying the EXIF a stock iPhone photo would carry.
+    ///
+    /// Why this matters: at the photo tier the pipeline may read `photos/**` and
+    /// nothing else, so whatever is *not* in these files is information the
+    /// photo path does not have. Re-encoding a bare CGImage produced files with
+    /// no camera model and no focal length at all — thinner than a photo from
+    /// the stock Camera app, and thinner than the brief asks for. "Any picture
+    /// in" has to mean a picture like the ones people actually take.
+    ///
+    /// `focal35` is deliberately rounded to a whole millimetre before it is
+    /// written. ARKit's live intrinsics estimate is a per-capture calibration we
+    /// are not entitled to at this tier; an integer 35 mm-equivalent is a fixed
+    /// property of the lens that every iPhone photo reports. Rounding is what
+    /// keeps the two apart. The unrounded estimate stays in `_reference/`, where
+    /// it serves as the ground truth for measuring what the approximation costs.
+    static func encodeJPEG(_ image: CGImage,
+                           quality: CGFloat,
+                           deviceModel: String,
+                           focal35: Int,
+                           captured: Date) -> Data? {
+        let output = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(
+            output, UTType.jpeg.identifier as CFString, 1, nil) else { return nil }
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy:MM:dd HH:mm:ss"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+
+        let exif: [CFString: Any] = [
+            kCGImagePropertyExifFocalLenIn35mmFilm: focal35,
+            kCGImagePropertyExifPixelXDimension: image.width,
+            kCGImagePropertyExifPixelYDimension: image.height,
+            kCGImagePropertyExifDateTimeOriginal: formatter.string(from: captured),
+        ]
+        let tiff: [CFString: Any] = [
+            kCGImagePropertyTIFFMake: "Apple",
+            kCGImagePropertyTIFFModel: deviceModel,
+            // Orientation 1, not 6. The pixels are stored in the sensor's native
+            // landscape frame because that is the frame the intrinsics describe.
+            // Tagging them for rotation would make correctness depend on whether
+            // the reader honours EXIF orientation, and a library that silently
+            // rotates turns a principal point into a transposed one.
+            kCGImagePropertyTIFFOrientation: 1,
+        ]
+
+        CGImageDestinationAddImage(destination, image, [
+            kCGImageDestinationLossyCompressionQuality: quality,
+            kCGImagePropertyExifDictionary: exif,
+            kCGImagePropertyTIFFDictionary: tiff,
+            kCGImagePropertyOrientation: 1,
+        ] as CFDictionary)
+
+        guard CGImageDestinationFinalize(destination) else { return nil }
+        return output as Data
     }
 
     // MARK: - Pixel buffer extraction

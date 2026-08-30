@@ -42,3 +42,29 @@ depth and no poses. The capture app records everything it can (poses at every
 tier are useful to *us* as an internal reference), but writes non-budget
 signals into a `_reference/` subtree the pipeline is forbidden to open at that
 tier. This gives us a clean answer at the defense and an honest error budget.
+
+## 2026-08-30 — Photo-tier EXIF is written deliberately, and rounded
+
+**Found on the first real device capture.** The photo tier's sensor budget is
+`photos/**`, so whatever is not inside those JPEGs is information the photo path
+does not have. Re-encoding a bare `CGImage` through `UIImage.jpegData` produced
+files with five EXIF tags and no camera model, no focal length. That is thinner
+than a photo from the stock Camera app — we had made our own floor tier harder
+than the brief asks, and unlike the photos a grader would produce.
+
+**Decision.** Write the EXIF a stock iPhone photo carries: make, model,
+`FocalLenIn35mmFilm`, pixel dimensions, capture time.
+
+**The line we are drawing.** ARKit's live per-frame intrinsics are a calibration
+we are not entitled to at this tier. An integer 35 mm-equivalent focal length is
+a fixed property of the lens that every iPhone photo reports. So the value is
+rounded to the whole millimetre before it is written, which is exactly what
+separates the two. The unrounded ARKit estimate stays in `_reference/`, out of
+budget, where it becomes the ground truth for measuring what the EXIF
+approximation costs us. That measurement belongs in the error budget.
+
+**Also fixed here.** The photos were being tagged EXIF orientation 6 while the
+pixels stayed in the sensor's native landscape frame — the frame the intrinsics
+describe. Correctness then depends on whether the reader honours EXIF
+orientation, and a library that silently rotates turns a principal point into a
+transposed one. Orientation is now 1 and the pixels are left alone.
