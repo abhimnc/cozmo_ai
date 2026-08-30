@@ -10,7 +10,8 @@ exists against what is required. Raw captures live in `benchmark/raw/`
 |---|---|---|---|
 | 1 | One multi-room capture, **3+ rooms plus a connector** | **capturable** | The property has 6 rooms off a Hall connector (`ground_truth/property.json`). The existing capture covers Living room, Hall, Bedroom only; re-capture including the kitchen and one more bedroom clears this |
 | 2 | One furnished room with **staged damage spanning two damage classes** | **not started** | — |
-| 6 | Mirrors, glass, wet-look surfaces, low light (a stated constraint, not a listed row) | **available** | The kitchen covers glass and wet-look surfaces in one room; a bathroom would add mirrors. Both are in this property |
+| 6 | Mirrors, glass, wet-look surfaces, low light (a stated constraint, not a listed row) | **available** | Two bathrooms give mirrors, glass and wet-look surfaces together; the kitchen adds a second instance. Low light still needs staging |
+| 7 | A closed-door adjacency, so the photo tier's worst failure mode is measured rather than avoided | **needs staging** | Every connection in this property is an archway. Close the Living room's wall D door or cover an archway and re-capture |
 | 3 | The same rooms at **all three tiers**, multi-room set included | **photo only** | LiDAR tier is not capturable on an iPhone 13 (risk #1). Video tier not yet captured |
 | 4 | At least one room captured **twice at the same tier** (repeatability gate) | **done** | Living room, photo tier: `..._172319` (4 photos) and `..._174340` (5 photos) |
 | 5 | **Laser or tape ground truth** on everything | **not started** | — |
@@ -26,8 +27,12 @@ exists against what is required. Raw captures live in `benchmark/raw/`
 
 ## Property
 
-Seven spaces: Hall, Living room, three bedrooms, kitchen, small puja room. Full
-graph in `ground_truth/property.json`.
+Nine spaces: Hall, Living room, three bedrooms, kitchen, small puja room, two
+bathrooms. Full graph in `ground_truth/property.json`.
+
+**Every Hall connection is an open archway.** At the photo tier that is the best
+case available: an archway carries a through-view, so every adjacency in the
+property has direct image evidence and none has to be inferred.
 
 The Hall is a hub: it connects to all six rooms, so the property is a star with the
 Hall at the centre. Two things follow. The Hall is the natural anchor for the
