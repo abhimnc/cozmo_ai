@@ -82,3 +82,37 @@ level as well, so regenerating restores the indirection. This will recur every
 time someone edits Signing & Capabilities in the GUI; `xcodegen generate` is the
 fix, and `grep DEVELOPMENT_TEAM ios/CozmoCapture.xcodeproj/project.pbxproj`
 should only ever show `$(COZMO_DEVELOPMENT_TEAM)` before a commit.
+
+## 2026-08-31 — Archways are the photo tier's only stitching evidence
+
+The Living room turns out to have two archways (walls B and C) and one hinged
+door (wall D). That is a benchmark fact, but it forces a pipeline decision.
+
+**The problem.** At the photo tier there are no poses and no frame ordering.
+Rooms arrive as independent folders of stills. Nothing in the input says the
+Living room is next to the Hall, and the stitch gate requires correct adjacency
+with no room overlaps. A per-room reconstruction, however good, produces a pile
+of disconnected polygons.
+
+**What actually carries the signal.** An archway has no door leaf, so a photo
+taken in one room and pointed at an archway contains pixels of the *next* room:
+its floor, its far wall, sometimes its own openings. That through-view is the
+only observation in the entire photo tier that ties two rooms into one frame.
+A closed door tells us an opening exists and nothing about what is behind it.
+
+**Decision.** The photo-tier stitch is built on through-view matching: detect
+openings, classify each as door-like or see-through, and for see-through
+openings match the visible far-side content against the candidate rooms'
+own photo sets. The archway's measured width doubles as the scale constraint
+tying the two rooms' coordinate frames together.
+
+**Consequence for the benchmark.** A property whose rooms connect only by
+closed doors is close to unstitchable at the photo tier, and we should say so
+rather than pretend otherwise. Our benchmark should contain at least one closed
+-door connection so the failure mode is measured rather than avoided, and the
+intervals on those adjacencies must widen accordingly.
+
+**Consequence for capture.** The protocol should ask the operator to include at
+least one photo per room shot *through* each opening. That is a one-line change
+to the instructions and it is the difference between a stitchable and an
+unstitchable photo capture.
