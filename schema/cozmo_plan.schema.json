@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cozmo.ai/schema/cozmo_plan.schema.json",
+  "title": "Cozmo plan",
+  "description": "Output contract for one capture. Every scalar the pipeline reports about the physical world is a Measurement, never a bare number, so a confidence interval cannot be omitted by accident.",
+  "type": "object",
+  "required": ["schema_version", "capture", "pipeline", "rooms", "stitch", "calibration"],
+  "additionalProperties": false,
+
+  "$defs": {
+    "Measurement": {
+      "type": "object",
+      "description": "A physical quantity with its interval and how it was obtained. ci_low <= value <= ci_high is enforced by the validator, not just by convention.",
+      "required": ["value", "ci_low", "ci_high", "unit", "method"],
+      "additionalProperties": false,
+      "properties": {
+        "value": { "type": "number" },
+        "ci_low": { "type": "number" },
+        "ci_high": { "type": "number" },
+        "unit": { "enum": ["m", "m2", "cm", "deg", "count"] },
+        "method": {
+          "type": "string",
+          "description": "How this number was produced, e.g. 'plane_fit_lidar', 'exif_scale_monocular'. Free text, but it must be specific enough to audit: the calibration score depends on being able to trace an interval back to what produced it."
+        },
+        "n_observations": { "type": "integer", "minimum": 0 },
+        "notes": { "type": "string" }
+      }
+    },
+
+    "Opening": {
+      "type": "object",
+      "required": ["id", "type", "wall_id", "width", "height"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "enum": ["door", "window", "archway", "pass_through"] },
+        "wall_id": { "type": "string" },
+        "width": { "$ref": "#/$defs/Measurement" },
+        "height": { "$ref": "#/$defs/Measurement" },
+        "sill_height": { "$ref": "#/$defs/Measurement" },
+        "offset_along_wall": { "$ref": "#/$defs/Measurement" },
+        "connects_to_room": {
+          "type": ["string", "null"],
+          "description": "Room id on the far side, when this opening is what makes two rooms adjacent."
+        },
+        "detection_confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+
+    "Wall": {
+      "type": "object",
+      "required": ["id", "length", "height"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "length": { "$ref": "#/$defs/Measurement" },
+        "height": { "$ref": "#/$defs/Measurement" },
+        "start": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+        "end": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+        "clear_run": {
+          "$ref": "#/$defs/Measurement",
+          "description": "Unobstructed floor run along this wall, when built-ins make it differ from the wall length. Two distinct quantities; a scorer must be told which one a gate compares."
+        }
+      }
+    },
+
+    "Room": {
+      "type": "object",
+      "required": ["id", "name", "walls", "ceiling_height", "floor_area", "openings"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "walls": { "type": "array", "items": { "$ref": "#/$defs/Wall" }, "minItems": 3 },
+        "ceiling_height": { "$ref": "#/$defs/Measurement" },
+        "floor_area": { "$ref": "#/$defs/Measurement" },
+        "openings": { "type": "array", "items": { "$ref": "#/$defs/Opening" } },
+        "polygon": {
+          "type": "array",
+          "description": "Room outline in the stitched property frame, metres, anticlockwise.",
+          "items": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+          "minItems": 3
+        },
+        "source_frames": { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "Stitch": {
+      "type": "object",
+      "required": ["adjacency", "footprint_area", "drift"],
+      "additionalProperties": false,
+      "properties": {
+        "adjacency": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["room_a", "room_b", "via"],
+            "additionalProperties": false,
+            "properties": {
+              "room_a": { "type": "string" },
+              "room_b": { "type": "string" },
+              "via": { "type": "string", "description": "Opening id that connects them." },
+              "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        },
+        "footprint_area": { "$ref": "#/$defs/Measurement" },
+        "room_overlap_area": {
+          "$ref": "#/$defs/Measurement",
+          "description": "Total area where room polygons overlap. The photo-tier gate requires no overlaps, so this is reported rather than silently resolved."
+        },
+        "drift": {
+          "type": "object",
+          "description": "Required. 'Poses used as-is' is an automatic fail on the drift-accountability gate, so the field cannot be omitted.",
+          "required": ["method", "applied"],
+          "additionalProperties": false,
+          "properties": {
+            "method": { "enum": ["loop_closure", "pose_graph", "plane_anchored", "none"] },
+            "applied": { "type": "boolean" },
+            "residual_closure_error": { "$ref": "#/$defs/Measurement" },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "DamageRegion": {
+      "type": "object",
+      "required": ["id", "room_id", "surface_id", "damage_class", "extent"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "room_id": { "type": "string" },
+        "surface_id": { "type": "string", "description": "Wall id, 'ceiling' or 'floor'." },
+        "damage_class": { "type": "string" },
+        "extent": { "$ref": "#/$defs/Measurement" },
+        "polygon": {
+          "type": "array",
+          "items": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidence_frames": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "ConcealedFlag": {
+      "type": "object",
+      "description": "A concealed-damage suspicion. The rule that fired is required: a flag without a traceable rule is an opinion.",
+      "required": ["id", "room_id", "surface_id", "rule_id", "rule_statement", "triggered_by"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "room_id": { "type": "string" },
+        "surface_id": { "type": "string" },
+        "rule_id": { "type": "string" },
+        "rule_statement": { "type": "string", "description": "The rule in words, as it would be read aloud to a homeowner." },
+        "triggered_by": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Ids of the observed damage regions that satisfied the rule.",
+          "minItems": 1
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+
+    "ScopeLineItem": {
+      "type": "object",
+      "required": ["id", "room_id", "surface_id", "action", "quantity"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "room_id": { "type": "string" },
+        "surface_id": { "type": "string" },
+        "action": { "type": "string" },
+        "quantity": { "$ref": "#/$defs/Measurement" },
+        "derived_from": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Damage region or concealed flag ids. Scope items are keyed to surfaces via these."
+        }
+      }
+    }
+  },
+
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+
+    "capture": {
+      "type": "object",
+      "required": ["capture_id", "tier", "sensor_budget"],
+      "additionalProperties": true,
+      "properties": {
+        "capture_id": { "type": "string" },
+        "tier": { "enum": ["photo", "video", "lidar"] },
+        "sensor_budget": { "type": "array", "items": { "type": "string" } },
+        "device_model": { "type": "string" },
+        "captured_at": { "type": "string" }
+      }
+    },
+
+    "pipeline": {
+      "type": "object",
+      "required": ["version", "run_at", "command"],
+      "additionalProperties": true,
+      "properties": {
+        "version": { "type": "string" },
+        "git_commit": { "type": "string" },
+        "run_at": { "type": "string" },
+        "command": { "type": "string", "description": "The exact command that produced this file, so the run is reproducible from the output alone." },
+        "runtime_seconds": { "type": "number" }
+      }
+    },
+
+    "rooms": { "type": "array", "items": { "$ref": "#/$defs/Room" }, "minItems": 1 },
+    "stitch": { "$ref": "#/$defs/Stitch" },
+    "damage": { "type": "array", "items": { "$ref": "#/$defs/DamageRegion" } },
+    "concealed_flags": { "type": "array", "items": { "$ref": "#/$defs/ConcealedFlag" } },
+    "scope": { "type": "array", "items": { "$ref": "#/$defs/ScopeLineItem" } },
+
+    "calibration": {
+      "type": "object",
+      "description": "How the intervals above were arrived at. Calibration is scored at every tier, so this is required rather than optional.",
+      "required": ["interval_basis", "coverage_target"],
+      "additionalProperties": true,
+      "properties": {
+        "interval_basis": { "type": "string", "description": "e.g. 'propagated_sensor_noise', 'empirical_from_benchmark', 'prior_widened_for_tier'." },
+        "coverage_target": { "type": "number", "minimum": 0, "maximum": 1 },
+        "scale_source": { "type": "string", "description": "What set metric scale: 'lidar_depth', 'exif_focal_length', 'known_object_prior'." },
+        "warnings": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "renders": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "plan_svg": { "type": "string" },
+        "plan_png": { "type": "string" }
+      }
+    }
+  }
+}

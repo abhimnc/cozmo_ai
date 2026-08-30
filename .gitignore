@@ -28,3 +28,7 @@ captures/
 
 # Local signing team, per developer
 ios/Signing.local.xcconfig
+
+# Python
+.venv/
+*.egg-info/
