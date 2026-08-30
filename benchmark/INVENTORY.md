@@ -8,13 +8,22 @@ exists against what is required. Raw captures live in `benchmark/raw/`
 
 | # | Requirement | Status | Have |
 |---|---|---|---|
-| 1 | One multi-room capture, **3+ rooms plus a connector** | **capturable** | The property has 6 rooms off a Hall connector (`ground_truth/property.json`). The existing capture covers Living room, Hall, Bedroom only; re-capture including the kitchen and one more bedroom clears this |
+| 1 | One multi-room capture, **3+ rooms plus a connector** | **done** | `capture_20260831_031153_photo`: 8 rooms in one pass with the Hall as connector, 61 photos. Only the puja room is absent |
 | 2 | One furnished room with **staged damage spanning two damage classes** | **not started** | — |
 | 6 | Mirrors, glass, wet-look surfaces, low light (a stated constraint, not a listed row) | **available** | Two bathrooms give mirrors, glass and wet-look surfaces together; the kitchen adds a second instance. Low light still needs staging |
 | 7 | A closed-door adjacency, so the photo tier's worst failure mode is measured rather than avoided | **needs staging** | Every connection in this property is an archway. Close the Living room's wall D door or cover an archway and re-capture |
 | 3 | The same rooms at **all three tiers**, multi-room set included | **photo only** | LiDAR tier is not capturable on an iPhone 13 (risk #1). Video tier not yet captured |
 | 4 | At least one room captured **twice at the same tier** (repeatability gate) | **done** | Living room, photo tier: `..._172319` (4 photos) and `..._174340` (5 photos) |
 | 5 | **Laser or tape ground truth** on everything | **not started** | — |
+
+## Canonical room identity
+
+Room ids for the benchmark are fixed by **`capture_20260831_031153_photo`**, the
+only capture holding the whole floor in one pass — 8 rooms including the Hall.
+See `ground_truth/room_identity.json`. Bedroom and bathroom numbers in the
+earlier captures were assigned independently and do **not** match; only
+`living_room`, `hall` and `kitchen` can be joined across captures, being
+single-instance rooms with no numbering to disagree about.
 
 ## Room identity does not survive a retype
 
@@ -37,7 +46,8 @@ treated as having **disjoint** bedroom sets.
 
 | Capture | Tier | Rooms | Photos | Purpose |
 |---|---|---|---|---|
-| `capture_20260831_023857_photo` | photo | Living Room, Hall, Kitchen, 3 bedrooms | 23 | **the multi-room set.** Contains the Hall, so every room has a connector and the set is stitchable |
+| `capture_20260831_031153_photo` | photo | Living room, Hall, Kitchen, 3 bedrooms, 2 bathrooms | **61** | **the canonical multi-room set.** Whole floor in one pass, Hall included, 6–9 photos per room. Room numbering here is authoritative |
+| `capture_20260831_023857_photo` | photo | Living Room, Hall, Kitchen, 3 bedrooms | 23 | superseded by 031153; bedroom numbering does not match |
 | `capture_20260831_030010_photo` | photo | 2 bathrooms, 3 bedrooms | 24 | per-room detail. **Not stitchable alone**: no Hall and no Living room, so none of these five rooms touch each other |
 | `capture_20260830_172319_photo` | photo | Living room, Hall, Bedroom | 11 | superseded — mixes two floors |
 | `capture_20260830_173700_photo` | photo | Hall2, Living room 2 | 8 | superseded — the second floor |

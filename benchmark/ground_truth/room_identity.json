@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "source_capture": "capture_20260831_031153_photo",
+  "declared_at": "2026-08-31",
+  "note": "Room identity for the benchmark is fixed by this capture, on the operator's instruction. It is the only capture holding the whole floor in one pass - 8 rooms including the Hall - so it is the only one whose numbering can be authoritative for stitching and adjacency.",
+  "rooms": [
+    {
+      "id": "living_room",
+      "capture_name": "Living room",
+      "capture_slug": "living_room",
+      "photos": 8,
+      "ground_truth": "ground_truth/living_room.json"
+    },
+    {
+      "id": "hall",
+      "capture_name": "Hall",
+      "capture_slug": "hall",
+      "photos": 9,
+      "ground_truth": "ground_truth/hall.json",
+      "role": "connector"
+    },
+    {
+      "id": "bedroom_1",
+      "capture_name": "Bed room 1",
+      "capture_slug": "bed_room_1",
+      "photos": 6,
+      "ground_truth": null
+    },
+    {
+      "id": "bedroom_2",
+      "capture_name": "Bed room 2",
+      "capture_slug": "bed_room_2",
+      "photos": 6,
+      "ground_truth": null
+    },
+    {
+      "id": "kitchen",
+      "capture_name": "Kitchen",
+      "capture_slug": "kitchen",
+      "photos": 9,
+      "ground_truth": null
+    },
+    {
+      "id": "bedroom_3",
+      "capture_name": "Bedroom 3",
+      "capture_slug": "bedroom_3",
+      "photos": 8,
+      "ground_truth": null
+    },
+    {
+      "id": "bathroom_1",
+      "capture_name": "Bathroom 1",
+      "capture_slug": "bathroom_1",
+      "photos": 6,
+      "ground_truth": null
+    },
+    {
+      "id": "bathroom_2",
+      "capture_name": "Bathroom 2",
+      "capture_slug": "bathroom_2",
+      "photos": 9,
+      "ground_truth": null
+    }
+  ],
+  "slug_warning": "Two bedrooms were typed 'Bed room 1' and 'Bed room 2' here but 'Bedroom 1' and 'Bedroom 2' in capture_20260831_030010_photo, giving slugs bed_room_1 and bedroom_1 for what may or may not be the same room. The canonical id column above is what the pipeline and scorer use; the capture_slug is recorded only so a bundle path can be resolved. The app now offers previous names back rather than accepting a retype, which is what allowed the divergence.",
+  "earlier_captures": {
+    "status": "not comparable by room number",
+    "reason": "Bedroom and bathroom numbering in capture_20260831_023857_photo and capture_20260831_030010_photo was assigned independently and the operator has confirmed it does not match this capture. Those bundles remain valid as per-room photo sets but their bedroom and bathroom identities must not be joined to this one.",
+    "safe_to_join": [
+      "living_room",
+      "hall",
+      "kitchen"
+    ],
+    "safe_to_join_note": "Single-instance rooms; no numbering to disagree about."
+  },
+  "missing_from_capture": [
+    "puja_room - present in the property graph, not captured here. The stitch will be scored against a floor plan that has it, so either capture it or record it as a known omission."
+  ]
+}
