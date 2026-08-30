@@ -68,3 +68,17 @@ pixels stayed in the sensor's native landscape frame — the frame the intrinsic
 describe. Correctness then depends on whether the reader honours EXIF
 orientation, and a library that silently rotates turns a principal point into a
 transposed one. Orientation is now 1 and the pixels are left alone.
+
+## 2026-08-30 — Signing team, second pass
+
+Selecting a team in Xcode's Signing & Capabilities writes `DEVELOPMENT_TEAM`
+into the **target** build settings of the generated `.xcodeproj`, and a
+target-level setting beats the project-level one. So the xcconfig indirection
+added earlier was silently defeated the moment anyone touched that pane, and a
+real team ID went back into the committed project file.
+
+`project.yml` now sets `DEVELOPMENT_TEAM: $(COZMO_DEVELOPMENT_TEAM)` at target
+level as well, so regenerating restores the indirection. This will recur every
+time someone edits Signing & Capabilities in the GUI; `xcodegen generate` is the
+fix, and `grep DEVELOPMENT_TEAM ios/CozmoCapture.xcodeproj/project.pbxproj`
+should only ever show `$(COZMO_DEVELOPMENT_TEAM)` before a commit.

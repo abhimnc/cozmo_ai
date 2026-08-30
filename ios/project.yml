@@ -24,6 +24,7 @@ targets:
       Release: Signing.xcconfig
     settings:
       base:
+        DEVELOPMENT_TEAM: $(COZMO_DEVELOPMENT_TEAM)
         PRODUCT_BUNDLE_IDENTIFIER: com.cozmoai.capture
         INFOPLIST_FILE: CozmoCapture/Info.plist
         TARGETED_DEVICE_FAMILY: "1"
