@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "room_id": "living_room",
+  "status": "provisional",
+  "measured_at": "2026-08-30",
+  "method": "unrecorded",
+  "source": "handwritten note, photographed as capture_20260830_180228_photo",
+
+  "precision_m": 0.05,
+  "precision_note": "Values are stated to 0.05 m at best (5.5, 3.75, 3.5, 2.0, 1.0, 0.6). The opening-width gate is 2 cm and the ceiling-height gate is 1.5 cm, so this ground truth is 3x coarser than the tolerance it would be judging. Usable for a sanity check, not for scoring a gate.",
+
+  "assumed_rectangular": true,
+  "assumption_note": "The note gives length and breadth only, so the room is being treated as a rectangle with two pairs of equal walls. The gates are scored per wall; if the room is not square this is wrong on up to four walls at once.",
+
+  "walls": [
+    { "id": "A", "length_m": 5.5,  "derived_from": "length" },
+    { "id": "B", "length_m": 3.75, "derived_from": "breadth" },
+    { "id": "C", "length_m": 5.5,  "derived_from": "length, assumed opposite A" },
+    { "id": "D", "length_m": 3.75, "derived_from": "breadth, assumed opposite B" }
+  ],
+
+  "ceiling_height_m": 3.5,
+  "floor_area_m2": 20.625,
+  "floor_area_note": "Computed as 5.5 x 3.75, not measured independently.",
+
+  "openings": [
+    {
+      "id": "window_1",
+      "type": "window",
+      "width_m": 2.0,
+      "height_m": 1.0,
+      "wall_id": null,
+      "sill_height_m": null
+    },
+    {
+      "id": "door_1",
+      "type": "door",
+      "width_m": 0.6,
+      "height_m": 2.0,
+      "wall_id": null
+    }
+  ],
+
+  "applies_to_captures": [
+    "capture_20260830_172319_photo#01_living_room",
+    "capture_20260830_174340_photo#01_living_room"
+  ],
+
+  "open_questions": [
+    "Tape or laser? The brief asks for one of the two, and the answer sets the ground-truth uncertainty we quote.",
+    "Ceiling height 3.5 m is tall for a residential room. Plausible in older construction, worth confirming it is not 2.5 m.",
+    "Door width 0.6 m is narrow: interior doors are usually 0.70-0.80 m and a main door 0.90-1.00 m. Worth re-measuring.",
+    "Which wall carries the window, and which carries the door?",
+    "Are all four walls actually equal in pairs, or does the room have a bay, alcove or non-square corner?"
+  ]
+}
