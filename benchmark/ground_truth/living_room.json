@@ -1,14 +1,15 @@
 {
   "schema_version": 1,
   "room_id": "living_room",
-  "status": "confirmed_by_operator",
+  "status": "complete_pending_reveal_placement",
   "measured_at": "2026-08-31",
   "method": "tape",
   "source": "operator-confirmed table, superseding the handwritten note in capture_20260830_234933_photo",
   "revision_history": [
     "v1 2026-08-30: 5.5 x 3.75 x 3.5 m estimate. Superseded \u2014 24 cm out on ceiling, ~45 cm out on wall length, and rectangular-only.",
     "v2 2026-08-30: per-wall, heights 325.4/325.9 varying by 0.5 cm, window height 110.5. Superseded.",
-    "v3 2026-08-31: heights corrected to a uniform 329.4 (+3.75 cm on v2), window height 110.9. Wall lengths and floor unchanged."
+    "v3 2026-08-31: heights corrected to a uniform 329.4 (+3.75 cm on v2), window height 110.9. Wall lengths and floor unchanged.",
+    "v4 2026-08-31: second door added on wall C (1.850 x 0.855 m, identical to the wall D door). The 40 cm floor-versus-wall gap is resolved: it is two 20 cm door reveals, i.e. the wall thickness visible inside each door opening. 497.7 - 2x20 = 457.7 exactly."
   ],
   "units_note": "Source values are centimetres, recorded here in metres.",
   "precision_m": 0.001,
@@ -44,28 +45,28 @@
     "long_m": 4.577,
     "area_m2": 15.24
   },
-  "floor_vs_wall_gap": {
-    "what": "Floor long dimension 457.7 cm against wall C at 497.7 cm and wall A at 505.7 cm.",
-    "size_cm": 40.0,
-    "status": "operator reconfirmed 457.7 in v3 while correcting other values in the same table, so it is treated as deliberate rather than a slip",
-    "implication": "40 cm of that run is occupied by something the tape could not cross \u2014 a wardrobe, alcove, chimney breast or built-in. Wall length and clear floor are then two different quantities and the pipeline must be told which one each gate is scored against.",
-    "still_needed": "what the obstruction is, and its width, so the scoring script compares like with like"
-  },
   "openings": [
     {
       "id": "window_1",
       "type": "window",
+      "wall_id": "C",
       "width_m": 1.413,
       "height_m": 1.109,
-      "wall_id": "C",
       "sill_height_m": null
     },
     {
       "id": "door_1",
       "type": "door",
+      "wall_id": "D",
       "width_m": 0.855,
-      "height_m": 1.85,
-      "wall_id": "D"
+      "height_m": 1.85
+    },
+    {
+      "id": "door_2",
+      "type": "door",
+      "wall_id": "C",
+      "width_m": 0.855,
+      "height_m": 1.85
     }
   ],
   "applies_to_captures": [
@@ -73,10 +74,22 @@
     "capture_20260830_174340_photo#01_living_room"
   ],
   "open_questions": [
-    "What occupies the 40 cm between wall length and clear floor, and is it on wall A or wall C?",
-    "Is A-B-C-D clockwise or anticlockwise, and which is the entry wall? Needed to align pipeline output to this key. Wall D carries the door, which makes it the likely entry.",
+    "Both doors are said to account for the 40 cm, but only wall C reconciles arithmetically (497.7 - 40 = 457.7, whereas 505.7 - 40 = 465.7). Are both door reveals on wall C, or is the wall D door's reveal reducing the short floor dimension instead? This changes which wall the scorer applies the correction to.",
+    "Direct tape reading across one door reveal, to confirm the 20 cm wall thickness that is currently derived rather than measured.",
+    "Is A-B-C-D clockwise or anticlockwise, and which door is the entry?",
     "Tape uncertainty: re-measure one wall and one opening three times to get a spread."
   ],
   "method_note": "Tape. Uncertainty is not yet quantified: a single-pass tape run over a ~5 m wall carries sag, corner placement and reading error, and the opening gate is 2 cm. Cheapest way to pin it is to re-measure one wall and one opening three times and take the spread \u2014 until then we cannot honestly quote a ground-truth interval, and any pipeline error smaller than that spread is unmeasurable.",
-  "openings_note": "Window on wall C (4.977 m run, opening 1.413 m). Door on wall D (3.330 m run, opening 0.855 m). Both fit their walls with room to spare, so neither placement is geometrically forced \u2014 this had to come from the operator."
+  "openings_note": "Three openings: a window and a door on wall C, a door on wall D. Both doors are 1.850 x 0.855 m. Opening detection is scored with a missed opening and a phantom opening each counting as a miss, so the count itself is part of the answer key: finding two of these three costs one miss, and inventing a fourth costs another.",
+  "wall_thickness_m": 0.2,
+  "wall_thickness_note": "Derived, not directly measured: the 40 cm floor-versus-wall gap divided by two door reveals. A 20 cm wall is thick, consistent with masonry construction and with the 3.294 m ceiling. Worth confirming with a direct tape reading across one door reveal, since it now carries weight in the scoring.",
+  "floor_vs_wall": {
+    "resolved": true,
+    "wall_length_m": 4.977,
+    "clear_floor_m": 4.577,
+    "difference_m": 0.4,
+    "cause": "Two door reveals of 0.20 m each. 497.7 - 2 x 20 = 457.7 cm exactly.",
+    "scoring_consequence": "Wall length and clear floor are different quantities and the scorer must not compare them. A reconstruction sees the room-side wall surface, so it should recover 4.977 m for wall C; comparing that against the 4.577 m floor figure would report an 8% error that is really two doorways. Floor area must likewise be computed from wall lengths, not from the tape's floor run.",
+    "arithmetic_note": "The 40 cm reconciles against wall C (4.977 m) and not against wall A (5.057 m), which is consistent with the long floor run having been measured along the C direction."
+  }
 }
