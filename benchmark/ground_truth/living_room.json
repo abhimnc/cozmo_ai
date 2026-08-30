@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "room_id": "living_room",
-  "status": "complete_pending_sketch",
+  "status": "consistent",
   "measured_at": "2026-08-31",
   "method": "tape",
   "source": "operator-confirmed table, superseding the handwritten note in capture_20260830_234933_photo",
@@ -11,7 +11,8 @@
     "v3 2026-08-31: heights corrected to a uniform 329.4 (+3.75 cm on v2), window height 110.9. Wall lengths and floor unchanged.",
     "v4 2026-08-31: second door added on wall C (1.850 x 0.855 m, identical to the wall D door). The 40 cm floor-versus-wall gap is resolved: it is two 20 cm door reveals, i.e. the wall thickness visible inside each door opening. 497.7 - 2x20 = 457.7 exactly.",
     "v5 2026-08-31: third door added on wall B, 1.850 m high x 2.013 m wide. Four openings total.",
-    "v6 2026-08-31: the wall B and wall C openings are archways, not doors. Wall D keeps the only real door. Two archways means two adjacencies out of this room."
+    "v6 2026-08-31: the wall B and wall C openings are archways, not doors. Wall D keeps the only real door. Two archways means two adjacencies out of this room.",
+    "v7 2026-08-31: openings relaid. Walls A, B, D carry openings; wall C carries only the window. Wall A has the largest opening (1.850 x 2.013 m). A and B are archways, D is the hinged door. This layout also resolves the 40 cm exactly."
   ],
   "units_note": "Source values are centimetres, recorded here in metres.",
   "precision_m": 0.001,
@@ -54,31 +55,33 @@
       "wall_id": "C",
       "width_m": 1.413,
       "height_m": 1.109,
-      "sill_height_m": null
+      "sill_height_m": null,
+      "note": "Wall C's only opening. A window does not reach the floor, so it takes no reveal off any floor run."
     },
     {
-      "id": "door_1",
+      "id": "archway_a",
+      "type": "archway",
+      "wall_id": "A",
+      "width_m": 2.013,
+      "height_m": 1.85,
+      "note": "Largest opening in the room, 2.013 m of wall A's 5.057 m run. Open archway, so photos pointed at it see into the neighbouring room. Height/width order still worth confirming - it is the only opening here wider than it is tall."
+    },
+    {
+      "id": "archway_b",
+      "type": "archway",
+      "wall_id": "B",
+      "width_m": 0.855,
+      "height_m": 1.85,
+      "width_source": "inferred",
+      "note": "Width not stated directly. Inferred as 0.855 m because two 1.850 x 0.855 m openings were recorded before the relayout and wall D accounts for one of them. Marked inferred rather than measured: it feeds the 2 cm opening gate, so it should be taped before any benchmark run."
+    },
+    {
+      "id": "door_d",
       "type": "door",
       "wall_id": "D",
       "width_m": 0.855,
       "height_m": 1.85,
-      "note": "The only hinged door in the room."
-    },
-    {
-      "id": "door_2",
-      "type": "archway",
-      "wall_id": "C",
-      "width_m": 0.855,
-      "height_m": 1.85,
-      "note": "Open archway on wall C, no door leaf. Connects the Living room to a neighbouring space; the room on the far side is not yet recorded."
-    },
-    {
-      "id": "door_3",
-      "type": "archway",
-      "wall_id": "B",
-      "width_m": 2.013,
-      "height_m": 1.85,
-      "note": "Open archway on wall B, 2.013 m of a 3.330 m run. Connects the Living room to a neighbouring space. Recorded as 1.850 m high x 2.013 m wide; the height/width order is still worth confirming, since it is the only opening here wider than it is tall."
+      "note": "The only hinged door. Closed-leaf openings carry no through-view, so this one gives the photo tier no adjacency evidence."
     }
   ],
   "applies_to_captures": [
@@ -86,30 +89,29 @@
     "capture_20260830_174340_photo#01_living_room"
   ],
   "open_questions": [
-    "Which room is on the far side of each archway - the wall C one and the wall B one?",
-    "A labelled sketch would close the rest at once: box with walls A-D, the four openings on their walls, an arrow for the entry, and the two reveals that make up the 40 cm circled.",
-    "Confirm the wall B archway is 1.850 m high x 2.013 m wide and not the reverse.",
-    "Which two reveals make up the 40 cm? The arithmetic reconciles only against wall C.",
+    "Which room is beyond the wall A archway, and which beyond the wall B archway?",
+    "Tape the wall B archway width; it is currently inferred at 0.855 m and feeds a 2 cm gate.",
+    "Confirm the wall A archway is 1.850 m high x 2.013 m wide and not the reverse.",
     "Direct tape reading across one reveal, to confirm the derived 0.20 m wall thickness.",
     "Tape uncertainty: re-measure one wall and one opening three times to get a spread."
   ],
   "method_note": "Tape. Uncertainty is not yet quantified: a single-pass tape run over a ~5 m wall carries sag, corner placement and reading error, and the opening gate is 2 cm. Cheapest way to pin it is to re-measure one wall and one opening three times and take the spread \u2014 until then we cannot honestly quote a ground-truth interval, and any pipeline error smaller than that spread is unmeasurable.",
-  "openings_note": "Four openings: a window and an archway on wall C, an archway on wall B, a door on wall D. Two archways means two adjacencies out of this room, and adjacency is a scored output on the stitched plan. With four openings the >=85% opening-width gate rounds up to 100%: three of four is 75% and fails, so every opening must land within 2 cm and a phantom fifth fails the row on its own.",
+  "openings_note": "Four openings: window on C, archways on A and B, hinged door on D. Two archways is two adjacencies out of this room. With four openings the >=85% opening-width gate rounds up to 100% - three of four is 75% and fails - so every opening must land within 2 cm and a phantom fifth fails the row on its own.",
   "wall_thickness_m": 0.2,
   "wall_thickness_note": "Derived, not directly measured: the 40 cm floor-versus-wall gap divided by two door reveals. A 20 cm wall is thick, consistent with masonry construction and with the 3.294 m ceiling. Worth confirming with a direct tape reading across one door reveal, since it now carries weight in the scoring.",
   "floor_vs_wall": {
     "resolved": true,
-    "wall_length_m": 4.977,
-    "clear_floor_m": 4.577,
-    "difference_m": 0.4,
-    "cause": "Two door reveals of 0.20 m each. 497.7 - 2 x 20 = 457.7 cm exactly.",
-    "scoring_consequence": "Wall length and clear floor are different quantities and the scorer must not compare them. A reconstruction sees the room-side wall surface, so it should recover 4.977 m for wall C; comparing that against the 4.577 m floor figure would report an 8% error that is really two doorways. Floor area must likewise be computed from wall lengths, not from the tape's floor run.",
-    "arithmetic_note": "The 40 cm reconciles against wall C (4.977 m) and not against wall A (5.057 m), which is consistent with the long floor run having been measured along the C direction.",
-    "open_point": "The 40 cm was attributed to 'the two doors' when two were known. There are now three. The arithmetic still reconciles only against wall C (497.7 - 40 = 457.7); wall A does not (505.7 - 40 = 465.7), and the wall B door does not reduce the short floor run, which measures 333 and equals wall B's full length. Which two reveals the 40 cm represents is now genuinely unclear and should not be assumed."
+    "explanation": "The long floor run is measured wall B face to wall D face. B carries an archway and D carries a door, so there is an opening at each end of that run, each with a 0.20 m reveal. 457.7 + 20 + 20 = 497.7, which is wall C exactly.",
+    "wall_c_m": 4.977,
+    "clear_floor_long_m": 4.577,
+    "reveal_each_m": 0.2,
+    "wall_a_note": "Wall A measures 5.057 m, 8 cm longer than the reconciled 4.977 m. That is the room not being square, already recorded, not a second unexplained gap.",
+    "short_run_note": "The short floor run is 3.330 m and equals walls B and D exactly. Wall C's only opening is a window, which does not reach the floor, so nothing shortens this run.",
+    "scoring_consequence": "A reconstruction sees the room-side wall surface and should recover 4.977 m for wall C and 5.057 m for wall A. Scoring either against the 4.577 m clear floor would report an 8% error that is really two doorways. Floor area must be computed from wall lengths."
   },
   "adjacency": {
-    "via_archway_wall_C": null,
-    "via_archway_wall_B": null,
-    "note": "Which room lies beyond each archway is not yet recorded. The multi-room capture holds Living room, Hall and Bedroom, so these two archways are very likely the connectors between them - but that is an inference and the stitched plan is scored on correct adjacency, so it needs stating rather than deducing."
+    "via_archway_a": null,
+    "via_archway_b": null,
+    "note": "Two archways, so two adjacencies out of the Living room. Which room lies beyond each is not recorded. The multi-room capture holds Living room, Hall and Bedroom, so these are very likely the connectors, but adjacency is scored and should be stated rather than deduced. The wall D door, having a leaf, offers the photo tier no evidence of what is behind it."
   }
 }

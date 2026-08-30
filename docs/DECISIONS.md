@@ -85,8 +85,10 @@ should only ever show `$(COZMO_DEVELOPMENT_TEAM)` before a commit.
 
 ## 2026-08-31 — Archways are the photo tier's only stitching evidence
 
-The Living room turns out to have two archways (walls B and C) and one hinged
-door (wall D). That is a benchmark fact, but it forces a pipeline decision.
+The Living room turns out to have two archways and one hinged door. (Corrected
+2026-08-31: the archways are on walls A and B, not B and C; wall C carries only
+the window. The wall assignments moved, the argument below did not.) That is a
+benchmark fact, but it forces a pipeline decision.
 
 **The problem.** At the photo tier there are no poses and no frame ordering.
 Rooms arrive as independent folders of stills. Nothing in the input says the
