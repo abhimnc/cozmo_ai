@@ -1,52 +1,46 @@
 {
   "schema_version": 1,
   "room_id": "living_room",
-  "status": "provisional_one_conflict",
-  "measured_at": "2026-08-30",
+  "status": "confirmed_by_operator",
+  "measured_at": "2026-08-31",
   "method": "unrecorded",
-  "source": "handwritten note, photographed as capture_20260830_234933_photo",
-  "supersedes": "the 2026-08-30 estimate of 5.5 x 3.75 x 3.5 m, which was 24 cm out on ceiling height and ~45 cm out on wall length",
+  "source": "operator-confirmed table, superseding the handwritten note in capture_20260830_234933_photo",
 
-  "units_note": "Source values are centimetres, recorded here in metres. The note gives each wall as height x length.",
+  "revision_history": [
+    "v1 2026-08-30: 5.5 x 3.75 x 3.5 m estimate. Superseded — 24 cm out on ceiling, ~45 cm out on wall length, and rectangular-only.",
+    "v2 2026-08-30: per-wall, heights 325.4/325.9 varying by 0.5 cm, window height 110.5. Superseded.",
+    "v3 2026-08-31: heights corrected to a uniform 329.4 (+3.75 cm on v2), window height 110.9. Wall lengths and floor unchanged."
+  ],
+
+  "units_note": "Source values are centimetres, recorded here in metres.",
   "precision_m": 0.001,
 
   "walls": [
-    { "id": "A", "length_m": 5.057, "height_m": 3.254 },
-    { "id": "B", "length_m": 3.330, "height_m": 3.259 },
-    { "id": "C", "length_m": 4.977, "height_m": 3.259 },
-    { "id": "D", "length_m": 3.330, "height_m": 3.254 }
+    { "id": "A", "length_m": 5.057, "height_m": 3.294 },
+    { "id": "B", "length_m": 3.330, "height_m": 3.294 },
+    { "id": "C", "length_m": 4.977, "height_m": 3.294 },
+    { "id": "D", "length_m": 3.330, "height_m": 3.294 }
   ],
 
-  "ceiling_height_m": 3.2565,
-  "ceiling_height_spread_m": 0.005,
-  "ceiling_note": "Mean of the four wall heights. The room's own ceiling varies by 0.5 cm corner to corner, which is a third of the 1.5 cm gate and is a floor on achievable accuracy: our pipeline cannot be more consistent than the ceiling is flat. This belongs in the error budget.",
+  "ceiling_height_m": 3.294,
+  "ceiling_height_spread_m": 0.0,
+  "ceiling_note": "All four corners now measure identically, so the ground truth asserts a flat ceiling and the full 1.5 cm gate is available to the pipeline. This replaces v2, which showed a 0.5 cm corner-to-corner spread; that spread was an artefact of the superseded numbers, not a property of the room.",
 
   "rectangular": false,
-  "shape_note": "Opposite walls A and C differ by 8.0 cm (1.6%); B and D agree exactly. The room is genuinely not square, which is why per-wall ground truth was needed and why the earlier length-and-breadth version could not have scored a gate.",
+  "shape_note": "Walls A and C differ by 8.0 cm (1.6%) while B and D agree exactly. The room is genuinely not square, which is why per-wall ground truth is required.",
 
   "floor_m": { "short_m": 3.330, "long_m": 4.577, "area_m2": 15.24 },
-  "CONFLICT": {
-    "what": "Floor long dimension is written 457.7 cm, but wall C measures 497.7 cm and wall A 505.7 cm.",
-    "size": "40 cm against wall C — 8% of the wall length, which is the entire photo-tier gate.",
-    "readings": {
-      "if_457_7_is_correct": "The clear floor is shorter than the wall, so something occupies 40 cm along that run — a wardrobe, alcove, chimney breast or built-in. Then floor area is 15.24 m2 and the pipeline should recover the wall, not the clear floor.",
-      "if_it_is_a_slip_for_497_7": "Floor is 3.33 x 4.977 m, area 16.57 m2, fully consistent with wall C."
-    },
-    "resolution": "unresolved — must not be guessed, it is gate-sized"
+  "floor_vs_wall_gap": {
+    "what": "Floor long dimension 457.7 cm against wall C at 497.7 cm and wall A at 505.7 cm.",
+    "size_cm": 40.0,
+    "status": "operator reconfirmed 457.7 in v3 while correcting other values in the same table, so it is treated as deliberate rather than a slip",
+    "implication": "40 cm of that run is occupied by something the tape could not cross — a wardrobe, alcove, chimney breast or built-in. Wall length and clear floor are then two different quantities and the pipeline must be told which one each gate is scored against.",
+    "still_needed": "what the obstruction is, and its width, so the scoring script compares like with like"
   },
 
   "openings": [
-    {
-      "id": "window_1", "type": "window",
-      "width_m": 1.413, "height_m": 1.105,
-      "wall_id": null, "sill_height_m": null
-    },
-    {
-      "id": "door_1", "type": "door",
-      "width_m": 0.855, "height_m": 1.850,
-      "wall_id": null,
-      "note": "Door height 1.85 m is low against a 2.0-2.1 m modern standard, but consistent with older construction and with the 3.26 m ceiling."
-    }
+    { "id": "window_1", "type": "window", "width_m": 1.413, "height_m": 1.109, "wall_id": null, "sill_height_m": null },
+    { "id": "door_1", "type": "door", "width_m": 0.855, "height_m": 1.850, "wall_id": null }
   ],
 
   "applies_to_captures": [
@@ -55,9 +49,9 @@
   ],
 
   "open_questions": [
-    "Resolve the 40 cm floor-versus-wall conflict above.",
-    "Which wall carries the door, and which carries the window? Opening detection is scored per surface, so an opening on the wrong wall scores as one miss plus one phantom.",
-    "Tape or laser? The brief asks for one of the two and the answer sets the ground-truth uncertainty we are entitled to quote.",
-    "Wall ordering: is A-B-C-D clockwise or anticlockwise, and which is the entry wall? Needed to align our output to this key."
+    "What occupies the 40 cm between wall length and clear floor?",
+    "Which wall carries the door, and which the window? Opening detection is scored per surface, so an opening placed on the wrong wall costs a miss and a phantom — two hits from one error.",
+    "Tape or laser? The brief asks for one, and it sets the ground-truth uncertainty we may quote.",
+    "Is A-B-C-D clockwise or anticlockwise, and which is the entry wall?"
   ]
 }

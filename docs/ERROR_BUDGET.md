@@ -46,6 +46,18 @@ Consequences to handle in the pipeline:
 read its EXIF, to pin down Apple's convention empirically rather than by
 argument.
 
+## Ground-truth side
+
+### Ceiling flatness — **withdrawn**
+
+An earlier reading of the Living room gave wall heights of 325.4/325.9 cm, a
+0.5 cm corner-to-corner spread, and that was written up here as a floor on
+achievable ceiling accuracy. The operator's corrected measurement (2026-08-31)
+gives a uniform 329.4 cm, so the spread was an artefact of the superseded
+numbers rather than a property of the room. The full 1.5 cm gate is available.
+Recorded rather than deleted because the reasoning still applies to any room
+whose ceiling genuinely is not flat, and we should check for it per room.
+
 ## Known capture-side issues
 
 - A capture saved with zero photos still writes a manifest and survives the
