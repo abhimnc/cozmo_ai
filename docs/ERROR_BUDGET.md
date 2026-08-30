@@ -85,11 +85,50 @@ intervals must carry it. Claiming ±8% wall lengths while half that budget sits
 in an unchecked focal-length assumption would be exactly the confident garbage
 the brief caps scores for.
 
-**The next thing to try, and why it should work.** Every photo in a capture comes
-from the same phone, so they share *one* focal length. Estimating it jointly
-across a room's 5-11 photos — one unknown against many images — is far better
-conditioned than solving each image alone and averaging. The per-image estimator
-built here becomes the residual term in that joint fit rather than the answer.
+**Evaluated again on 23 photos, 6 rooms (`capture_20260831_023857_photo`).**
+A larger set made the failure legible: the error is not noise, it is a
+**systematic +69% bias**, and every gate built to suppress it makes it worse.
+
+| Per-axis support floor | Frames kept | Median error |
+|---|---|---|
+| 0.03 | 22 of 23 | +69% |
+| 0.06 | 19 | +96% |
+| 0.09 | 16 | +104% |
+| 0.12 | 11 | +109% |
+| 0.20 | 2 | +152% |
+
+**Root cause, now identified.** The objective is monotonically biased toward
+large focal lengths. As f grows every vanishing point recedes, the line families
+become near-parallel, and a fixed angular threshold accepts a wider swath of the
+image — so an inflated frame scores higher on *every* axis at once. Gating on
+per-axis support therefore selects harder for inflated frames rather than
+against them, which is exactly what the sweep shows. The explained-fraction gate
+is equally useless: the single worst estimate (+226%) explained 82% of line
+structure.
+
+The fix is to change the objective, not to add gates on top of it. The count of
+inliers has to be normalised against how many a *random* frame at that focal
+length would collect, so a frame is scored on the inliers it wins beyond chance.
+Joint multi-image estimation was the earlier plan and it does **not** fix this
+on its own: a shared focal length across 23 images would converge on the same
++69%, because the bias is coherent across images rather than averaging out.
+
+**Audit against withheld data.** Running from outside the pipeline, against
+ARKit intrinsics in `_reference/` that the photo tier cannot read:
+
+| Source | Focal (px) | Error vs ARKit |
+|---|---|---|
+| ARKit, 23 frames | 3038.5 median | — |
+| EXIF, what the tier uses | 3024.0 | **−0.48%** |
+| Geometric estimator | ~5100 | +69% |
+
+This reverses the priority. EXIF is accurate to half a percent on our own
+captures, so the 35 mm-convention worry does not bite here — our capture app
+writes the convention it computes. The risk was always about *stock Camera*
+photos carrying Apple's 26 mm instead, and that remains untested. Meanwhile the
+"independent check" is far less trustworthy than the thing it was built to
+check, and must not be allowed to widen an interval that EXIF already gets
+right.
 
 **What is kept in the meantime.** The rejection behaviour. The estimator now
 refuses roughly four photos in five rather than reporting a number it cannot
