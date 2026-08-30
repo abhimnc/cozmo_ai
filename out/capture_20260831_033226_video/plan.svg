@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30190" height="6841" viewBox="0 0 30190 6841" font-family="ui-sans-serif,system-ui,sans-serif">
+<rect width="30190" height="6841" fill="#fbfaf8"/>
+<text x="40" y="26" font-size="15" font-weight="600" fill="#3d3a34">capture_20260831_033226_video &#183; video tier</text>
+<text x="40" y="44" font-size="11" fill="#8a8377">Rooms drawn at estimated size. Shaded band is the confidence interval. Layout is arbitrary: no room placement has been solved.</text>
+<rect x="40.0" y="70.0" width="336.2" height="248.9" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="40.0" y="70.0" width="151.2" height="156.2" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="40.0" y="242.2" font-size="12" fill="#3d3a34">Bedroom 1</text>
+<text x="40.0" y="256.2" font-size="10" fill="#8a8377">3.72 &#215; 3.60 m</text>
+<rect x="401.4" y="70.0" width="264.1" height="170.2" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="401.4" y="70.0" width="132.0" height="130.9" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="401.4" y="216.9" font-size="12" fill="#3d3a34">Hall</text>
+<text x="401.4" y="230.9" font-size="10" fill="#8a8377">3.12 &#215; 3.14 m</text>
+<rect x="690.6" y="70.0" width="3124.8" height="760.3" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="690.6" y="70.0" width="401.8" height="210.7" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="690.6" y="296.7" font-size="12" fill="#3d3a34">Bedroom 2</text>
+<text x="690.6" y="310.7" font-size="10" fill="#8a8377">5.02 &#215; 9.57 m</text>
+<rect x="3840.6" y="70.0" width="357.8" height="193.4" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="3840.6" y="70.0" width="178.9" height="148.8" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="3840.6" y="234.8" font-size="12" fill="#3d3a34">Kitchen</text>
+<text x="3840.6" y="248.8" font-size="10" fill="#8a8377">3.54 &#215; 4.26 m</text>
+<rect x="4223.7" y="70.0" width="906.6" height="625.1" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="4223.7" y="70.0" width="225.6" height="91.5" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="4223.7" y="177.5" font-size="12" fill="#3d3a34">Puja room</text>
+<text x="4223.7" y="191.5" font-size="10" fill="#8a8377">2.18 &#215; 5.37 m</text>
+<rect x="5155.5" y="70.0" width="730.2" height="950.5" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="5155.5" y="70.0" width="365.1" height="365.6" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="5155.5" y="451.6" font-size="12" fill="#3d3a34">Bedroom 3</text>
+<text x="5155.5" y="465.6" font-size="10" fill="#8a8377">8.70 &#215; 8.69 m</text>
+<rect x="5910.9" y="70.0" width="1188.4" height="438.3" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="5910.9" y="70.0" width="594.2" height="275.1" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="5910.9" y="361.1" font-size="12" fill="#3d3a34">Bathroom 1</text>
+<text x="5910.9" y="375.1" font-size="10" fill="#8a8377">6.55 &#215; 14.15 m</text>
+<rect x="7124.5" y="70.0" width="21902.1" height="6691.3" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="7124.5" y="70.0" width="899.7" height="401.4" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="7124.5" y="487.4" font-size="12" fill="#3d3a34">Bathroom 2</text>
+<text x="7124.5" y="501.4" font-size="10" fill="#8a8377">9.56 &#215; 21.42 m</text>
+<rect x="29051.8" y="70.0" width="1099.0" height="744.3" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="29051.8" y="70.0" width="549.5" height="314.7" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="29051.8" y="400.7" font-size="12" fill="#3d3a34">Living room</text>
+<text x="29051.8" y="414.7" font-size="10" fill="#8a8377">7.49 &#215; 13.08 m</text>
+</svg>

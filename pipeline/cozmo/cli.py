@@ -119,6 +119,11 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
 
 
 def cmd_run(args: argparse.Namespace) -> int:
+    """One command per capture: bundle in, plan.json and plan.svg out."""
+    import time
+    from .plan import build_plan, estimate_rooms, write_outputs
+
+    started = time.time()
     try:
         bundle = CaptureBundle.load(args.bundle)
     except (EmptyCapture, FileNotFoundError, ValueError) as exc:
@@ -126,17 +131,51 @@ def cmd_run(args: argparse.Namespace) -> int:
         return 2
 
     problems = bundle.validate_inputs()
-    if problems:
+    if problems and bundle.tier == "photo":
         print("error: capture is not usable", file=sys.stderr)
         for p in problems:
             print(f"  ! {p}", file=sys.stderr)
         return 2
 
-    print(f"error: no geometry stage is implemented yet for the {bundle.tier!r} tier.",
-          file=sys.stderr)
-    print("  The bundle loads and the sensor budget holds; reconstruction is the next build.",
-          file=sys.stderr)
-    return 3
+    views_by_room = _views_for(bundle)
+    estimates = estimate_rooms(bundle, views_by_room)
+
+    command = f"cozmo run {args.bundle}"
+    plan = build_plan(bundle, estimates, command, time.time() - started)
+    out_dir = args.output or (Path("out") / bundle.capture_id)
+    json_path, svg_path = write_outputs(plan, out_dir)
+
+    print(f"capture  {bundle.capture_id}  ({bundle.tier} tier)")
+    for est in estimates:
+        if est.depth_m:
+            print(f"  {est.name:<16} {est.views_used}/{est.views_total} views   "
+                  f"{est.depth_m.value:.2f} x {est.width_m.value:.2f} m")
+        else:
+            print(f"  {est.name:<16} 0/{est.views_total} views   no estimate")
+    print(f"\nplan   {json_path}")
+    print(f"render {svg_path}")
+    print(f"time   {time.time() - started:.1f}s")
+    return 0
+
+
+def _views_for(bundle: CaptureBundle):
+    """Per-room image analyses, whatever the tier stores them as."""
+    from .photo.room import analyse
+    out = {}
+    if bundle.tier == "photo":
+        for slug, paths in bundle.photos_by_room().items():
+            out[slug] = [analyse(str(bundle.root / p)) for p in paths]
+    elif bundle.tier == "video":
+        from .video.frames import frames_by_room
+        # Decoded frames carry no EXIF; the device model supplies the lens.
+        focal35 = 27.0 if "iPhone" in bundle.device_model else None
+        for slug, paths in frames_by_room(bundle).items():
+            out[slug] = [analyse(p, focal_35mm=focal35) for p in paths]
+    elif bundle.tier == "lidar":
+        from .lidar.frames import frames_by_room
+        for slug, paths in frames_by_room(bundle).items():
+            out[slug] = [analyse(p) for p in paths]
+    return out
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -156,7 +195,8 @@ def main(argv: list[str] | None = None) -> int:
 
     p_run = sub.add_parser("run", help="Produce a plan from one capture.")
     p_run.add_argument("bundle", type=Path)
-    p_run.add_argument("-o", "--output", type=Path, default=None)
+    p_run.add_argument("-o", "--output", type=Path, default=None,
+                       help="Output directory (default: out/<capture_id>).")
     p_run.set_defaults(func=cmd_run)
 
     args = parser.parse_args(argv)

@@ -1,0 +1,897 @@
+{
+  "schema_version": 1,
+  "capture": {
+    "capture_id": "capture_20260831_031153_photo",
+    "tier": "photo",
+    "sensor_budget": [
+      "manifest.json",
+      "rooms.json",
+      "photos/**"
+    ],
+    "device_model": "iPhone 13",
+    "captured_at": "2026-08-30T21:41:53Z"
+  },
+  "pipeline": {
+    "version": "0.1.0",
+    "git_commit": "d76d194",
+    "run_at": "2026-08-30T22:16:40.108591+00:00",
+    "command": "cozmo run benchmark/raw/capture_20260831_031153_photo",
+    "runtime_seconds": 7.6
+  },
+  "rooms": [
+    {
+      "id": "living_room",
+      "name": "Living room",
+      "walls": [
+        {
+          "id": "A",
+          "length": {
+            "value": 4.5141,
+            "ci_low": 0.0,
+            "ci_high": 9.5262,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 7,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "B",
+          "length": {
+            "value": 6.5396,
+            "ci_low": 0.0,
+            "ci_high": 34.4418,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 7,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "C",
+          "length": {
+            "value": 4.5141,
+            "ci_low": 0.0,
+            "ci_high": 9.5262,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 7,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "D",
+          "length": {
+            "value": 6.5396,
+            "ci_low": 0.0,
+            "ci_high": 34.4418,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 7,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        }
+      ],
+      "ceiling_height": {
+        "value": 2.9,
+        "ci_low": 2.175,
+        "ci_high": 3.625,
+        "unit": "m",
+        "method": "residential_prior_not_estimated",
+        "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+      },
+      "floor_area": {
+        "value": 29.52,
+        "ci_low": 0.0,
+        "ci_high": 328.1008,
+        "unit": "m2",
+        "method": "depth_times_width",
+        "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
+      },
+      "openings": [],
+      "source_frames": 7
+    },
+    {
+      "id": "hall",
+      "name": "Hall",
+      "walls": [
+        {
+          "id": "A",
+          "length": {
+            "value": 6.1335,
+            "ci_low": 3.3172,
+            "ci_high": 8.9499,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 8,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "B",
+          "length": {
+            "value": 12.5215,
+            "ci_low": 0.0,
+            "ci_high": 25.043,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 8,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "C",
+          "length": {
+            "value": 6.1335,
+            "ci_low": 3.3172,
+            "ci_high": 8.9499,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 8,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "D",
+          "length": {
+            "value": 12.5215,
+            "ci_low": 0.0,
+            "ci_high": 25.043,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 8,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        }
+      ],
+      "ceiling_height": {
+        "value": 2.9,
+        "ci_low": 2.175,
+        "ci_high": 3.625,
+        "unit": "m",
+        "method": "residential_prior_not_estimated",
+        "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+      },
+      "floor_area": {
+        "value": 76.801,
+        "ci_low": 0.0,
+        "ci_high": 224.1313,
+        "unit": "m2",
+        "method": "depth_times_width",
+        "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
+      },
+      "openings": [],
+      "source_frames": 8
+    },
+    {
+      "id": "bed_room_1",
+      "name": "Bed room 1",
+      "walls": [
+        {
+          "id": "A",
+          "length": {
+            "value": 28.1536,
+            "ci_low": 5.131,
+            "ci_high": 51.1761,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 4,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "B",
+          "length": {
+            "value": 10.4884,
+            "ci_low": 0.0,
+            "ci_high": 25.1034,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 4,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "C",
+          "length": {
+            "value": 28.1536,
+            "ci_low": 5.131,
+            "ci_high": 51.1761,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 4,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "D",
+          "length": {
+            "value": 10.4884,
+            "ci_low": 0.0,
+            "ci_high": 25.1034,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 4,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        }
+      ],
+      "ceiling_height": {
+        "value": 2.9,
+        "ci_low": 2.175,
+        "ci_high": 3.625,
+        "unit": "m",
+        "method": "residential_prior_not_estimated",
+        "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+      },
+      "floor_area": {
+        "value": 295.2849,
+        "ci_low": 0.0,
+        "ci_high": 1284.695,
+        "unit": "m2",
+        "method": "depth_times_width",
+        "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
+      },
+      "openings": [],
+      "source_frames": 4
+    },
+    {
+      "id": "bed_room_2",
+      "name": "Bed room 2",
+      "walls": [
+        {
+          "id": "A",
+          "length": {
+            "value": 12.2615,
+            "ci_low": 0.0,
+            "ci_high": 25.9372,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 6,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "B",
+          "length": {
+            "value": 15.1449,
+            "ci_low": 0.0,
+            "ci_high": 66.4835,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 6,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "C",
+          "length": {
+            "value": 12.2615,
+            "ci_low": 0.0,
+            "ci_high": 25.9372,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 6,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "D",
+          "length": {
+            "value": 15.1449,
+            "ci_low": 0.0,
+            "ci_high": 66.4835,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 6,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        }
+      ],
+      "ceiling_height": {
+        "value": 2.9,
+        "ci_low": 2.175,
+        "ci_high": 3.625,
+        "unit": "m",
+        "method": "residential_prior_not_estimated",
+        "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+      },
+      "floor_area": {
+        "value": 185.6999,
+        "ci_low": 0.0,
+        "ci_high": 1724.3983,
+        "unit": "m2",
+        "method": "depth_times_width",
+        "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
+      },
+      "openings": [],
+      "source_frames": 6
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "walls": [
+        {
+          "id": "A",
+          "length": {
+            "value": 2.8003,
+            "ci_low": 0.0,
+            "ci_high": 33.3411,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 8,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "B",
+          "length": {
+            "value": 3.3865,
+            "ci_low": 0.0,
+            "ci_high": 49.2345,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 8,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "C",
+          "length": {
+            "value": 2.8003,
+            "ci_low": 0.0,
+            "ci_high": 33.3411,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 8,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "D",
+          "length": {
+            "value": 3.3865,
+            "ci_low": 0.0,
+            "ci_high": 49.2345,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 8,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        }
+      ],
+      "ceiling_height": {
+        "value": 2.9,
+        "ci_low": 2.175,
+        "ci_high": 3.625,
+        "unit": "m",
+        "method": "residential_prior_not_estimated",
+        "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+      },
+      "floor_area": {
+        "value": 9.4832,
+        "ci_low": 0.0,
+        "ci_high": 1641.532,
+        "unit": "m2",
+        "method": "depth_times_width",
+        "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
+      },
+      "openings": [],
+      "source_frames": 8
+    },
+    {
+      "id": "bedroom_3",
+      "name": "Bedroom 3",
+      "walls": [
+        {
+          "id": "A",
+          "length": {
+            "value": 14.3295,
+            "ci_low": 0.0,
+            "ci_high": 38.0805,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 6,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "B",
+          "length": {
+            "value": 14.7663,
+            "ci_low": 0.0,
+            "ci_high": 60.0952,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 6,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "C",
+          "length": {
+            "value": 14.3295,
+            "ci_low": 0.0,
+            "ci_high": 38.0805,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 6,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "D",
+          "length": {
+            "value": 14.7663,
+            "ci_low": 0.0,
+            "ci_high": 60.0952,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 6,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        }
+      ],
+      "ceiling_height": {
+        "value": 2.9,
+        "ci_low": 2.175,
+        "ci_high": 3.625,
+        "unit": "m",
+        "method": "residential_prior_not_estimated",
+        "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+      },
+      "floor_area": {
+        "value": 211.5933,
+        "ci_low": 0.0,
+        "ci_high": 2288.4579,
+        "unit": "m2",
+        "method": "depth_times_width",
+        "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
+      },
+      "openings": [],
+      "source_frames": 6
+    },
+    {
+      "id": "bathroom_1",
+      "name": "Bathroom 1",
+      "walls": [
+        {
+          "id": "A",
+          "length": {
+            "value": 9.7169,
+            "ci_low": 0.0,
+            "ci_high": 124.3976,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 6,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "B",
+          "length": {
+            "value": 7.9951,
+            "ci_low": 0.0,
+            "ci_high": 856.0434,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 6,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "C",
+          "length": {
+            "value": 9.7169,
+            "ci_low": 0.0,
+            "ci_high": 124.3976,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 6,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "D",
+          "length": {
+            "value": 7.9951,
+            "ci_low": 0.0,
+            "ci_high": 856.0434,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 6,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        }
+      ],
+      "ceiling_height": {
+        "value": 2.9,
+        "ci_low": 2.175,
+        "ci_high": 3.625,
+        "unit": "m",
+        "method": "residential_prior_not_estimated",
+        "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+      },
+      "floor_area": {
+        "value": 77.6871,
+        "ci_low": 0.0,
+        "ci_high": 106489.7507,
+        "unit": "m2",
+        "method": "depth_times_width",
+        "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
+      },
+      "openings": [],
+      "source_frames": 6
+    },
+    {
+      "id": "bathroom_2",
+      "name": "Bathroom 2",
+      "walls": [
+        {
+          "id": "A",
+          "length": {
+            "value": 3.0007,
+            "ci_low": 0.0979,
+            "ci_high": 5.9035,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 7,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "B",
+          "length": {
+            "value": 7.1952,
+            "ci_low": 0.0,
+            "ci_high": 14.3904,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 7,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "C",
+          "length": {
+            "value": 3.0007,
+            "ci_low": 0.0979,
+            "ci_high": 5.9035,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 7,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "D",
+          "length": {
+            "value": 7.1952,
+            "ci_low": 0.0,
+            "ci_high": 14.3904,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 7,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        }
+      ],
+      "ceiling_height": {
+        "value": 2.9,
+        "ci_low": 2.175,
+        "ci_high": 3.625,
+        "unit": "m",
+        "method": "residential_prior_not_estimated",
+        "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+      },
+      "floor_area": {
+        "value": 21.5905,
+        "ci_low": 0.0,
+        "ci_high": 84.9537,
+        "unit": "m2",
+        "method": "depth_times_width",
+        "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
+      },
+      "openings": [],
+      "source_frames": 7
+    }
+  ],
+  "stitch": {
+    "adjacency": [],
+    "footprint_area": {
+      "value": 907.66,
+      "ci_low": 0.0,
+      "ci_high": 114066.02,
+      "unit": "m2",
+      "method": "sum_of_room_areas",
+      "notes": "Sum of per-room areas, not a stitched footprint. No room placement has been solved."
+    },
+    "room_overlap_area": {
+      "value": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "unit": "m2",
+      "method": "not_applicable_no_placement",
+      "notes": "Zero because no rooms have been placed, not because placement was checked for overlaps."
+    },
+    "drift": {
+      "method": "none",
+      "applied": false,
+      "notes": "No inter-room placement is solved at this tier yet, so there is no accumulated drift to correct. Stated explicitly: this is an absence of the stage, not poses used as-is."
+    }
+  },
+  "damage": [],
+  "concealed_flags": [],
+  "scope": [],
+  "calibration": {
+    "interval_basis": "empirical_from_benchmark",
+    "coverage_target": 0.95,
+    "scale_source": "exif_focal_length_and_camera_height_prior",
+    "warnings": [
+      "Room depth measured 11% and 23% low against tape ground truth on the two rooms that have it.",
+      "Far-wall width measured 96% and 382% high on those same rooms; its interval is +/-100% and it should not be relied on.",
+      "Ceiling height is a residential prior, not an estimate.",
+      "No opening detection, so no openings are reported and no adjacency is claimed.",
+      "Ground-truth tape uncertainty is unquantified, so these errors are observed rather than measured."
+    ]
+  },
+  "renders": {
+    "plan_svg": "plan.svg"
+  }
+}
