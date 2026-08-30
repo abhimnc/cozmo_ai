@@ -1,43 +1,51 @@
 {
   "schema_version": 1,
   "room_id": "living_room",
-  "status": "provisional",
+  "status": "provisional_one_conflict",
   "measured_at": "2026-08-30",
   "method": "unrecorded",
-  "source": "handwritten note, photographed as capture_20260830_180228_photo",
+  "source": "handwritten note, photographed as capture_20260830_234933_photo",
+  "supersedes": "the 2026-08-30 estimate of 5.5 x 3.75 x 3.5 m, which was 24 cm out on ceiling height and ~45 cm out on wall length",
 
-  "precision_m": 0.05,
-  "precision_note": "Values are stated to 0.05 m at best (5.5, 3.75, 3.5, 2.0, 1.0, 0.6). The opening-width gate is 2 cm and the ceiling-height gate is 1.5 cm, so this ground truth is 3x coarser than the tolerance it would be judging. Usable for a sanity check, not for scoring a gate.",
-
-  "assumed_rectangular": true,
-  "assumption_note": "The note gives length and breadth only, so the room is being treated as a rectangle with two pairs of equal walls. The gates are scored per wall; if the room is not square this is wrong on up to four walls at once.",
+  "units_note": "Source values are centimetres, recorded here in metres. The note gives each wall as height x length.",
+  "precision_m": 0.001,
 
   "walls": [
-    { "id": "A", "length_m": 5.5,  "derived_from": "length" },
-    { "id": "B", "length_m": 3.75, "derived_from": "breadth" },
-    { "id": "C", "length_m": 5.5,  "derived_from": "length, assumed opposite A" },
-    { "id": "D", "length_m": 3.75, "derived_from": "breadth, assumed opposite B" }
+    { "id": "A", "length_m": 5.057, "height_m": 3.254 },
+    { "id": "B", "length_m": 3.330, "height_m": 3.259 },
+    { "id": "C", "length_m": 4.977, "height_m": 3.259 },
+    { "id": "D", "length_m": 3.330, "height_m": 3.254 }
   ],
 
-  "ceiling_height_m": 3.5,
-  "floor_area_m2": 20.625,
-  "floor_area_note": "Computed as 5.5 x 3.75, not measured independently.",
+  "ceiling_height_m": 3.2565,
+  "ceiling_height_spread_m": 0.005,
+  "ceiling_note": "Mean of the four wall heights. The room's own ceiling varies by 0.5 cm corner to corner, which is a third of the 1.5 cm gate and is a floor on achievable accuracy: our pipeline cannot be more consistent than the ceiling is flat. This belongs in the error budget.",
+
+  "rectangular": false,
+  "shape_note": "Opposite walls A and C differ by 8.0 cm (1.6%); B and D agree exactly. The room is genuinely not square, which is why per-wall ground truth was needed and why the earlier length-and-breadth version could not have scored a gate.",
+
+  "floor_m": { "short_m": 3.330, "long_m": 4.577, "area_m2": 15.24 },
+  "CONFLICT": {
+    "what": "Floor long dimension is written 457.7 cm, but wall C measures 497.7 cm and wall A 505.7 cm.",
+    "size": "40 cm against wall C — 8% of the wall length, which is the entire photo-tier gate.",
+    "readings": {
+      "if_457_7_is_correct": "The clear floor is shorter than the wall, so something occupies 40 cm along that run — a wardrobe, alcove, chimney breast or built-in. Then floor area is 15.24 m2 and the pipeline should recover the wall, not the clear floor.",
+      "if_it_is_a_slip_for_497_7": "Floor is 3.33 x 4.977 m, area 16.57 m2, fully consistent with wall C."
+    },
+    "resolution": "unresolved — must not be guessed, it is gate-sized"
+  },
 
   "openings": [
     {
-      "id": "window_1",
-      "type": "window",
-      "width_m": 2.0,
-      "height_m": 1.0,
-      "wall_id": null,
-      "sill_height_m": null
+      "id": "window_1", "type": "window",
+      "width_m": 1.413, "height_m": 1.105,
+      "wall_id": null, "sill_height_m": null
     },
     {
-      "id": "door_1",
-      "type": "door",
-      "width_m": 0.6,
-      "height_m": 2.0,
-      "wall_id": null
+      "id": "door_1", "type": "door",
+      "width_m": 0.855, "height_m": 1.850,
+      "wall_id": null,
+      "note": "Door height 1.85 m is low against a 2.0-2.1 m modern standard, but consistent with older construction and with the 3.26 m ceiling."
     }
   ],
 
@@ -47,10 +55,9 @@
   ],
 
   "open_questions": [
-    "Tape or laser? The brief asks for one of the two, and the answer sets the ground-truth uncertainty we quote.",
-    "Ceiling height 3.5 m is tall for a residential room. Plausible in older construction, worth confirming it is not 2.5 m.",
-    "Door width 0.6 m is narrow: interior doors are usually 0.70-0.80 m and a main door 0.90-1.00 m. Worth re-measuring.",
-    "Which wall carries the window, and which carries the door?",
-    "Are all four walls actually equal in pairs, or does the room have a bay, alcove or non-square corner?"
+    "Resolve the 40 cm floor-versus-wall conflict above.",
+    "Which wall carries the door, and which carries the window? Opening detection is scored per surface, so an opening on the wrong wall scores as one miss plus one phantom.",
+    "Tape or laser? The brief asks for one of the two and the answer sets the ground-truth uncertainty we are entitled to quote.",
+    "Wall ordering: is A-B-C-D clockwise or anticlockwise, and which is the entry wall? Needed to align our output to this key."
   ]
 }
