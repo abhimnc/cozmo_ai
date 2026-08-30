@@ -1,0 +1,28 @@
+name: CozmoCapture
+options:
+  bundleIdPrefix: com.cozmoai
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: 9VGYA957Q3
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  CozmoCapture:
+    type: application
+    platform: iOS
+    sources:
+      - path: CozmoCapture
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.cozmoai.capture
+        INFOPLIST_FILE: CozmoCapture/Info.plist
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        GENERATE_INFOPLIST_FILE: NO
