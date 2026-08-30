@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "room_id": "living_room",
-  "status": "complete_pending_reveal_placement",
+  "status": "complete_pending_sketch",
   "measured_at": "2026-08-31",
   "method": "tape",
   "source": "operator-confirmed table, superseding the handwritten note in capture_20260830_234933_photo",
@@ -9,7 +9,8 @@
     "v1 2026-08-30: 5.5 x 3.75 x 3.5 m estimate. Superseded \u2014 24 cm out on ceiling, ~45 cm out on wall length, and rectangular-only.",
     "v2 2026-08-30: per-wall, heights 325.4/325.9 varying by 0.5 cm, window height 110.5. Superseded.",
     "v3 2026-08-31: heights corrected to a uniform 329.4 (+3.75 cm on v2), window height 110.9. Wall lengths and floor unchanged.",
-    "v4 2026-08-31: second door added on wall C (1.850 x 0.855 m, identical to the wall D door). The 40 cm floor-versus-wall gap is resolved: it is two 20 cm door reveals, i.e. the wall thickness visible inside each door opening. 497.7 - 2x20 = 457.7 exactly."
+    "v4 2026-08-31: second door added on wall C (1.850 x 0.855 m, identical to the wall D door). The 40 cm floor-versus-wall gap is resolved: it is two 20 cm door reveals, i.e. the wall thickness visible inside each door opening. 497.7 - 2x20 = 457.7 exactly.",
+    "v5 2026-08-31: third door added on wall B, 1.850 m high x 2.013 m wide. Four openings total."
   ],
   "units_note": "Source values are centimetres, recorded here in metres.",
   "precision_m": 0.001,
@@ -67,6 +68,14 @@
       "wall_id": "C",
       "width_m": 0.855,
       "height_m": 1.85
+    },
+    {
+      "id": "door_3",
+      "type": "door",
+      "wall_id": "B",
+      "width_m": 2.013,
+      "height_m": 1.85,
+      "note": "Wider than it is tall, and 2.013 m of a 3.330 m wall - 60% of that run. Recorded as given. Worth confirming it is height 1.850 x width 2.013 and not the reverse, since every other opening here is taller than it is wide, and confirming whether it is a double door or an open archway. The distinction matters: an archway is what makes two rooms adjacent, and adjacency is scored."
     }
   ],
   "applies_to_captures": [
@@ -74,13 +83,15 @@
     "capture_20260830_174340_photo#01_living_room"
   ],
   "open_questions": [
-    "Both doors are said to account for the 40 cm, but only wall C reconciles arithmetically (497.7 - 40 = 457.7, whereas 505.7 - 40 = 465.7). Are both door reveals on wall C, or is the wall D door's reveal reducing the short floor dimension instead? This changes which wall the scorer applies the correction to.",
-    "Direct tape reading across one door reveal, to confirm the 20 cm wall thickness that is currently derived rather than measured.",
-    "Is A-B-C-D clockwise or anticlockwise, and which door is the entry?",
+    "A labelled sketch would close every remaining question at once: a box with walls A-D marked, the four openings drawn on their walls, an arrow for the entry, and the two door reveals that account for the 40 cm circled.",
+    "Confirm door_3 is 1.850 m high x 2.013 m wide and not the reverse; it is the only opening here wider than it is tall.",
+    "Is door_3 a double door or an open archway? An archway is what makes two rooms adjacent, and adjacency is a scored output.",
+    "Which two door reveals make up the 40 cm, now that there are three doors?",
+    "Direct tape reading across one door reveal, to confirm the derived 0.20 m wall thickness.",
     "Tape uncertainty: re-measure one wall and one opening three times to get a spread."
   ],
   "method_note": "Tape. Uncertainty is not yet quantified: a single-pass tape run over a ~5 m wall carries sag, corner placement and reading error, and the opening gate is 2 cm. Cheapest way to pin it is to re-measure one wall and one opening three times and take the spread \u2014 until then we cannot honestly quote a ground-truth interval, and any pipeline error smaller than that spread is unmeasurable.",
-  "openings_note": "Three openings: a window and a door on wall C, a door on wall D. Both doors are 1.850 x 0.855 m. Opening detection is scored with a missed opening and a phantom opening each counting as a miss, so the count itself is part of the answer key: finding two of these three costs one miss, and inventing a fourth costs another.",
+  "openings_note": "Four openings: window and door on wall C, door on wall D, wide door on wall B. With four openings the >=85% opening-width gate rounds up to 100%: three of four is 75% and fails. Every opening in this room must land within 2 cm, and any phantom fifth opening fails the row on its own. A small room is a harsh room to be scored in.",
   "wall_thickness_m": 0.2,
   "wall_thickness_note": "Derived, not directly measured: the 40 cm floor-versus-wall gap divided by two door reveals. A 20 cm wall is thick, consistent with masonry construction and with the 3.294 m ceiling. Worth confirming with a direct tape reading across one door reveal, since it now carries weight in the scoring.",
   "floor_vs_wall": {
@@ -90,6 +101,7 @@
     "difference_m": 0.4,
     "cause": "Two door reveals of 0.20 m each. 497.7 - 2 x 20 = 457.7 cm exactly.",
     "scoring_consequence": "Wall length and clear floor are different quantities and the scorer must not compare them. A reconstruction sees the room-side wall surface, so it should recover 4.977 m for wall C; comparing that against the 4.577 m floor figure would report an 8% error that is really two doorways. Floor area must likewise be computed from wall lengths, not from the tape's floor run.",
-    "arithmetic_note": "The 40 cm reconciles against wall C (4.977 m) and not against wall A (5.057 m), which is consistent with the long floor run having been measured along the C direction."
+    "arithmetic_note": "The 40 cm reconciles against wall C (4.977 m) and not against wall A (5.057 m), which is consistent with the long floor run having been measured along the C direction.",
+    "open_point": "The 40 cm was attributed to 'the two doors' when two were known. There are now three. The arithmetic still reconciles only against wall C (497.7 - 40 = 457.7); wall A does not (505.7 - 40 = 465.7), and the wall B door does not reduce the short floor run, which measures 333 and equals wall B's full length. Which two reveals the 40 cm represents is now genuinely unclear and should not be assumed."
   }
 }
