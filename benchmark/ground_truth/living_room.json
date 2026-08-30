@@ -124,7 +124,8 @@
     ],
     "note": "The Living room touches the Hall twice, through two different archways on two perpendicular walls. Walls A and B are adjacent, so the Hall wraps the corner between them and the Living room is a corner room.",
     "loop_constraint": "This is the most useful property in the benchmark so far. Two independent connections between the same pair of rooms form a closed cycle: place the Hall relative to the Living room through archway A, then again through archway B, and the two placements must agree. Any disagreement is stitching error, measured rather than asserted. It gives us a real loop-closure residual at the photo tier, where there are no poses to close a loop with, and it is exactly the ablation the drift-accountability gate asks for - stitch with the second constraint on and off, and report the footprint both ways.",
-    "modelling_consequence": "The room adjacency graph is a multigraph, not a tree: two edges join the same pair. A stitcher that assumes one opening per room pair, or that stops after finding the first connection, will silently discard the only loop in the property and with it the only way to measure its own drift."
+    "modelling_consequence": "The room adjacency graph is a multigraph, not a tree: two edges join the same pair. A stitcher that assumes one opening per room pair, or that stops after finding the first connection, will silently discard the only loop in the property and with it the only way to measure its own drift.",
+    "topology_note": "The Hall is a hub connecting many rooms, so the property is a star. Every other room likely touches the Hall exactly once, and single-edge placements cannot contradict themselves. The Living room's two archways are therefore probably the only cycle in the whole property, and the only place the stitch can be caught being wrong."
   },
   "wall_thickness_source": "operator_confirmed",
   "completeness": {

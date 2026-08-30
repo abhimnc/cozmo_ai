@@ -23,6 +23,16 @@ exists against what is required. Raw captures live in `benchmark/raw/`
 | `capture_20260830_174340_photo` | photo | Living room | 5 | **repeatability B** — same room as 172319 |
 | `capture_20260830_172252_photo` | photo | — | 0 | empty; keep as a pipeline rejection case |
 
+## Topology
+
+The Hall is a hub: it connects to many rooms, so the property is a star with the
+Hall at the centre. Two things follow. The Hall is the natural anchor for the
+stitch, because its error propagates everywhere while a bedroom's stays local.
+And a star is almost all tree — which is why the one cycle below matters so much.
+
+This also settles requirement 1: the Hall is the connector the brief asks for
+alongside "three or more rooms".
+
 ## Loop constraint
 
 The Living room connects to the Hall through two separate archways, on

@@ -150,3 +150,46 @@ failure the gate exists to catch.
 
 **Benchmark consequence.** Ground truth for the Hall is now load-bearing, not
 optional: without it the loop can be described but not scored.
+
+## 2026-08-31 — The Hall is a hub, and that decides the stitch order
+
+The Hall connects to many rooms, which makes the property a **star**: a central
+connector with rooms hanging off it. That is the ordinary residential topology
+and it has three consequences worth fixing now.
+
+**1. The Hall is the anchor, not room one.** Every room's placement is expressed
+relative to the Hall, so Hall geometry error propagates into every room at once
+while a bedroom's error stays local. The stitch therefore solves the Hall first,
+from all of its openings jointly, and places rooms against it — rather than
+chaining room to room, where error compounds along the chain and the result
+depends on which room happened to be processed first.
+
+**2. A star has almost no loops, so the Living room's double archway may be the
+only cycle in the property.** Every other room touches the Hall once; those
+edges are a tree, and a tree cannot contradict itself. Place a bedroom through
+its single archway and there is no second path to disagree with it, so its
+placement is unfalsifiable no matter how wrong it is. The Living room's two
+archways are the only place the property can catch itself being wrong. That
+makes them disproportionately valuable and it makes the multigraph decision
+non-negotiable.
+
+**3. Shared openings are free cross-room constraints.** An archway belongs to
+two rooms and has one physical width. Reconstructed from the Living room side
+and again from the Hall side, the two estimates must agree. That is a
+repeatability check we get without capturing anything twice, it is available at
+every tier, and it is the one consistency test that survives even in a pure
+tree. Disagreement between the two sides is reportable error.
+
+**Scoring question to settle before the benchmark report.** An opening between
+two rooms appears in both rooms' plans. Counted once or twice against the
+"≤2 cm on ≥85% of openings" gate? We will count each physical opening once and
+say so, because counting it twice would let a single well-measured archway
+inflate the pass rate. Stated explicitly so the choice is visible rather than
+convenient.
+
+**Capture consequence.** The Hall is a corridor: narrow, so the camera cannot
+back far enough away to see a whole wall; often blank, so it is feature-poor;
+and its walls are seen at grazing angles, where depth and edge localisation are
+worst. It is simultaneously the hardest room to reconstruct and the one whose
+error hurts most. The capture protocol should ask for extra coverage there, and
+the error budget should expect the Hall to dominate.
