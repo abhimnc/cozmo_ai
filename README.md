@@ -31,9 +31,15 @@ scripts/      weight fetching, reproduction entry points
 
 ```
 brew install xcodegen
-cd ios && xcodegen generate
+cd ios
+cp Signing.local.xcconfig.example Signing.local.xcconfig   # then put your team ID in it
+xcodegen generate
 open CozmoCapture.xcodeproj
 ```
+
+The team ID lives in `Signing.local.xcconfig`, which is gitignored, so a clone
+never carries someone else's signing identity. Leaving it empty also works —
+Xcode will ask which team to use on first open.
 
 Or from the command line, against a connected device:
 

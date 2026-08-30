@@ -8,7 +8,7 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    DEVELOPMENT_TEAM: 9VGYA957Q3
+    DEVELOPMENT_TEAM: $(COZMO_DEVELOPMENT_TEAM)
     CODE_SIGN_STYLE: Automatic
     MARKETING_VERSION: "0.1.0"
     CURRENT_PROJECT_VERSION: "1"
@@ -19,6 +19,9 @@ targets:
     platform: iOS
     sources:
       - path: CozmoCapture
+    configFiles:
+      Debug: Signing.xcconfig
+      Release: Signing.xcconfig
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.cozmoai.capture

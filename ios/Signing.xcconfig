@@ -1,0 +1,9 @@
+// Signing configuration.
+//
+// The team ID is deliberately not committed: a clone on someone else's machine
+// must build without first deleting a stranger's team. Put your own in
+// Signing.local.xcconfig (gitignored, see Signing.local.xcconfig.example) or
+// leave it empty and let Xcode pick the team when you first open the project.
+COZMO_DEVELOPMENT_TEAM =
+
+#include? "Signing.local.xcconfig"

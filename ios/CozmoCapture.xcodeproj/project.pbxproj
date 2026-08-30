@@ -34,6 +34,7 @@
 		D240D1ACB6699A844A092368 /* CaptureBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureBundle.swift; sourceTree = "<group>"; };
 		E9A626CE52113AB26A79882D /* ARPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPreview.swift; sourceTree = "<group>"; };
 		F9C3B3BE9D031099D471C09C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		"TEMP_021D0D5F-218F-4D3E-95A1-C80F705D913D" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -96,6 +97,14 @@
 			path = CozmoCapture;
 			sourceTree = "<group>";
 		};
+		"TEMP_BB61D226-8226-4135-830A-2E8DF7646FFB" /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				"TEMP_021D0D5F-218F-4D3E-95A1-C80F705D913D" /* Signing.xcconfig */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,7 +135,7 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					11312693AA30DD07942D8ED9 = {
-						DevelopmentTeam = 9VGYA957Q3;
+						DevelopmentTeam = "$(COZMO_DEVELOPMENT_TEAM)";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -174,6 +183,7 @@
 /* Begin XCBuildConfiguration section */
 		B86C8506216D0A0D838820D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = "TEMP_021D0D5F-218F-4D3E-95A1-C80F705D913D" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -192,6 +202,7 @@
 		};
 		B9E9C04AD143530229A7E1FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = "TEMP_021D0D5F-218F-4D3E-95A1-C80F705D913D" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -245,7 +256,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 9VGYA957Q3;
+				DEVELOPMENT_TEAM = "$(COZMO_DEVELOPMENT_TEAM)";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -305,7 +316,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 9VGYA957Q3;
+				DEVELOPMENT_TEAM = "$(COZMO_DEVELOPMENT_TEAM)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

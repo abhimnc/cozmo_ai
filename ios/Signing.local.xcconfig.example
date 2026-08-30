@@ -1,0 +1,4 @@
+// Copy to Signing.local.xcconfig and set your Apple Developer team ID.
+// Find it with:  security find-identity -v -p codesigning
+// (the 10-character code in parentheses)
+COZMO_DEVELOPMENT_TEAM = ABCDE12345

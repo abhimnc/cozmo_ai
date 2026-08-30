@@ -25,3 +25,6 @@ weights/
 benchmark/raw/
 captures/
 *.zip
+
+# Local signing team, per developer
+ios/Signing.local.xcconfig
