@@ -2,7 +2,7 @@
   "schema_version": 1,
   "property_id": "home_01",
   "recorded_at": "2026-08-31",
-  "source": "operator description, 2026-08-31",
+  "source": "operator description plus hand sketch, capture_20260831_020548_photo",
   "status": "topology_recorded_geometry_pending",
   "rooms": [
     {
@@ -15,57 +15,81 @@
       "id": "living_room",
       "name": "Living room",
       "role": "room",
-      "geometry": "ground_truth/living_room.json"
+      "geometry": "ground_truth/living_room.json",
+      "position": "west of the Hall"
     },
     {
       "id": "bedroom_1",
-      "name": "Bedroom 1",
+      "name": "Bedroom (top)",
       "role": "room",
-      "geometry": "unmeasured"
+      "geometry": "unmeasured",
+      "position": "north of the Hall, beyond the wall D recess"
     },
     {
       "id": "bedroom_2",
-      "name": "Bedroom 2",
+      "name": "Bedroom (east, upper)",
       "role": "room",
-      "geometry": "unmeasured"
+      "geometry": "unmeasured",
+      "position": "east column, below the kitchen"
     },
     {
       "id": "bedroom_3",
-      "name": "Bedroom 3",
+      "name": "Bedroom (east, lower)",
       "role": "room",
-      "geometry": "unmeasured"
+      "geometry": "unmeasured",
+      "position": "east column, bottom"
     },
     {
       "id": "kitchen",
       "name": "Kitchen",
       "role": "room",
-      "geometry": "unmeasured"
+      "geometry": "unmeasured",
+      "position": "east column, below the puja room"
     },
     {
       "id": "puja_room",
       "name": "Puja room",
       "role": "room",
       "geometry": "unmeasured",
-      "note": "Small. Tight rooms are the hard case at the photo tier: the camera cannot back far enough away to frame a whole wall, so every view is oblique and close."
+      "note": "Small. Tight rooms are the hard case at the photo tier: the camera cannot back far enough away to frame a whole wall, so every view is oblique and close.",
+      "position": "east column, top"
     },
     {
       "id": "bathroom_1",
       "name": "Bathroom 1",
       "role": "room",
       "geometry": "unmeasured",
-      "note": "Mirrors, glass and wet-look surfaces in one room - all three of the brief's named hard surfaces, and the natural place to demonstrate them."
+      "note": "Mirrors, glass and wet-look surfaces in one room - all three of the brief's named hard surfaces, and the natural place to demonstrate them.",
+      "position": "south of the Hall, centre"
     },
     {
       "id": "bathroom_2",
       "name": "Bathroom 2",
       "role": "room",
-      "geometry": "unmeasured"
+      "geometry": "unmeasured",
+      "position": "west, below the Living room"
     },
     {
       "id": "outside",
       "name": "Outside",
       "role": "exterior",
       "geometry": "n/a"
+    },
+    {
+      "id": "balcony",
+      "name": "Balcony",
+      "role": "exterior",
+      "geometry": "unmeasured",
+      "position": "west, above the Living room",
+      "note": "Reached from the Living room through its wall D door - the only hinged door in that room."
+    },
+    {
+      "id": "parking",
+      "name": "Parking space",
+      "role": "exterior",
+      "geometry": "unmeasured",
+      "position": "north-west corner",
+      "note": "Outside the building envelope; not part of the stitched floor plan."
     }
   ],
   "edges": [
@@ -91,22 +115,29 @@
       "a": "hall",
       "b": "bedroom_1",
       "via": null,
-      "opening_type": "archway",
-      "confirmed": true
+      "opening_type": "door",
+      "confirmed": true,
+      "hall_side": "door_recess",
+      "wall_id": "D_recess",
+      "note": "At the far end of the 1.753 m recess off wall D."
     },
     {
       "a": "hall",
       "b": "bedroom_2",
       "via": null,
       "opening_type": "archway",
-      "confirmed": true
+      "confirmed": true,
+      "hall_side": "arch_a3",
+      "wall_id": "A"
     },
     {
       "a": "hall",
       "b": "bedroom_3",
       "via": null,
       "opening_type": "archway",
-      "confirmed": true
+      "confirmed": true,
+      "hall_side": "arch_a4",
+      "wall_id": "A"
     },
     {
       "a": "hall",
@@ -147,12 +178,20 @@
       "opening_type": "archway",
       "confirmed": true,
       "note": "Main entrance."
+    },
+    {
+      "a": "living_room",
+      "b": "balcony",
+      "via": "door_d",
+      "opening_type": "door",
+      "confirmed": true,
+      "note": "Resolves the previously unrecorded eighth edge: the Living room's only hinged door leads to the balcony, not into the property."
     }
   ],
   "topology": {
     "shape": "star with one cycle",
     "hall_degree": 10,
-    "cycles": 1,
+    "cycles": "1 if archway_b reaches the Hall, otherwise 0 - see discrepancy above",
     "cycle_note": "The only cycle in the property is Living room to Hall and back, through archways A and B. Every other room hangs off the Hall by a single edge, and a single edge cannot contradict itself. That one cycle is the property's only means of catching its own stitching error.",
     "all_hall_connections_are_archways": true,
     "archway_note": "Every Hall connection is an open archway. At the photo tier this is the best possible case: an archway carries a through-view, so every adjacency in the property has direct image evidence and none has to be guessed. A property behind closed doors would leave most edges structurally invisible at this tier.",
@@ -165,8 +204,39 @@
     "unassigned_note": "Three Hall openings have no named destination and three bedrooms have no named opening. The pairing is near-certain but is not stated, and adjacency is scored."
   },
   "open_questions": [
-    "The Living room's wall D opening is a hinged door and is not one of the Hall connections, so it leads somewhere not yet in this graph - a main entrance, a balcony, or another room. It is an unrecorded edge, and on a stitched plan a missing edge is a scored error.",
-    "Is there a main entrance door onto the Hall, separate from the Living room's wall D door?",
-    "Confirm the bedroom and bathroom openings really are open archways rather than doorways that happened to be open. Both give a through-view when open, but only a true archway still does when the property is captured on another day."
-  ]
+    "Where does the Living room's archway_b (0.855 m, on its wall B) actually lead? The Hall has no opening of that size. This decides whether the property has a loop at all.",
+    "Which way does the Hall's wall C step go - does segment C2 push outward or cut a bay inward? 1.92 m2, an 11% swing on Hall floor area, and the polygon cannot close without it.",
+    "Are the balcony and parking space inside the stitched floor plan, or excluded as exterior?"
+  ],
+  "layout_from_sketch": {
+    "hall": "central, the connector",
+    "east_wall_A": [
+      "puja_room",
+      "kitchen",
+      "bedroom_2",
+      "bedroom_3"
+    ],
+    "south_wall_B": [
+      "bathroom_1",
+      "outside (main entrance)"
+    ],
+    "west_wall_C": [
+      "bathroom_2",
+      "living_room"
+    ],
+    "north_wall_D": [
+      "bedroom_1, through the recess"
+    ],
+    "note": "Wall A's four archways map onto the four rooms in the east column, in order. That is what confirms arch_a3 and arch_a4 as the two eastern bedrooms rather than leaving them unassigned."
+  },
+  "discrepancy_living_room_archway_b": {
+    "what": "The Living room records two archways: archway_a at 2.013 m, and archway_b at 0.855 m, both said to lead to the Hall. The Hall's wall C carries only two openings - the 2.013 m Living room archway and a 0.787 m archway to bathroom_2. There is no 0.855 m opening anywhere on the Hall.",
+    "candidates": [
+      "archway_b leads to the balcony entry passage rather than the Hall, which the sketch hints at with the 'to enter' arrow above the Living room.",
+      "archway_b is the Hall's arch_a3 at 0.875 m - but that is on wall A, on the opposite side of the Hall from the Living room, so this is geometrically implausible.",
+      "The Hall's wall list is missing an opening."
+    ],
+    "why_it_matters": "This is the property's only cycle. If archway_b does not reach the Hall, the room graph is a pure tree, no placement can contradict another, and the loop-closure residual the drift ablation depends on does not exist on this property.",
+    "status": "unresolved"
+  }
 }
