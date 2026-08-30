@@ -12,7 +12,8 @@
     "v4 2026-08-31: second door added on wall C (1.850 x 0.855 m, identical to the wall D door). The 40 cm floor-versus-wall gap is resolved: it is two 20 cm door reveals, i.e. the wall thickness visible inside each door opening. 497.7 - 2x20 = 457.7 exactly.",
     "v5 2026-08-31: third door added on wall B, 1.850 m high x 2.013 m wide. Four openings total.",
     "v6 2026-08-31: the wall B and wall C openings are archways, not doors. Wall D keeps the only real door. Two archways means two adjacencies out of this room.",
-    "v7 2026-08-31: openings relaid. Walls A, B, D carry openings; wall C carries only the window. Wall A has the largest opening (1.850 x 2.013 m). A and B are archways, D is the hinged door. This layout also resolves the 40 cm exactly."
+    "v7 2026-08-31: openings relaid. Walls A, B, D carry openings; wall C carries only the window. Wall A has the largest opening (1.850 x 2.013 m). A and B are archways, D is the hinged door. This layout also resolves the 40 cm exactly.",
+    "v8 2026-08-31: wall B archway measured at 1.850 x 0.855 m, confirming the inferred width. Both archways lead to the Hall, from different directions, so Living room and Hall are connected twice."
   ],
   "units_note": "Source values are centimetres, recorded here in metres.",
   "precision_m": 0.001,
@@ -64,7 +65,7 @@
       "wall_id": "A",
       "width_m": 2.013,
       "height_m": 1.85,
-      "note": "Largest opening in the room, 2.013 m of wall A's 5.057 m run. Open archway, so photos pointed at it see into the neighbouring room. Height/width order still worth confirming - it is the only opening here wider than it is tall."
+      "note": "Largest opening in the room, 2.013 m of wall A's 5.057 m run. Open archway leading to the Hall. Height/width order still worth confirming - it is the only opening here wider than it is tall."
     },
     {
       "id": "archway_b",
@@ -72,8 +73,8 @@
       "wall_id": "B",
       "width_m": 0.855,
       "height_m": 1.85,
-      "width_source": "inferred",
-      "note": "Width not stated directly. Inferred as 0.855 m because two 1.850 x 0.855 m openings were recorded before the relayout and wall D accounts for one of them. Marked inferred rather than measured: it feeds the 2 cm opening gate, so it should be taped before any benchmark run."
+      "width_source": "measured",
+      "note": "Measured, confirming the earlier inference. Same size as the wall D door: 1.850 x 0.855 m. Leads to the Hall."
     },
     {
       "id": "door_d",
@@ -89,11 +90,10 @@
     "capture_20260830_174340_photo#01_living_room"
   ],
   "open_questions": [
-    "Which room is beyond the wall A archway, and which beyond the wall B archway?",
-    "Tape the wall B archway width; it is currently inferred at 0.855 m and feeds a 2 cm gate.",
     "Confirm the wall A archway is 1.850 m high x 2.013 m wide and not the reverse.",
     "Direct tape reading across one reveal, to confirm the derived 0.20 m wall thickness.",
-    "Tape uncertainty: re-measure one wall and one opening three times to get a spread."
+    "Tape uncertainty: re-measure one wall and one opening three times to get a spread.",
+    "Ground truth for the Hall, so the loop constraint can actually be scored rather than only described."
   ],
   "method_note": "Tape. Uncertainty is not yet quantified: a single-pass tape run over a ~5 m wall carries sag, corner placement and reading error, and the opening gate is 2 cm. Cheapest way to pin it is to re-measure one wall and one opening three times and take the spread \u2014 until then we cannot honestly quote a ground-truth interval, and any pipeline error smaller than that spread is unmeasurable.",
   "openings_note": "Four openings: window on C, archways on A and B, hinged door on D. Two archways is two adjacencies out of this room. With four openings the >=85% opening-width gate rounds up to 100% - three of four is 75% and fails - so every opening must land within 2 cm and a phantom fifth fails the row on its own.",
@@ -110,8 +110,20 @@
     "scoring_consequence": "A reconstruction sees the room-side wall surface and should recover 4.977 m for wall C and 5.057 m for wall A. Scoring either against the 4.577 m clear floor would report an 8% error that is really two doorways. Floor area must be computed from wall lengths."
   },
   "adjacency": {
-    "via_archway_a": null,
-    "via_archway_b": null,
-    "note": "Two archways, so two adjacencies out of the Living room. Which room lies beyond each is not recorded. The multi-room capture holds Living room, Hall and Bedroom, so these are very likely the connectors, but adjacency is scored and should be stated rather than deduced. The wall D door, having a leaf, offers the photo tier no evidence of what is behind it."
+    "edges": [
+      {
+        "to_room": "hall",
+        "via": "archway_a",
+        "wall_id": "A"
+      },
+      {
+        "to_room": "hall",
+        "via": "archway_b",
+        "wall_id": "B"
+      }
+    ],
+    "note": "The Living room touches the Hall twice, through two different archways on two perpendicular walls. Walls A and B are adjacent, so the Hall wraps the corner between them and the Living room is a corner room.",
+    "loop_constraint": "This is the most useful property in the benchmark so far. Two independent connections between the same pair of rooms form a closed cycle: place the Hall relative to the Living room through archway A, then again through archway B, and the two placements must agree. Any disagreement is stitching error, measured rather than asserted. It gives us a real loop-closure residual at the photo tier, where there are no poses to close a loop with, and it is exactly the ablation the drift-accountability gate asks for - stitch with the second constraint on and off, and report the footprint both ways.",
+    "modelling_consequence": "The room adjacency graph is a multigraph, not a tree: two edges join the same pair. A stitcher that assumes one opening per room pair, or that stops after finding the first connection, will silently discard the only loop in the property and with it the only way to measure its own drift."
   }
 }

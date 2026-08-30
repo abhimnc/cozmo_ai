@@ -118,3 +118,35 @@ intervals on those adjacencies must widen accordingly.
 least one photo per room shot *through* each opening. That is a one-line change
 to the instructions and it is the difference between a stitchable and an
 unstitchable photo capture.
+
+## 2026-08-31 — The double archway is a loop, and the stitcher must not throw it away
+
+The Living room connects to the Hall **twice**: an archway on wall A and another
+on wall B. Walls A and B are perpendicular, so the Hall wraps the corner between
+them.
+
+**Why this matters more than an extra edge.** Place the Hall relative to the
+Living room through archway A. Now place it again through archway B. Both are
+derived independently from image evidence, and both must land in the same spot.
+Any disagreement is stitching error — *measured*, not asserted.
+
+That is a loop-closure residual at the photo tier, which otherwise has no poses
+to close a loop with. The drift-accountability gate demands a stated method plus
+an ablation showing the stitched footprint with correction on and off. This
+double connection is what makes that ablation possible on our own benchmark
+rather than only on the LiDAR tier.
+
+**Decision.** The room graph is a **multigraph**: multiple edges may join the
+same pair of rooms, and all of them are kept. The stitch solves for room poses
+over the full edge set rather than over a spanning tree, so redundant edges
+become residuals instead of being discarded.
+
+**The failure this avoids.** The obvious implementation walks the adjacency
+graph, places each room the first time it is reached, and moves on. That is a
+spanning tree. On this property it would use archway A, ignore archway B, and
+produce a stitch with zero apparent error — because it threw away the only
+evidence capable of contradicting it. Confident, unfalsifiable, and exactly the
+failure the gate exists to catch.
+
+**Benchmark consequence.** Ground truth for the Hall is now load-bearing, not
+optional: without it the loop can be described but not scored.

@@ -23,16 +23,24 @@ exists against what is required. Raw captures live in `benchmark/raw/`
 | `capture_20260830_174340_photo` | photo | Living room | 5 | **repeatability B** — same room as 172319 |
 | `capture_20260830_172252_photo` | photo | — | 0 | empty; keep as a pipeline rejection case |
 
+## Loop constraint
+
+The Living room connects to the Hall through two separate archways, on
+perpendicular walls. That is a closed cycle in the room graph and the only
+source of a measurable stitching residual we currently have at the photo tier.
+It makes Hall ground truth load-bearing rather than optional, and it is what
+lets the drift ablation run on the photo tier at all. See `docs/DECISIONS.md`.
+
 ## Next captures needed, in priority order
 
 1. **Tape ground truth for the Living room.** Wall lengths, ceiling height, and
    every door/window width. Without it none of the captures above can score a
    gate — they are input with no answer key. Cheapest, highest value.
-2. **One more room** in the multi-room capture, to satisfy 3 rooms + connector.
-3. **Video tier** of the same spaces. Runs on the iPhone 13 today.
-4. **A stock Camera app photo** of the same room, to settle the 35 mm-equivalent
+3. **One more room** in the multi-room capture, to satisfy 3 rooms + connector.
+4. **Video tier** of the same spaces. Runs on the iPhone 13 today.
+5. **A stock Camera app photo** of the same room, to settle the 35 mm-equivalent
    convention empirically (see `docs/ERROR_BUDGET.md`).
-5. Staged damage across two classes, and the LiDAR tier — both blocked on other
+6. Staged damage across two classes, and the LiDAR tier — both blocked on other
    things (damage classes need defining; LiDAR needs Pro hardware).
 
 ## Note on repeatability
