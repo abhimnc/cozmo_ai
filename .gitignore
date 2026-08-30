@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Xcode
+ios/*.xcodeproj/xcuserdata/
+ios/*.xcworkspace/xcuserdata/
+DerivedData/
+*.xcuserstate
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.python-version
+
+# Model weights + large binaries (fetched by script per constraints)
+weights/
+*.pt
+*.pth
+*.onnx
+*.mlmodel
+*.mlpackage
+
+# Capture data (raw benchmark data is submitted separately, not committed inline)
+benchmark/raw/
+captures/
+*.zip
