@@ -44,7 +44,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 | 2.14 | Furnished room with staged damage, two classes | — | Not staged | **NOT DONE** |
 | 2.15 | Same rooms at all three tiers | `benchmark/raw/` | Photo and video captured on real hardware; LiDAR exercised synthetically only | **PARTIAL** |
 | 2.16 | One room captured twice, same tier | `benchmark/raw/` | Living room in two photo captures | **DONE** |
-| 2.17 | Laser or tape ground truth | `benchmark/ground_truth/` | Tape: Living room and Hall complete, walls/ceiling/openings/wall thickness | **PARTIAL** — 2 of 9 rooms |
+| 2.17 | Laser or tape ground truth | `benchmark/ground_truth/` | Tape: Living room and Hall complete, **with measured uncertainty** (wall sd 1.56 cm; ceiling sd 14.01 cm, which cannot resolve the 1.5 cm gate) | **PARTIAL** — 2 of 9 rooms |
 | 2.18 | Raw sensor data submitted | `benchmark/raw/` | 10 captures incl. 486 MB video; gitignored, supplied separately | **DONE** |
 
 ## Part 2 — Gates
@@ -56,7 +56,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 | 2.21 | Repeatability within 1 cm / 0.5% | `benchmark/BENCHMARK_REPORT.md` | Table produced: **0 of 8**, and the report states which failure mode it is (unrepeatable, not repeatable-but-biased) | **NOT DONE** — measured and diagnosed |
 | 2.22 | Drift accountability + ablation | `out/*/plan.json` | `stitch.drift` states `method: none, applied: false` because no placement stage exists. **Not** "poses used as-is" — the stage is absent, and the field says so | **PARTIAL** |
 | 2.23 | Photo-tier whole-property stitch | — | Not implemented | **NOT DONE** |
-| 2.24 | Photo ±8% / video ±3% wall lengths | `fixloop/after/` | Photo median 33.3%, video 27.2%. Both fail | **NOT DONE** — measured and reported |
+| 2.24 | Photo ±8% / video ±3% wall lengths | `fixloop/after2/` | Photo median 26.2% with **1 of 6 dimensions passing**; video median 38.3%, 0 of 6 | **NOT DONE** — measured and reported |
 | 2.25 | Calibration scored at every tier | `fixloop/after/` | 5 of 6 intervals contain truth at both tiers | **DONE** |
 
 ## Part 3 — Head-to-head

@@ -3,10 +3,10 @@
 Handheld iPhone capture in, dimensioned room geometry out. Built 30–31 August
 2026. This report states what works, what does not, and the numbers behind both.
 
-**Summary in one line:** the pipeline runs end to end on two of three tiers in
-under 8 seconds, produces schema-valid output whose intervals cover the truth
-5 times in 6, and **passes no accuracy gate**. Several contracted stages —
-opening detection, room placement, damage analysis — are absent, not merely
+**Summary in one line:** the pipeline runs end to end on **all three tiers** in
+under 11 seconds, produces schema-valid output whose intervals cover the truth
+5 times in 6, and passes **one** accuracy gate of six. Several contracted stages
+— opening detection, room placement, damage analysis — are absent, not merely
 inaccurate.
 
 ---
@@ -38,10 +38,16 @@ each out-of-budget read being refused.
 
 **Per-view geometry (`pipeline/cozmo/photo/room.py`).** Detect line segments
 (LSD); recover the vertical vanishing point from near-vertical segments; build a
-gravity-aligned rotation; find the floor boundary as the lowest strong edge per
-column below the horizon; back-project it onto the floor plane using a camera
-height prior of 1.45 m. Room depth is the 75th percentile of the resulting
-distances.
+gravity-aligned rotation; back-project floor-candidate edge points onto the floor
+plane using a camera-height prior of 1.45 m; then find **wall bases as straight
+runs in that floor plane** (`floorplane.py`).
+
+That last step is the substantive one. Seen from above, the base of a planar wall
+is a straight line metres long, while furniture is short segments and scatter —
+a separation that exists in the bird's-eye view and nowhere in the image. It
+replaced a lowest-edge-per-column heuristic that found bed bases, and it produced
+the project's only passing dimension. Where no run has enough support, the older
+heuristic still applies.
 
 **Plan assembly (`pipeline/cozmo/plan.py`).** Quantities the pipeline can
 estimate carry intervals set from measured error. Quantities it cannot are
@@ -116,15 +122,31 @@ The scale chain is sound: EXIF is accurate to half a percent, and the 35 mm
 convention ambiguity we feared (Apple's 26 mm versus the horizontal convention's
 27) does not bite, because our capture app writes the convention it computes.
 
-**The dominant term is floor-boundary detection.** The boundary is found as the
-lowest strong edge per column, which in a furnished room is frequently the base
-of a bed, a cupboard or a mosquito net rather than the wall. That error is not
-bounded by any prior and is why the residual is now mostly negative.
+**The dominant term is still floor-boundary detection**, though less so after
+iteration 2. Wall bases are now found as straight runs on the floor plane rather
+than as the lowest edge per column, which moved the photo tier from 33.3% to
+26.2% median error. What remains is that a room can present no run long enough to
+be a wall, and that motion blur produces smears which pass a straightness test —
+the cause of the video tier's regression.
 
-**Ground-truth uncertainty is unquantified**, because the repeat-three-times
-exercise was deferred. Consequence, stated rather than implied: errors below are
-*observed*, not *measured*. We may not quote a ground-truth interval, and cannot
-claim a sub-centimetre result is distinguishable from the key's own noise.
+**Ground-truth uncertainty is measured**, by repeat tape readings:
+
+| Quantity | sd | Gate | sd ÷ gate |
+|---|---|---|---|
+| Wall length | 1.56 cm | 40 cm | 0.04 |
+| Opening width | 0.99 cm | 2 cm | 0.50 |
+| Ceiling height | **14.01 cm** | 1.5 cm | **9.3** |
+
+Wall-length errors are therefore *measured*. **The ceiling gate cannot be
+verified by tape at all** — the key is 9.3 times coarser than the tolerance. That
+is a finding about method, not only about us: the brief permits laser or tape,
+and a tape reading to a 3.3 m ceiling cannot resolve 1.5 cm, so laser is
+effectively mandatory for that gate whatever the brief allows.
+
+Two of four recorded quantities also fell outside the range of their own repeats,
+so the original single readings carry a bias on top of random spread. They are
+kept as the answer key, having been taken systematically in one session, but are
+now quoted with uncertainty.
 
 ---
 
@@ -156,7 +178,7 @@ third of the rooms and only looks acceptable because nothing checks it there.
 
 ---
 
-## 6. The fix loop
+## 6. The fix loop (two iterations)
 
 Declaration committed **before** the fix (`fixloop/DECLARATION.md`).
 
@@ -187,12 +209,35 @@ ray's `y` component against `sin θ` — a number near 1000 against one near 0.1
 so the floor had been inert since written. The shipped change is really two, and
 crediting the threshold alone would be dishonest.
 
+### Iteration 2 — floor-plane wall detection (`fixloop/ITERATION_2.md`)
+
+The first fix bounded a divergence; its post-mortem named detection as the
+remaining cause, and this attacks that. Wall bases become straight runs on the
+floor plane instead of the lowest edge per column.
+
+**Photo tier:** median 33.3% → **26.2%**, accuracy 0/6 → **1/6**, calibration
+held at 5/6. The living room's short wall lands at **−0.4%** — the project's
+first and only passing dimension.
+
+**Video tier: regressed**, 27.2% → 38.3%, calibration 5/6 → 4/6. Two explanations
+were tested and rejected — the run-length threshold (swept 0.6–1.6 m, no effect)
+and floor-point scarcity (1590 vs 1821 per frame, identical segment counts). What
+remains is that motion blur in a walking capture produces elongated smears that
+pass a straightness test, so those frames yield *wrong* lines rather than fewer.
+
+Shipped with the regression reported rather than reverted. A tier-conditional
+switch was considered and rejected: sharing one estimator is what makes the tier
+comparison mean anything, and branching on the tier label would turn it into a
+comparison of two implementations.
+
 ---
 
 ## 7. Known failure modes
 
 **Unrepeatable.** Two photo captures of the same four rooms agree on **0 of 8**
-wall dimensions within 1 cm or 0.5%; worst disagreement 2.69 m. The brief asks
+wall dimensions within 1 cm or 0.5%; worst disagreement 3.36 m. The spread
+*widened* through iteration 2 even as accuracy improved, because which line the
+detector calls the far wall is itself viewpoint-sensitive. The brief asks
 which failure this is: **unrepeatable**, not repeatable-but-biased. A biased
 system gives the same wrong answer twice; this gives different answers because
 which floor-boundary points are found depends on where the operator stood.
@@ -220,8 +265,9 @@ marked NOT DONE in `COMPLIANCE.md` rather than described as partial.
 
 ## 8. What we would do next
 
-1. **Floor-region segmentation** in place of the lowest-edge heuristic. It is the
-   dominant error term and everything downstream is capped by it.
+1. **A blur or motion gate on video frame selection.** The single clearest
+   finding of iteration 2, and the reason one tier regressed while the other
+   improved.
 2. **Opening detection**, which unlocks adjacency, which unlocks the stitch.
 3. **Per-room ceiling estimation** from the wall/ceiling boundary at a known
    floor distance, replacing a prior that is wrong by construction here.
