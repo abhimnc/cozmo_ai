@@ -57,7 +57,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 | 2.22 | Drift accountability + ablation | `out/*/plan.json` | `stitch.drift` states `method: none, applied: false` because no placement stage exists. **Not** "poses used as-is" — the stage is absent, and the field says so | **PARTIAL** |
 | 2.23 | Photo-tier whole-property stitch | — | Not implemented | **NOT DONE** |
 | 2.24 | Photo ±8% / video ±3% wall lengths | `fixloop/after2/` | Photo median 26.2% with **1 of 6 dimensions passing**; video median 38.3%, 0 of 6 | **NOT DONE** — measured and reported |
-| 2.25 | Calibration scored at every tier | `fixloop/after/` | 5 of 6 intervals contain truth at both tiers | **DONE** |
+| 2.25 | Calibration scored at every tier | `benchmark/BENCHMARK_REPORT.md` | **6 of 6** intervals contain the truth at the photo tier, 4 of 6 at video. Intervals average ±100% of their value, so coverage reflects how little is known rather than good calibration — stated in the report | **DONE** |
 
 ## Part 3 — Head-to-head
 

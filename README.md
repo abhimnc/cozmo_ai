@@ -3,11 +3,15 @@
 Handheld iPhone capture in, dimensioned room geometry out. One command per
 capture.
 
-> **Read this first.** The pipeline runs end to end on the photo and video tiers
-> in under 8 seconds and produces schema-valid output whose intervals cover the
-> truth 5 times in 6. It **passes no accuracy gate**, and several contracted
-> stages — opening detection, room placement, damage analysis — are absent
-> rather than inaccurate. `COMPLIANCE.md` marks each one honestly.
+> **Read this first.** The pipeline runs end to end on **all three tiers** in
+> under 12 seconds and produces schema-valid output. It passes **one accuracy
+> gate of six** — the living room's short wall, −0.4%. Photo-tier intervals cover
+> the truth 6 times in 6, but average ±100% of their own value, so that reflects
+> how little is known rather than good calibration.
+>
+> Room placement and damage analysis are **absent**, not inaccurate. Opening
+> detection exists but finds 2 of 3 doors and none within the 2 cm gate.
+> `COMPLIANCE.md` marks all 31 requirements honestly;
 > `benchmark/BENCHMARK_REPORT.md` has the numbers.
 
 ---

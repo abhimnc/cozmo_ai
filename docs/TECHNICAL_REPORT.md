@@ -115,8 +115,8 @@ zero stitching error by discarding its only contradicting evidence.
 | EXIF focal length | **−0.48%** | audited against ARKit intrinsics |
 | EXIF rounding to integer mm | 0.49% worst | measured, 8 photos |
 | Camera-height prior (1.45 m) | ±10% | prior, dominant scale term |
-| Floor-boundary detection | **dominant, unbounded** | see below |
-| Ground-truth tape uncertainty | **unquantified** | not measured |
+| Floor-boundary detection | **dominant** | see below; improved by iteration 2 |
+| Ground-truth tape uncertainty | 1.56 cm (wall), 14.01 cm (ceiling) | measured, repeat readings |
 
 The scale chain is sound: EXIF is accurate to half a percent, and the 35 mm
 convention ambiguity we feared (Apple's 26 mm versus the horizontal convention's
