@@ -272,6 +272,14 @@ only detectable when the camera faces its wall, so the classification returns
 "facing" for 8 of 9 detections and separates nothing. Naming a wall needs a
 coordinate frame shared between views, which the photo tier has not.
 
+**Damage detection is absent by decision, not oversight.** The rules and scope
+generator exist and are tested; the image-to-region stage is not built.
+`docs/DAMAGE_PLAN.md` records why: open data cannot substitute for the benchmark
+the brief requires us to build, only cracks have adequate public data (one class,
+where the benchmark needs two), and this home has no real damage while staged
+damage was declined — so a detector would have produced numbers nobody could
+check.
+
 **Absent stages, not inaccurate ones.** No room placement, so no stitched plan —
 which the brief calls the product surface, and which is blocked upstream by the
 wall-assignment problem above rather than by time. No damage detection, concealed

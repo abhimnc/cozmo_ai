@@ -41,7 +41,7 @@ All 8 deliverables written; **7 complete, 1 partial**.
 | # | Requirement | Path | Artifact | Status |
 |---|---|---|---|---|
 | 2.13 | Multi-room capture, 3+ rooms plus connector | `benchmark/raw/capture_20260831_031153_photo` | 8 rooms, Hall connector, 61 photos | **DONE** |
-| 2.14 | Furnished room with staged damage, two classes | — | Not staged | **NOT DONE** |
+| 2.14 | Furnished room with staged damage, two classes | `docs/DAMAGE_PLAN.md` | Not staged — the operator declined to tape proxy damage to their walls. Recorded rather than left blank | **NOT DONE** |
 | 2.15 | Same rooms at all three tiers | `benchmark/raw/` | Photo and video captured on real hardware; LiDAR exercised synthetically only | **PARTIAL** |
 | 2.16 | One room captured twice, same tier | `benchmark/raw/` | Living room in two photo captures | **DONE** |
 | 2.17 | Laser or tape ground truth | `benchmark/ground_truth/` | Tape: Living room and Hall complete, **with measured uncertainty** (wall sd 1.56 cm; ceiling sd 14.01 cm, which cannot resolve the 1.5 cm gate) | **PARTIAL** — 2 of 9 rooms |
