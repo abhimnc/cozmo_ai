@@ -80,25 +80,42 @@ quantities the operator never taps: ceiling height and the Hall's short
 dimension. Where magicplan gets a corner tapped, it is far better — its Hall
 floor area is within **2.3%**, which no part of our pipeline approaches.
 
-**Its ceiling heights are not reliable.** This is a single-storey flat with a
-uniform 3.294 m ceiling, measured by tape in two rooms. magicplan reports:
+**Correction, 2026-08-31.** An earlier version of this file claimed magicplan's
+ceiling heights were unreliable, on the evidence that they ranged 1.75 m to
+3.59 m across a flat whose ceiling was measured at 3.294 m in two rooms. That
+claim was wrong, and it was wrong because of my assumption, not their data.
 
-| Room | Ceiling | Error |
+The operator reports that three rooms genuinely have lower ceilings: both
+bathrooms have storage boxed in above them, and bedroom 3 sits over an
+underground garage so its floor is raised. Re-read with the architecture
+accounted for:
+
+| Room | magicplan | Assessment |
 |---|---|---|
-| Bedroom C | 1.75 m | −47% |
-| Bathroom B | 1.79 m | −46% |
-| Bathroom A | 1.96 m | −40% |
-| Living Room | 2.49 m | −24% |
-| Bedroom B | 2.65 m | −20% |
-| Bedroom A | 3.28 m | −0% |
-| Other | 3.28 m | −0% |
-| Kitchen | 3.33 m | +1% |
-| Hallway | 3.59 m | +9% |
+| Bedroom C | 1.75 m | genuinely low — garage below |
+| Bathroom B | 1.79 m | genuinely low — storage above |
+| Bathroom A | 1.96 m | genuinely low — storage above |
+| Living Room | 2.49 m | **wrong, −24%** |
+| Bedroom B | 2.65 m | **wrong, −20%** |
+| Bedroom A | 3.28 m | consistent |
+| Other | 3.28 m | consistent |
+| Kitchen | 3.33 m | consistent |
+| Hallway | 3.59 m | consistent |
 
-A **1.84 m spread** across one floor, and **2 of 9** inside the brief's 1.5 cm
-ceiling gate. Our own ceiling figure is a stated prior, not an estimate, and it
-still beats theirs in the Living room — which says less about our pipeline than
-about how hard this quantity is for the incumbent too.
+magicplan detected three real height changes that a uniform-ceiling assumption
+would have marked as errors, and it is wrong on two rooms. Four of the six rooms
+expected at 3.294 m land within 10%. That is a materially better result than
+this file first reported, and the difference was my premise.
+
+The specific comparison rows above are unaffected: the Living room ceiling is
+one of the two magicplan genuinely gets wrong, so our win there stands.
+
+**What this says about our own pipeline is worse.** We quote a *single*
+residential ceiling prior for every room. On this property that cannot be right
+for both a 3.294 m hall and a bathroom with storage boxed above it — so the
+prior is wrong by construction on a third of the rooms, and only looks
+acceptable because it is never checked against them. magicplan at least
+*measures* the quantity and therefore can detect the change.
 
 **Neither system would pass the brief's gates.** magicplan's best wall error is
 13.8% against an ±8% photo-tier gate, and its ceilings miss a 1.5 cm gate by up

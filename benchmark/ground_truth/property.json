@@ -229,5 +229,26 @@
       "bedroom_1, through the recess"
     ],
     "note": "Wall A's four archways map onto the four rooms in the east column, in order. That is what confirms arch_a3 and arch_a4 as the two eastern bedrooms rather than leaving them unassigned."
+  },
+  "ceiling_heights": {
+    "note": "The floor does not have one ceiling height. Operator-reported, 2026-08-31, after magicplan's varying figures prompted the question.",
+    "measured_m": {
+      "living_room": 3.294,
+      "hall": 3.294
+    },
+    "lower_by_construction": {
+      "bathroom_1": "box storage built above; height unmeasured",
+      "bathroom_2": "box storage built above; height unmeasured",
+      "bedroom_3": "underground garage below, so the floor is raised; height unmeasured"
+    },
+    "expected_3294": [
+      "living_room",
+      "hall",
+      "kitchen",
+      "bedroom_1",
+      "bedroom_2",
+      "puja_room"
+    ],
+    "consequence": "A single ceiling-height prior is wrong for a third of this property. The pipeline currently quotes one prior for every room, which cannot be right for both a 3.294 m hall and a bathroom with storage boxed above it."
   }
 }
