@@ -26,7 +26,7 @@ All 8 deliverables written; 6 complete, 2 partial.
 | 2.1 | Dimensioned per-room plan: walls | `schema/`, `out/*/plan.json` | 4 walls per room with intervals | **PARTIAL** — rectangle only, ±30% |
 | 2.2 | Ceiling height | `out/*/plan.json` | Reported as a **residential prior, not an estimate** | **PARTIAL** |
 | 2.3 | Floor area | `out/*/plan.json` | Depth × width, interval propagated | **PARTIAL** |
-| 2.4 | Openings | `pipeline/cozmo/photo/openings.py` | Doors and archways detected as jamb pairs standing on a wall line, with metric widths and confidence, emitted in `plan.json`. **Windows not detectable** (no floor contact); widths off −14.8% and +52.7%; not assigned to walls | **PARTIAL** |
+| 2.4 | Openings | `pipeline/cozmo/photo/openings.py` | Doors and archways detected as jamb pairs standing on a wall line, with metric widths and confidence, emitted in `plan.json`. **Windows not detectable** (no floor contact); widths off −14.8% and +52.7%; **wall assignment attempted and found structurally blocked** at this tier — see `docs/ERROR_BUDGET.md` | **PARTIAL** |
 | 2.5 | Stitched multi-room plan, correct adjacency | — | No placement solved; `stitch.adjacency` empty with stated reason | **NOT DONE** |
 | 2.6 | Per-surface damage regions, class and extent | — | No damage detection | **NOT DONE** |
 | 2.7 | Concealed-damage flags with the rule that fired | `schema/` | Schema defines it, requires `rule_id` + `rule_statement`; no detector | **NOT DONE** |

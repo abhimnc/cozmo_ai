@@ -231,6 +231,34 @@ run. Negative physical quantities now raise at construction with a message
 saying they must be rejected where they arise rather than clamped, and the
 opening detector drops an unmeasurable height while keeping the usable width.
 
+## Assigning openings to named walls — **attempted, structurally blocked**
+
+The output contract wants each opening on a wall. Ours report
+`wall_id: "unassigned"`, and an attempt to resolve that found the obstacle is
+structural rather than a matter of effort.
+
+**What is recoverable from one view.** A rectangular room's four walls form two
+pairs, and a single image can tell a wall the camera *faces* from one *beside*
+it: the first runs across the view, the second runs away from it.
+
+**Why it does not help.** Measured across the whole-floor capture, the
+classification returns **facing for 8 of 9** detected openings. An opening is
+found from its two vertical jambs, and both are only visible when the camera
+roughly faces that wall — edge-on, a doorway is a line rather than a pair of
+jambs. So "facing" is a precondition of *detecting* an opening at all, not a
+property that separates one wall from another.
+
+**What would be needed**, neither of which exists at this tier:
+
+1. A coordinate frame shared between views. Naming a wall "A" rather than "C"
+   requires knowing that two photos looked at the same wall, and the photo tier
+   has no poses and no registration between views.
+2. A room model richer than a rectangle. The Hall is stepped with a recess; there
+   is no true "wall C" in our output for an opening to be assigned to.
+
+This is also why room stitching was not attempted: adjacency needs openings tied
+to named walls, and that is upstream of everything the stitch would do.
+
 ## Known capture-side issues
 
 - A capture saved with zero photos still writes a manifest and survives the

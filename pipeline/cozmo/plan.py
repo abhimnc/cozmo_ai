@@ -135,7 +135,7 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
                     # and none is claimed to be a window.
                     "id": f"{est.room_id}_opening_{i + 1}",
                     "type": "door",
-                    "wall_id": "unassigned",
+                    "wall_id": "unassigned",   # see photo/openings.assign_wall_family
                     "width": Measurement.from_relative(
                         o.width_m, OPENING_REL_INTERVAL, "m", "jamb_pair_on_floor_line",
                         notes="Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is.").to_json(),

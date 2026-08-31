@@ -49,6 +49,7 @@ class Opening:
     wall_distance_m: float
     jamb_confidence: float
     kind: str                    # "door_or_archway" - see module docstring on windows
+    wall_family: str = "unknown"  # "facing" | "side" - see assign_wall_family
 
 
 def _vertical_segments(seg: Segments, rotation: np.ndarray, focal: float,
@@ -150,8 +151,35 @@ def detect(seg: Segments, wall_lines: list[FloorLine], rotation: np.ndarray,
                 wall_distance_m=dist,
                 jamb_confidence=min(1.0, line.support / 60.0),
                 kind="door_or_archway",
+                wall_family=assign_wall_family(line),
             ))
     return openings
+
+
+def assign_wall_family(line: FloorLine) -> str:
+    """Which pair of walls this line belongs to, from the camera's point of view.
+
+    In a rectangular room the four walls form two pairs, and a view can tell them
+    apart: a wall the camera faces runs across the view, a wall beside the camera
+    runs away from it. That is a real distinction and it is recoverable from one
+    image.
+
+    **Measured to be near-useless for openings, and kept only as a diagnostic.**
+    Across the whole-floor capture it returns "facing" for 8 detected openings and
+    "side" for 1. The reason is structural rather than a tuning problem: an
+    opening is found from its *two* vertical jambs, and both are only visible when
+    the camera roughly faces that wall - seen edge-on a doorway is a line, not a
+    pair of jambs. So "facing" is a precondition of detection, not a property that
+    separates one wall from another.
+
+    Two things would be needed to assign an opening to a named wall, and neither
+    exists at this tier: a coordinate frame shared between views, and a room model
+    richer than a rectangle. The plan therefore reports `wall_id: "unassigned"`
+    rather than resolving the ambiguity by guessing.
+    """
+    # `direction` is a unit vector in the (lateral, forward) floor frame. A wall
+    # the camera faces is mostly lateral; one beside it is mostly forward.
+    return "facing" if abs(line.direction[0]) > abs(line.direction[1]) else "side"
 
 
 def aggregate(per_view: list[list[Opening]], tolerance_rel: float = 0.25) -> list[Opening]:
@@ -189,11 +217,14 @@ def aggregate(per_view: list[list[Opening]], tolerance_rel: float = 0.25) -> lis
         # consumer can weigh it rather than having the decision made for them.
         widths = sorted(x.width_m for x in c)
         heights = [x.height_m for x in c if x.height_m]
+        families = [x.wall_family for x in c]
+        family = max(set(families), key=families.count)
         out.append(Opening(
             width_m=widths[len(widths) // 2],
             height_m=sorted(heights)[len(heights) // 2] if heights else None,
             wall_distance_m=sorted(x.wall_distance_m for x in c)[len(c) // 2],
             jamb_confidence=min(1.0, len(c) / 4.0),
             kind="door_or_archway",
+            wall_family=family,
         ))
     return out
