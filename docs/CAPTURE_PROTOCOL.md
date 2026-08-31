@@ -30,6 +30,10 @@ which the dev build satisfies.
 5. The home screen names your device and shows a green tick beside every tier
    this handset can run. If a tier is greyed out, the app says why.
 
+*Installing from a completely fresh Mac — including the Xcode download, signing
+setup, and the bundle-identifier change a different Apple ID requires — is
+documented separately in `docs/INSTALL_FRESH.md`.*
+
 ## Photo tier
 
 1. Tap **Photos**.
