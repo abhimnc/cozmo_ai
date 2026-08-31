@@ -1,68 +1,118 @@
 # Cozmo AI — Round 2
 
-Handheld iPhone capture in, dimensioned whole-property floor plan and damage
-scope out. One command per capture.
+Handheld iPhone capture in, dimensioned room geometry out. One command per
+capture.
 
-## Status
+> **Read this first.** The pipeline runs end to end on the photo and video tiers
+> in under 8 seconds and produces schema-valid output whose intervals cover the
+> truth 5 times in 6. It **passes no accuracy gate**, and several contracted
+> stages — opening detection, room placement, damage analysis — are absent
+> rather than inaccurate. `COMPLIANCE.md` marks each one honestly.
+> `benchmark/BENCHMARK_REPORT.md` has the numbers.
 
-Early. The capture app builds and runs all three tiers; the pipeline does not
-exist yet.
+---
 
-| Piece | State |
-|---|---|
-| iOS capture app (`ios/`) | builds, all three tiers wired, LiDAR untestable on available hardware |
-| Capture bundle format (`ios/CozmoCapture/Capture/CaptureBundle.swift`) | v1, versioned |
-| Pipeline (`pipeline/`) | not started |
-| Output JSON schema (`schema/`) | not started |
-| Benchmark set (`benchmark/`) | not captured |
+## Run it in under 15 minutes
+
+Requires macOS or Linux, Python 3.11+, and [uv](https://docs.astral.sh/uv/)
+(`curl -LsSf https://astral.sh/uv/install.sh | sh`).
+
+```bash
+git clone https://github.com/abhimnc/cozmo_ai && cd cozmo_ai
+uv venv --python 3.12 .venv
+uv pip install -e .
+
+# Run a capture. One command, no configuration.
+.venv/bin/cozmo run benchmark/raw/capture_20260831_031153_photo
+
+# Score it against tape ground truth.
+.venv/bin/cozmo score out/capture_20260831_031153_photo/plan.json
+```
+
+Outputs land in `out/<capture_id>/` as `plan.json` (validated against
+`schema/cozmo_plan.schema.json`) and `plan.svg`.
+
+No network calls, no API keys, no model weights. OpenCV and numpy only.
+
+**Raw captures are not in git** — 500 MB of photos and a 486 MB video. They are
+supplied with the submission; unpack them into `benchmark/raw/` and the commands
+above work unchanged.
+
+### Other commands
+
+```bash
+cozmo inspect <bundle> --prove-budget   # show what this tier may read, and prove the rest is refused
+cozmo calibrate <bundle>                # EXIF focal length vs image geometry
+```
+
+## Reproducing every reported number
+
+```bash
+cozmo run   benchmark/raw/capture_20260831_031153_photo   # photo tier
+cozmo run   benchmark/raw/capture_20260831_033226_video   # video tier
+cozmo score out/capture_20260831_031153_photo/plan.json
+cozmo score out/capture_20260831_033226_video/plan.json
+```
+
+Fix-loop before/after are stored in `fixloop/before/` and `fixloop/after/` and
+regenerate with the same commands at the two commits either side of the fix.
+
+## The capture app
+
+```bash
+brew install xcodegen
+cd ios
+cp Signing.local.xcconfig.example Signing.local.xcconfig   # put your team ID in it
+xcodegen generate && open CozmoCapture.xcodeproj
+```
+
+Signing team lives in a gitignored file so a clone never carries someone else's
+identity. See `docs/CAPTURE_PROTOCOL.md` for what the person holding the phone
+does.
 
 ## Layout
 
 ```
-ios/          Route 1 capture app (ARKit, Swift, XcodeGen)
-pipeline/     capture bundle -> floor plan + damage + scope
-schema/       published output schema
-benchmark/    benchmark captures, ground truth, gate results
-docs/         decisions, risks, capture protocol, device matrix
-scripts/      weight fetching, reproduction entry points
+ios/                  Route 1 capture app (ARKit, Swift)
+pipeline/cozmo/       bundle → plan
+  budget.py           sensor-budget enforcement
+  measure.py          Measurement: no value without an interval
+  photo/room.py       single-view room geometry
+  score.py            scoring against ground truth
+schema/               published output schema
+benchmark/            captures, ground truth, reports, head-to-head
+fixloop/              declaration, before, after, post-mortem
+docs/                 technical report, decisions, risks, error budget
 ```
 
-## Building the capture app
+## Design decisions worth knowing
 
-```
-brew install xcodegen
-cd ios
-cp Signing.local.xcconfig.example Signing.local.xcconfig   # then put your team ID in it
-xcodegen generate
-open CozmoCapture.xcodeproj
-```
+**Sensor budgets are enforced, not conventional.** Each bundle declares the paths
+its tier may read; reads go through `CaptureBundle.open` and anything outside
+raises. Poses are recorded at every tier but written under `_reference/` at the
+thin tiers, where they are out of budget. `cozmo inspect --prove-budget` shows
+each out-of-budget read being refused. This guards a mistake that is easy to make
+and nearly invisible: a debugging shortcut that reads poses at the photo tier and
+never gets removed.
 
-The team ID lives in `Signing.local.xcconfig`, which is gitignored, so a clone
-never carries someone else's signing identity. Leaving it empty also works —
-Xcode will ask which team to use on first open.
+**No measurement exists without an interval.** `Measurement` cannot be
+constructed without `ci_low`, `value`, `ci_high`, `unit` and `method`, and the
+schema enforces the same. Intervals are set from measured error, not from what
+looks good.
 
-Or from the command line, against a connected device:
+**Absent stages say they are absent.** `stitch.drift` reports
+`method: "none", applied: false` because no placement stage exists — deliberately
+distinguished from "poses used as-is", which the brief makes an automatic fail.
+Openings are an empty list with a stated reason rather than a fabricated door.
 
-```
-cd ios
-xcodebuild -project CozmoCapture.xcodeproj -scheme CozmoCapture \
-  -destination 'id=<device-udid>' -allowProvisioningUpdates build
-```
+## Where to look
 
-`xcrun devicectl list devices` gives the UDID.
-
-**Toolchain requirement:** the Xcode version must be new enough for the iOS
-version on the target phone. Xcode 16.4 tops out at iOS 18.x device support.
-
-## Key design points
-
-- **Tiers are enforced, not conventional.** Each bundle's `manifest.json`
-  declares a `sensor_budget` — the paths the pipeline may read at that tier.
-  Poses are recorded at every tier but written under `_reference/` at the video
-  and photo tiers, where they are out of budget. See `docs/DECISIONS.md`.
-- **Gravity-aligned world.** `worldAlignment = .gravity` puts +Y on the gravity
-  vector, so ceiling height is a Y-extent rather than a plane-fit by-product.
-- **Continuous tiers capture the whole property in one session**, so every room
-  shares a coordinate frame and stitching starts from real adjacency.
-
-See `docs/CAPTURE_PROTOCOL.md` for what the person holding the phone does.
+| Question | File |
+|---|---|
+| What is done and not done? | `COMPLIANCE.md` |
+| How accurate is it? | `benchmark/BENCHMARK_REPORT.md` |
+| How does it work? | `docs/TECHNICAL_REPORT.md` |
+| What was fixed, and did it work? | `fixloop/POSTMORTEM.md` |
+| How does it compare to a real product? | `benchmark/head_to_head/README.md` |
+| Why was it built this way? | `docs/DECISIONS.md` |
+| What is it not honest about? | `docs/ERROR_BUDGET.md`, `docs/RISKS.md` |
