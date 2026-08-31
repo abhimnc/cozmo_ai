@@ -14,10 +14,10 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "e865f9f",
-    "run_at": "2026-08-31T07:40:12.973807+00:00",
+    "git_commit": "51c205c",
+    "run_at": "2026-08-31T07:46:25.430434+00:00",
     "command": "cozmo run benchmark/raw/capture_20260831_033226_video",
-    "runtime_seconds": 7.2
+    "runtime_seconds": 7.1
   },
   "rooms": [
     {

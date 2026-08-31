@@ -13,10 +13,10 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "b816678",
-    "run_at": "2026-08-31T04:33:44.147671+00:00",
+    "git_commit": "51c205c",
+    "run_at": "2026-08-31T07:46:33.548336+00:00",
     "command": "cozmo run benchmark/raw/capture_20260831_100045_photo",
-    "runtime_seconds": 1.3
+    "runtime_seconds": 2.3
   },
   "rooms": [
     {
@@ -26,13 +26,13 @@
         {
           "id": "A",
           "length": {
-            "value": 3.0731,
-            "ci_low": 2.1511,
-            "ci_high": 3.995,
+            "value": 0.0519,
+            "ci_low": 0.0363,
+            "ci_high": 0.0674,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 6,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 1,
+            "notes": "Scale from a 1.45 m camera-height prior. 1 of 6 views saw a whole wall. Interval set from measured error against tape ground truth. Single observation; interval is the method's prior, not measured."
           },
           "height": {
             "value": 2.9,
@@ -46,13 +46,13 @@
         {
           "id": "B",
           "length": {
-            "value": 3.7236,
+            "value": 2.7261,
             "ci_low": 0.0,
-            "ci_high": 7.4473,
+            "ci_high": 5.4522,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 6,
-            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+            "n_observations": 1,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld. Single observation; interval is the method's prior, not measured."
           },
           "height": {
             "value": 2.9,
@@ -66,13 +66,13 @@
         {
           "id": "C",
           "length": {
-            "value": 3.0731,
-            "ci_low": 2.1511,
-            "ci_high": 3.995,
+            "value": 0.0519,
+            "ci_low": 0.0363,
+            "ci_high": 0.0674,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 6,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 1,
+            "notes": "Scale from a 1.45 m camera-height prior. 1 of 6 views saw a whole wall. Interval set from measured error against tape ground truth. Single observation; interval is the method's prior, not measured."
           },
           "height": {
             "value": 2.9,
@@ -86,13 +86,13 @@
         {
           "id": "D",
           "length": {
-            "value": 3.7236,
+            "value": 2.7261,
             "ci_low": 0.0,
-            "ci_high": 7.4473,
+            "ci_high": 5.4522,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 6,
-            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+            "n_observations": 1,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld. Single observation; interval is the method's prior, not measured."
           },
           "height": {
             "value": 2.9,
@@ -113,39 +113,67 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 11.443,
+        "value": 0.1414,
         "ci_low": 0.0,
-        "ci_high": 29.7519,
+        "ci_high": 0.3676,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
       "openings": [],
-      "source_frames": 6
+      "source_frames": 6,
+      "polygon": [
+        [
+          -1.363,
+          -0.026
+        ],
+        [
+          1.363,
+          -0.026
+        ],
+        [
+          1.363,
+          0.026
+        ],
+        [
+          -1.363,
+          0.026
+        ]
+      ]
     }
   ],
   "stitch": {
     "adjacency": [],
     "footprint_area": {
-      "value": 11.443,
+      "value": 0.141,
       "ci_low": 0.0,
-      "ci_high": 29.752,
+      "ci_high": 0.368,
       "unit": "m2",
-      "method": "sum_of_room_areas",
-      "notes": "Sum of per-room areas, not a stitched footprint. No room placement has been solved."
+      "method": "union_of_placed_rooms",
+      "notes": "Union of 1 placed room rectangles. Room sizes and adjacency are measured; room *positions* are solved from those, not observed, so the footprint is a sum of measured areas rather than a surveyed outline."
     },
     "room_overlap_area": {
-      "value": 0.0,
-      "ci_low": 0.0,
-      "ci_high": 0.0,
+      "value": 0,
+      "ci_low": 0,
+      "ci_high": 0,
       "unit": "m2",
-      "method": "not_applicable_no_placement",
-      "notes": "Zero because no rooms have been placed, not because placement was checked for overlaps."
+      "method": "measured_from_placed_polygons",
+      "notes": "Checked directly against the placed rectangles, not assumed."
+    },
+    "layout": {
+      "position_method": "topological_layout",
+      "position_note": "Positions are solved so adjacent rooms touch and none overlap. Dimensions and adjacency are measured; positions are not - nothing observed says where along the hall a bedroom sits.",
+      "overlap_area_m2": 0,
+      "footprint_m2": 0.14,
+      "bounding_box_m2": 0.14,
+      "hub_room": "puja_room",
+      "orphan_rooms": [],
+      "orphan_note": "Rooms with no recovered adjacency. They are drawn, because a room the matcher could not link has not ceased to exist, but nothing observed says where they belong - so they are placed outside the connected group rather than guessed into a plausible gap."
     },
     "drift": {
       "method": "none",
       "applied": false,
-      "notes": "No inter-room placement is solved at this tier yet, so there is no accumulated drift to correct. Stated explicitly: this is an absence of the stage, not poses used as-is."
+      "notes": "Adjacency is recovered but room *placement* is not, so there are no accumulated poses to correct. Stated explicitly: this is an absence of the placement stage, not poses used as-is."
     }
   },
   "damage": [],
@@ -159,7 +187,10 @@
       "Room depth measured 11% and 23% low against tape ground truth on the two rooms that have it.",
       "Far-wall width measured 96% and 382% high on those same rooms; its interval is +/-100% and it should not be relied on.",
       "Ceiling height is a residential prior, not an estimate.",
-      "No opening detection, so no openings are reported and no adjacency is claimed.",
+      "Opening detection finds doors and archways only - a window has no floor contact for the method to use - and found 2 of 3 in the room with ground truth, with widths off by -14.8% and +52.7% against a 2 cm gate.",
+      "No damage detector: damage regions, concealed flags and scope items are empty because nothing is observed, not because the stages are missing. Run `cozmo demo-damage` to see the rule engine fire on a worked damage set.",
+      "Adjacency comes from verified image matches between rooms' photo sets, measured at 80% precision and 50% recall on the whole-floor capture. Rooms that merely look alike can match: this property's two bathrooms share tiling and are the known false positive.",
+      "Openings are not assigned to a wall. Adjacency is reported without room placement, so the plan is a graph of which rooms touch, not a laid-out floor plan.",
       "Ground-truth tape uncertainty is unquantified, so these errors are observed rather than measured."
     ]
   },

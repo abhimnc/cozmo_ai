@@ -27,18 +27,20 @@ rows stand. See `docs/ERROR_BUDGET.md`.
 
 | Room | Quantity | Truth | Estimate | Error | Interval covers truth | Gate ±8% |
 |---|---|---|---|---|---|---|
-| living_room | long wall | 5.017 | 4.581 | −8.7% | yes | FAIL |
-| living_room | short wall | 3.330 | 3.317 | **−0.4%** | yes | **PASS** |
+| living_room | long wall | 5.017 | 4.335 | −13.6% | yes | FAIL |
+| living_room | short wall | 3.330 | 3.760 | +12.9% | yes | FAIL |
 | living_room | ceiling | 3.294 | 2.900 | −12.0% | yes | FAIL |
-| hall | long wall | 7.079 | 3.979 | −43.8% | **no** | FAIL |
-| hall | short wall | 2.095 | 3.818 | +82.3% | yes | FAIL |
+| hall | long wall | 7.079 | 5.116 | −27.7% | yes | FAIL |
+| hall | short wall | 2.095 | 4.240 | +102.4% | yes | FAIL |
 | hall | ceiling | 3.294 | 2.900 | −12.0% | yes | FAIL |
 
-**Accuracy 1/6. Calibration 6/6.** Median wall error **26.2%**.
+**Accuracy 0/6. Calibration 6/6.** Median wall error **20.6%**.
 
-The living room's short wall at −0.4% is the project's only passing dimension.
-The Hall fails worst, and it is the room the rectangle model fits least — stepped
-wall, 1.75 m recess — so the failure is where the model is least applicable.
+No dimension passes. The Hall fails worst, and it is the room the rectangle model
+fits least — stepped wall, 1.75 m recess — so the failure is where the model is
+least applicable. Its short wall at +102% is the benchmark's worst number: only
+two of nine views saw a whole wall and those two disagree (6.00 m and 2.48 m),
+which is the wall-identity problem described above.
 
 **Calibration reached 6/6, and the number should not be celebrated.** Intervals
 are now a **predictive** spread rather than a standard error of the mean, which is
