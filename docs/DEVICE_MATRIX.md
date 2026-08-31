@@ -18,15 +18,29 @@ reproducible from any capture we submit rather than asserted here.
 
 ## Accuracy delivered per tier
 
-**Not yet measured.** These rows get filled from `benchmark/` against tape and
-laser ground truth, and stay empty until then. Publishing a number here before
-the benchmark exists is exactly the "confident garbage" the brief penalises.
+Measured against tape ground truth on the Living room and Hall
+(`benchmark/BENCHMARK_REPORT.md`). **No tier passes its gate**, and these are the
+numbers each honestly delivers rather than the ones it was designed to.
 
-| Tier | Wall length | Ceiling height | Opening width | Stitched footprint | Gate |
-|---|---|---|---|---|---|
-| LiDAR | — | — | — | — | Round 1 gates + ≤2 cm openings, ≤1.5 cm ceiling |
-| Video | — | — | — | — | wall lengths ±3% |
-| Photo | — | — | — | — | wall lengths ±8%, footprint ±8% |
+| Tier | Median wall error | Gate | Ceiling | Opening width | Footprint | Calibration |
+|---|---|---|---|---|---|---|
+| **Photo** | **20.6%** | ±8% — fails | prior only, not estimated | 2 of 3 found, none within 2 cm | 79.5 m² vs ~67, **+19%** | **6 of 6** intervals contain truth |
+| **Video** | **58.5%** | ±3% — fails | prior only | not detected | not stitched | 5 of 6 |
+| **LiDAR** | **not measured** | — | — | — | — | — |
+
+**The LiDAR row is empty on purpose.** No LiDAR-capable device was available, so
+the tier has only ever run on a synthetic bundle. It executes and emits a
+schema-valid plan; any accuracy figure from constructed depth would measure the
+generator rather than the pipeline.
+
+**Read the wall-error column with the calibration column.** The photo tier is
+wrong by about a fifth and says so: every interval it quotes contains the truth.
+Its intervals average ±100% of their value, which is honest and not very useful —
+see the benchmark report.
+
+**Room-size correlation, all eight rooms: +0.84.** A single-room error figure
+hides whether the estimator tracks size at all; this one does. It was +0.10
+before two fixes shipped today.
 
 ## LiDAR tier readiness
 
