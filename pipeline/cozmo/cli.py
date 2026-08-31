@@ -199,9 +199,49 @@ def main(argv: list[str] | None = None) -> int:
                        help="Output directory (default: out/<capture_id>).")
     p_run.set_defaults(func=cmd_run)
 
+    p_score = sub.add_parser("score", help="Score a plan against tape ground truth.")
+    p_score.add_argument("plan", type=Path)
+    p_score.add_argument("--truth", type=Path, default=Path("benchmark/ground_truth"))
+    p_score.set_defaults(func=cmd_score)
+
     args = parser.parse_args(argv)
     return args.func(args)
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def cmd_score(args) -> int:
+    """Score a produced plan against the tape ground truth."""
+    from .score import GATES, CEILING_GATE_M, score_plan
+    import json as _json
+
+    plan_path = Path(args.plan)
+    results = score_plan(plan_path, Path(args.truth))
+    if not results:
+        print("no rooms in this plan have ground truth", file=sys.stderr)
+        return 2
+
+    tier = _json.loads(plan_path.read_text())["capture"]["tier"]
+    gate = GATES.get(tier, GATES["photo"])
+
+    print(f"tier {tier}   gate: {gate['label']}, ceiling within {CEILING_GATE_M * 100:.1f} cm\n")
+    print(f"{'room':<14} {'quantity':<15} {'truth':>7} {'est':>8} {'err':>9} {'interval':>17} {'cov':>4} {'gate':>5}")
+    passes = fails = covered = 0
+    for r in results:
+        is_ceiling = r.quantity == "ceiling height"
+        ok = (abs(r.error_m) <= CEILING_GATE_M) if is_ceiling else (abs(r.error_pct) <= gate["wall_length_rel"] * 100)
+        passes, fails = passes + ok, fails + (not ok)
+        covered += r.covered
+        print(f"{r.room:<14} {r.quantity:<15} {r.truth_m:>7.3f} {r.estimate_m:>8.3f} "
+              f"{r.error_pct:>+8.1f}% {f'{r.ci_low:.2f}-{r.ci_high:.2f}':>17} "
+              f"{'yes' if r.covered else 'NO':>4} {'PASS' if ok else 'FAIL':>5}")
+
+    n = len(results)
+    print(f"\naccuracy    {passes}/{n} within gate")
+    print(f"calibration {covered}/{n} intervals contain the truth")
+    print("\nAccuracy and calibration are scored separately. An estimate outside the gate")
+    print("whose interval still covers the truth is honest; one inside the gate whose")
+    print("interval misses it was luck sold as a measurement.")
+    return 0
