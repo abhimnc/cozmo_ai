@@ -1,0 +1,16 @@
+tier photo   gate: wall lengths within +/-8%, ceiling within 1.5 cm
+
+room           quantity          truth      est       err          interval  cov  gate
+living_room    long wall         5.017    4.581     -8.7%         2.90-6.26  yes  FAIL
+living_room    short wall        3.330    3.317     -0.4%         0.00-6.63  yes  PASS
+living_room    ceiling height    3.294    2.900    -12.0%         2.17-3.62  yes  FAIL
+hall           long wall         7.079    3.979    -43.8%         2.69-5.27   NO  FAIL
+hall           short wall        2.095    3.818    +82.3%         0.00-7.64  yes  FAIL
+hall           ceiling height    3.294    2.900    -12.0%         2.17-3.62  yes  FAIL
+
+accuracy    1/6 within gate
+calibration 5/6 intervals contain the truth
+
+Accuracy and calibration are scored separately. An estimate outside the gate
+whose interval still covers the truth is honest; one inside the gate whose
+interval misses it was luck sold as a measurement.

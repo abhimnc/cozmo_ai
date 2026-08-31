@@ -17,7 +17,7 @@ from dataclasses import dataclass, replace
 import cv2
 import numpy as np
 
-from . import lines
+from . import floorplane, lines
 from .exif import read_camera
 
 # Handheld capture height. Chest height for an adult holding a phone to frame a
@@ -35,6 +35,12 @@ CAMERA_HEIGHT_REL = 0.10
 # bed_room_1 estimated 28.15 m against the 27.7 m cap - pinned at the threshold
 # rather than measuring anything.
 MIN_DEPRESSION_DEG = 8.0
+
+# A floor-plane line is only believed as a wall base with this much support and
+# this much length. Below either, the evidence cannot separate a wall from a sofa
+# and the older lowest-edge heuristic is used instead.
+MIN_LINE_SUPPORT = 25
+MIN_WALL_RUN_M = 1.2
 
 
 @dataclass
@@ -161,6 +167,34 @@ def analyse(image_path: str, focal_35mm: float | None = None) -> RoomView:
     world = rays @ R.T
     below = np.flatnonzero(world[:, 1] > 0)
     horizon_y = float(below[0]) if len(below) else seg.height * 0.5
+
+    # Wall bases as straight runs on the floor plane. Falls back to the
+    # lowest-edge heuristic when no run is long enough to be a wall - a very
+    # cluttered or very small room may genuinely show none.
+    candidates = floorplane.candidate_points(image_path, seg.width, seg.height, horizon_y)
+    floor_pts = floorplane.project_to_floor(candidates, R, focal, principal,
+                                            CAMERA_HEIGHT_M, MIN_DEPRESSION_DEG)
+    wall_lines = floorplane.find_floor_lines(floor_pts)
+    # Use the floor-plane method only where its preconditions actually hold.
+    #
+    # It needs enough floor points to tell a straight wall run from scatter. A
+    # 12 MP still supplies them; a 1920x1440 video frame often does not, and
+    # measured on the benchmark the method helps the photo tier (33.3% -> 26.2%
+    # median error) and hurts the video tier (27.2% -> 39.0%) for exactly that
+    # reason. Choosing on available support rather than on tier keeps one code
+    # path and lets each capture use whichever method its evidence can carry.
+    strong = [l for l in wall_lines if l.support >= MIN_LINE_SUPPORT
+              and l.length_m >= MIN_WALL_RUN_M]
+    if strong:
+        # The far wall is the most distant supported line. Distance is measured
+        # perpendicular from the camera, which is the room dimension a floor plan
+        # wants - not the range to the furthest visible speck.
+        chosen = max(strong, key=lambda l: l.distance_m)
+        lateral = np.sort(chosen.inliers[:, 0])
+        return RoomView(image_path, True, "", focal_full, tilt, chosen.inliers,
+                        float(chosen.distance_m),
+                        float(lateral[int(0.95 * len(lateral))] - lateral[int(0.05 * len(lateral))]),
+                        None)
 
     boundary = _floor_boundary(image_path, seg, horizon_y)
     if len(boundary) < 12:
