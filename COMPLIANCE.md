@@ -13,7 +13,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 |---|---|---|---|---|
 | 1.1 | Choose a capture route | `docs/DECISIONS.md` | Route 1 chosen, with reasoning | **DONE** |
 | 1.2 | Own iOS capture app | `ios/` | CozmoCapture, builds and runs on device | **DONE** |
-| 1.3 | Installable in under 10 min | `docs/CAPTURE_PROTOCOL.md` | Xcode/devicectl install documented; **no TestFlight build** — needs a paid developer account | **PARTIAL** |
+| 1.3 | Installable in under 10 min | `docs/CAPTURE_PROTOCOL.md` | Cable install via Xcode/devicectl works and is documented (~5 min with a Mac present). **TestFlight blocked externally**: Developer Program enrolment submitted, still Pending at 31 Aug 10:50 IST. A Release archive builds and signs; only Apple's approval is missing | **PARTIAL** |
 | 1.4 | Photo tier | `ios/.../CaptureTier.swift` | Implemented, 5 real captures | **DONE** |
 | 1.5 | Video tier | `ios/.../VideoRecorder.swift` | Implemented, 339 s / 20,324-frame walkthrough captured | **DONE** |
 | 1.6 | LiDAR tier | `pipeline/cozmo/lidar/`, `scripts/make_synthetic_lidar.py` | Runs end to end on a synthetic bundle (4.1 s, schema-valid). **Never run on real LiDAR data** — no LiDAR device available, so no accuracy claim | **PARTIAL** |

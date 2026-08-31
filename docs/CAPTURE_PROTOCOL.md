@@ -4,16 +4,21 @@
 does not need to know which tier the pipeline prefers; they tap the tier they
 were asked for and follow the screen.
 
-## Install (target: under 10 minutes)
+## Install (about 5 minutes, cable required)
 
-1. Open the TestFlight invitation link on the iPhone. Install **Cozmo Capture**.
-2. Open the app. Allow camera access when asked.
-3. The home screen names your device and shows a green tick beside every tier
+**TestFlight is not available.** Apple Developer Program enrolment was submitted
+and remains Pending; a Release archive builds and signs, and the moment enrolment
+clears the upload is one Xcode step away. Until then, installation is by cable:
+
+1. Connect the iPhone to a Mac with Xcode.
+2. From `ios/`, run:
+   `xcodebuild -project CozmoCapture.xcodeproj -scheme CozmoCapture -destination 'id=<udid>' -allowProvisioningUpdates build`
+   (`xcrun devicectl list devices` gives the UDID.)
+3. On the phone: Settings → General → VPN & Device Management → trust the
+   developer certificate.
+4. Open the app. Allow camera access when asked.
+5. The home screen names your device and shows a green tick beside every tier
    this handset can run. If a tier is greyed out, the app says why.
-
-*Fallback with no TestFlight:* connect the iPhone by cable, `xcodebuild ... install`
-from `ios/`, then Settings → General → VPN & Device Management → trust the
-developer certificate. Under two minutes with the cable already in hand.
 
 ## Photo tier
 
