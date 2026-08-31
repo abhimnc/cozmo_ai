@@ -16,6 +16,22 @@ exists against what is required. Raw captures live in `benchmark/raw/`
 | 4 | At least one room captured **twice at the same tier** (repeatability gate) | **done** | Living room, photo tier: `..._172319` (4 photos) and `..._174340` (5 photos) |
 | 5 | **Laser or tape ground truth** on everything | **not started** | — |
 
+## A deviation from the brief's photo count
+
+The brief specifies **2 to 8 stills per room** at the photo tier. Three rooms in
+the canonical capture have **9**: Hall, Kitchen and Bathroom 2. The other five sit
+inside the range at 6 to 8.
+
+Recorded rather than quietly trimmed. Removing a photo to fit would change the
+reported numbers, and the deviation is in the direction of *more* input than the
+brief guarantees — so any result from those three rooms is, if anything,
+flattered by one extra view. Worth knowing when reading them.
+
+The pipeline imposes no upper limit and handles the compliant range throughout;
+five of eight rooms are inside it, and the two-photo floor is enforced
+(`validate_inputs` rejects a room with fewer than 2, which is how the earlier
+one-photo capture was refused).
+
 ## Canonical room identity
 
 Room ids for the benchmark are fixed by **`capture_20260831_031153_photo`**, the

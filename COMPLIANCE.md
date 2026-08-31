@@ -14,7 +14,7 @@ All 8 deliverables written; **7 complete, 1 partial**.
 | 1.1 | Choose a capture route | `docs/DECISIONS.md` | Route 1 chosen, with reasoning | **DONE** |
 | 1.2 | Own iOS capture app | `ios/` | CozmoCapture, builds and runs on device | **DONE** |
 | 1.3 | Installable in under 10 min | `scripts/install_on_device.sh` | **Measured: 11 s** cold (DerivedData deleted), M4 MacBook Air, one command. Under 2 min end to end including the one-time certificate trust on the phone. The brief allows "a TestFlight build **or** a dev build"; this is the dev build. TestFlight additionally blocked externally — enrolment Pending at Apple since 31 Aug 10:50 IST | **DONE** |
-| 1.4 | Photo tier | `ios/.../CaptureTier.swift` | Implemented, 5 real captures | **DONE** |
+| 1.4 | Photo tier | `ios/.../CaptureTier.swift` | Implemented, 6 real captures. **Deviation recorded**: the brief specifies 2–8 stills per room and three rooms have 9 (`benchmark/INVENTORY.md`). The 2-photo floor is enforced in code | **DONE** — with a noted deviation |
 | 1.5 | Video tier | `ios/.../VideoRecorder.swift` | Implemented, 339 s / 20,324-frame walkthrough captured | **DONE** |
 | 1.6 | LiDAR tier | `pipeline/cozmo/lidar/`, `scripts/make_synthetic_lidar.py` | Runs end to end on a synthetic bundle (4.1 s, schema-valid). **Never run on real LiDAR data** — no LiDAR device available, so no accuracy claim | **PARTIAL** |
 | 1.7 | Device matrix | `docs/DEVICE_MATRIX.md` | Tier × hardware, probed at runtime, per-tier accuracy filled from benchmark | **DONE** |
