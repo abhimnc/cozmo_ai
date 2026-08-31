@@ -156,6 +156,39 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
     footprint_lo = sum(r["floor_area"]["ci_low"] for r in rooms_json)
     footprint_hi = sum(r["floor_area"]["ci_high"] for r in rooms_json)
 
+    # Damage reasoning. regions is empty until a detector exists; the rest
+    # follows from it, so all three collapse to empty together.
+    from .damage.rules import evaluate as evaluate_rules
+    from .damage.scope import build as build_scope
+
+    regions = []                      # no detector yet
+    context = {"rooms": [e.room_id for e in estimates],
+               "adjacent": {}}
+    for l in (links or []):
+        context["adjacent"].setdefault(l.room_a, []).append(l.room_b)
+        context["adjacent"].setdefault(l.room_b, []).append(l.room_a)
+    concealed = evaluate_rules(regions, context)
+    scope = build_scope(regions, concealed)
+
+    damage_json = [{"id": r.id, "room_id": r.room_id, "surface_id": r.surface_id,
+                    "damage_class": r.damage_class,
+                    "extent": Measurement.from_relative(r.extent_m2, 0.3, "m2",
+                                                        "detected_region").to_json(),
+                    "confidence": r.confidence} for r in regions]
+    flags_json = [{"id": f.id, "room_id": f.room_id, "surface_id": f.surface_id,
+                   "rule_id": f.rule_id, "rule_statement": f.rule_statement,
+                   "triggered_by": f.triggered_by, "confidence": f.confidence}
+                  for f in concealed]
+    scope_json = [{"id": s.id, "room_id": s.room_id, "surface_id": s.surface_id,
+                   "action": s.action,
+                   "quantity": Measurement.from_relative(
+                       s.quantity_m2 if s.quantity_m2 else 1.0,
+                       0.3 if s.quantity_m2 else 0.0,
+                       s.unit if s.quantity_m2 else "count",
+                       "extent_plus_overcut" if s.quantity_m2 else "investigation_no_area",
+                       notes=s.note).to_json(),
+                   "derived_from": s.derived_from} for s in scope]
+
     adjacency = [
         {"room_a": l.room_a, "room_b": l.room_b,
          "via": f"shared_view_{l.inliers}_inliers",
@@ -199,9 +232,14 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
                 "notes": "Adjacency is recovered but room *placement* is not, so there are no accumulated poses to correct. Stated explicitly: this is an absence of the placement stage, not poses used as-is.",
             },
         },
-        "damage": [],
-        "concealed_flags": [],
-        "scope": [],
+        # No damage detector exists, so no regions are observed and the rule
+        # engine has nothing to fire on. The stages are wired: give `evaluate()`
+        # damage regions and flags and scope appear. Empty here means "nothing
+        # observed", not "not implemented" - see COMPLIANCE.md, which marks the
+        # detector NOT DONE and the rules PARTIAL.
+        "damage": damage_json,
+        "concealed_flags": flags_json,
+        "scope": scope_json,
         "calibration": {
             "interval_basis": "empirical_from_benchmark",
             "coverage_target": 0.95,
@@ -211,6 +249,7 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
                 "Far-wall width measured 96% and 382% high on those same rooms; its interval is +/-100% and it should not be relied on.",
                 "Ceiling height is a residential prior, not an estimate.",
                 "Opening detection finds doors and archways only - a window has no floor contact for the method to use - and found 2 of 3 in the room with ground truth, with widths off by -14.8% and +52.7% against a 2 cm gate.",
+                "No damage detector: damage regions, concealed flags and scope items are empty because nothing is observed, not because the stages are missing. Run `cozmo demo-damage` to see the rule engine fire on a worked damage set.",
                 "Adjacency comes from verified image matches between rooms' photo sets, measured at 80% precision and 50% recall on the whole-floor capture. Rooms that merely look alike can match: this property's two bathrooms share tiling and are the known false positive.",
                 "Openings are not assigned to a wall. Adjacency is reported without room placement, so the plan is a graph of which rooms touch, not a laid-out floor plan.",
                 "Ground-truth tape uncertainty is unquantified, so these errors are observed rather than measured.",

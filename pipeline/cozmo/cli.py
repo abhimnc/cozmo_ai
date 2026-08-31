@@ -213,6 +213,10 @@ def main(argv: list[str] | None = None) -> int:
                        help="Output directory (default: out/<capture_id>).")
     p_run.set_defaults(func=cmd_run)
 
+    p_demo = sub.add_parser("demo-damage",
+                            help="Show the concealed-damage rules and scope generation working.")
+    p_demo.set_defaults(func=cmd_demo_damage)
+
     p_score = sub.add_parser("score", help="Score a plan against tape ground truth.")
     p_score.add_argument("plan", type=Path)
     p_score.add_argument("--truth", type=Path, default=Path("benchmark/ground_truth"))
@@ -224,6 +228,38 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def cmd_demo_damage(args) -> int:
+    """Run the concealed-damage rules and scope generation on a worked damage set.
+
+    The pipeline has no damage detector, so on a real capture these stages are
+    correctly empty. This shows they work, using supplied damage regions rather
+    than detected ones - clearly marked as such, because a demonstration that
+    looked like a result would be worse than none.
+    """
+    from .damage.rules import evaluate, demo_regions
+    from .damage.scope import build
+
+    regions, context = demo_regions()
+    flags = evaluate(regions, context)
+    items = build(regions, flags)
+
+    print("SUPPLIED damage regions (not detected - this pipeline has no detector):")
+    for r in regions:
+        print(f"  {r.id:<7} {r.room_id}/{r.surface_id:<9} {r.damage_class:<12} {r.extent_m2:.2f} m2")
+
+    print(f"\nConcealed-damage flags, {len(flags)} raised:")
+    for f in flags:
+        print(f"  {f.rule_id}")
+        print(f"     {f.room_id}/{f.surface_id}  from {', '.join(f.triggered_by)}  conf {f.confidence}")
+        print(f"     {f.rule_statement}")
+
+    print(f"\nScope, {len(items)} line items:")
+    for i in items:
+        q = f"{i.quantity_m2} m2" if i.quantity_m2 else "no area"
+        print(f"  {i.room_id}/{i.surface_id:<13} {q:<10} {i.action[:58]}")
+    return 0
 
 
 def cmd_score(args) -> int:

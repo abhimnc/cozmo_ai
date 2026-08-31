@@ -185,6 +185,38 @@ wide distribution, not as the system's error.
 **43% (3 of 7 shared dimensions), against a ≥70% gate. Failed.**
 Full table and analysis in `head_to_head/README.md`.
 
+## Damage reasoning — machinery without an input
+
+`plan.json` reports **zero** damage regions, concealed flags and scope items on
+every capture. That is "nothing observed", not "not implemented", and the
+distinction is checkable: `cozmo demo-damage` runs the same code on a worked
+damage set and produces 6 flags and 10 scope items.
+
+**Five concealed-damage rules**, each stating its reasoning in words a homeowner
+could be read:
+
+| Rule | Fires on |
+|---|---|
+| `R1_CEILING_WATER_FROM_ABOVE` | water staining on a ceiling → floor structure above |
+| `R2_WALL_BASE_WATER_SUBFLOOR` | water in the lower third of a wall → subfloor and cavity |
+| `R3_SHARED_WALL_WITH_WET_ROOM` | damage in a room adjoining a bathroom or kitchen |
+| `R4_EXTENSIVE_SURFACE_DAMAGE` | damage over a third of a surface → substrate behind all of it |
+| `R5_MOULD_IMPLIES_PERSISTENT_MOISTURE` | mould → an active source, out of sight |
+
+R3 consumes the adjacency graph recovered above, so the two stages are connected
+rather than parallel.
+
+**Scope separates two different promises.** Remediation items carry the measured
+extent plus a 15% allowance to reach sound substrate — labelled as a trade
+convention, not a measurement. Investigation items carry **no area at all**,
+because concealed damage cannot be quantified before the surface is opened, and
+putting a confident figure on something unseen is exactly what the brief
+penalises.
+
+**What is missing is the detector.** No stage identifies damage in an image, so
+nothing reaches the rules. That is marked NOT DONE, and no damage number appears
+anywhere in this report.
+
 ## Timing
 
 | Tier | Capture | Rooms | Inputs | Runtime |

@@ -4,7 +4,7 @@ Requirement → file path → artifact → status. Honest statuses only: **DONE*
 **PARTIAL**, **NOT DONE**. A requirement with no artifact is marked NOT DONE
 rather than described as in progress.
 
-Summary: **16 done, 6 partial, 9 not done** of 31 requirements.
+Summary: **16 done, 8 partial, 7 not done** of 31 requirements.
 All 8 deliverables written; **7 complete, 1 partial**.
 
 ## Part 1 — Capture route and tiers
@@ -29,8 +29,8 @@ All 8 deliverables written; **7 complete, 1 partial**.
 | 2.4 | Openings | `pipeline/cozmo/photo/openings.py` | Doors and archways detected as jamb pairs standing on a wall line, with metric widths and confidence, emitted in `plan.json`. **Windows not detectable** (no floor contact); widths off −14.8% and +52.7%; **wall assignment attempted and found structurally blocked** at this tier — see `docs/ERROR_BUDGET.md` | **PARTIAL** |
 | 2.5 | Stitched multi-room plan, correct adjacency | `pipeline/cozmo/photo/adjacency.py` | **Adjacency recovered** from verified image matches between rooms' photo sets — 80% precision, 50% recall on the whole-floor capture, emitted in `stitch.adjacency` with confidence. **No room placement**, so this is a graph of which rooms touch, not a laid-out plan | **PARTIAL** |
 | 2.6 | Per-surface damage regions, class and extent | — | No damage detection | **NOT DONE** |
-| 2.7 | Concealed-damage flags with the rule that fired | `schema/` | Schema defines it, requires `rule_id` + `rule_statement`; no detector | **NOT DONE** |
-| 2.8 | Scope line items keyed to surfaces | `schema/` | Schema defines it; no generator | **NOT DONE** |
+| 2.7 | Concealed-damage flags with the rule that fired | `pipeline/cozmo/damage/rules.py` | **Rule engine implemented**: 5 rules, each carrying its statement in plain words; every flag names the rule and the regions that satisfied it. Fires 6 flags on a worked damage set (`cozmo demo-damage`). Empty on real captures because **no damage detector exists** | **PARTIAL** |
+| 2.8 | Scope line items keyed to surfaces | `pipeline/cozmo/damage/scope.py` | **Generator implemented**: remediation items carry a measured extent plus a labelled trade allowance; investigation items carry **no area**, since concealed damage cannot be quantified before opening up. Every item names what it derives from. 10 items on the worked set | **PARTIAL** |
 | 2.9 | Confidence interval on every measurement | `pipeline/cozmo/measure.py` | `Measurement` type cannot be constructed without one; schema enforces it | **DONE** |
 | 2.10 | One command per capture | `pipeline/cozmo/cli.py` | `cozmo run <bundle>` → plan.json + plan.svg, ~5 s | **DONE** |
 | 2.11 | JSON to a published schema | `schema/cozmo_plan.schema.json` | Validated with `jsonschema` | **DONE** |
