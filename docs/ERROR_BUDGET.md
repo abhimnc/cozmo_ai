@@ -259,6 +259,41 @@ property that separates one wall from another.
 This is also why room stitching was not attempted: adjacency needs openings tied
 to named walls, and that is upstream of everything the stitch would do.
 
+## Aggregating across views — measured, and a real conflict
+
+Each room is seen several times and the per-view estimates disagree. How they are
+combined was tested rather than assumed, across all eight rooms:
+
+| Aggregation | Size correlation | Footprint vs ~67 m² | Median wall error |
+|---|---|---|---|
+| **median (kept)** | +0.50 | **85.5 m² (+27%)** | 27.3% |
+| 75th percentile | **+0.70** | 104.4 m² (+55%) | **24.0%** |
+| 90th percentile | +0.64 | 134.0 m² (+100%) | — |
+| max | +0.69 | 251.2 m² (+274%) | — |
+
+**The hypothesis behind the upper percentiles was right.** A view can never see
+*more* wall than exists, only less, so every per-view estimate is biased low by
+partial visibility and an upper percentile should recover more of the true
+extent. Correlation confirms it: +0.50 → +0.70.
+
+**But upper percentiles carry their own bias.** Taking the top of several noisy
+estimates selects for the noise as well as the signal, and the footprint doubles.
+
+**The conflict is genuine and neither option resolves it.** The 75th percentile
+is better on size correlation and marginally better on wall error; the median is
+far better on footprint. No option passes any gate, so the tie-break is which
+estimator is more honest about itself — and the median is unbiased by
+construction, while the 75th percentile is knowingly biased high. Choosing a
+known-biased estimator because it scores better on two of three measures would be
+tuning to the scoreboard.
+
+**Recorded because it points at the real fix.** The right answer is neither
+percentile: it is to know *how much* of a wall each view saw, and weight
+accordingly. A view seeing a wall's full run should count for more than one
+seeing a corner of it. That needs the fitted line's endpoints checked against the
+image border to tell a wall that ends from a wall that leaves the frame — which
+is a modest change, and the first thing to try next.
+
 ## Known capture-side issues
 
 - A capture saved with zero photos still writes a manifest and survives the
