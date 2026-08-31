@@ -4,7 +4,8 @@ Requirement → file path → artifact → status. Honest statuses only: **DONE*
 **PARTIAL**, **NOT DONE**. A requirement with no artifact is marked NOT DONE
 rather than described as in progress.
 
-Summary: **12 done, 7 partial, 12 not done** of 31 requirements.
+Summary: **15 done, 5 partial, 11 not done** of 31 requirements.
+All 8 deliverables written; 5 complete, 3 partial.
 
 ## Part 1 — Capture route and tiers
 
@@ -52,7 +53,7 @@ Summary: **12 done, 7 partial, 12 not done** of 31 requirements.
 |---|---|---|---|---|
 | 2.19 | Opening widths ≤2 cm on ≥85% | — | No opening detection; cannot be scored | **NOT DONE** |
 | 2.20 | Ceiling height ≤1.5 cm | `fixloop/after/score_photo.txt` | −12.0%, a prior not an estimate | **NOT DONE** |
-| 2.21 | Repeatability within 1 cm / 0.5% | — | Scoring script exists; repeatability table not produced | **NOT DONE** |
+| 2.21 | Repeatability within 1 cm / 0.5% | `benchmark/BENCHMARK_REPORT.md` | Table produced: **0 of 8**, and the report states which failure mode it is (unrepeatable, not repeatable-but-biased) | **NOT DONE** — measured and diagnosed |
 | 2.22 | Drift accountability + ablation | `out/*/plan.json` | `stitch.drift` states `method: none, applied: false` because no placement stage exists. **Not** "poses used as-is" — the stage is absent, and the field says so | **PARTIAL** |
 | 2.23 | Photo-tier whole-property stitch | — | Not implemented | **NOT DONE** |
 | 2.24 | Photo ±8% / video ±3% wall lengths | `fixloop/after/` | Photo median 33.3%, video 27.2%. Both fail | **NOT DONE** — measured and reported |
@@ -89,11 +90,11 @@ Summary: **12 done, 7 partial, 12 not done** of 31 requirements.
 |---|---|---|---|
 | D1 | Compliance matrix | `COMPLIANCE.md` | **DONE** |
 | D2 | Capture route + device matrix | `docs/CAPTURE_PROTOCOL.md`, `docs/DEVICE_MATRIX.md` | **PARTIAL** — no TestFlight |
-| D3 | Repo + README, 15 min on a clean machine | `README.md` | **PARTIAL** |
+| D3 | Repo + README, 15 min on a clean machine | `README.md` | **DONE** — verified by cloning fresh and running it |
 | D4 | Reproduction bundle | `benchmark/raw/`, `cozmo run` | **PARTIAL** — raw data supplied separately |
-| D5 | Benchmark report | `fixloop/`, `benchmark/` | **PARTIAL** — no repeatability table |
+| D5 | Benchmark report | `benchmark/BENCHMARK_REPORT.md` | **DONE** — gates at both runnable tiers, repeatability table, head-to-head, timing |
 | D6 | Fix loop bundle | `fixloop/` | **DONE** |
-| D7 | Technical report, max 6 pages | `docs/TECHNICAL_REPORT.md` | pending |
+| D7 | Technical report, max 6 pages | `docs/TECHNICAL_REPORT.md` | **DONE** |
 | D8 | Raw benchmark data | `benchmark/raw/` | **DONE** |
 
 ## Constraints
