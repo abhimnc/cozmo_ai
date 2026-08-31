@@ -187,10 +187,20 @@ def analyse(image_path: str, focal_35mm: float | None = None) -> RoomView:
     strong = [l for l in wall_lines if l.support >= MIN_LINE_SUPPORT
               and l.length_m >= MIN_WALL_RUN_M]
     if strong:
-        # The far wall is the most distant supported line. Distance is measured
-        # perpendicular from the camera, which is the room dimension a floor plan
-        # wants - not the range to the furthest visible speck.
-        chosen = max(strong, key=lambda l: l.distance_m)
+        # Take the **longest** run, not the most distant one.
+        #
+        # Choosing the most distant line assumed the far wall is the furthest
+        # thing visible. In a room with an open doorway it is not: the floor
+        # continues through the opening and the furthest line lies in the next
+        # room. Measured across eight rooms, that rule produced areas correlating
+        # -0.11 with actual room size - it was not measuring rooms at all, and it
+        # compressed an eightfold true spread into two and a half.
+        #
+        # Length is the better discriminant because it is a property of walls
+        # rather than of viewpoint. A wall base is metres long; a fragment glimpsed
+        # through a doorway is short, being clipped by the door frame. Same data,
+        # same fitting, correlation +0.42.
+        chosen = max(strong, key=lambda l: l.length_m)
         lateral = np.sort(chosen.inliers[:, 0])
         depth = float(chosen.distance_m)
         span = float(lateral[int(0.95 * len(lateral))] - lateral[int(0.05 * len(lateral))])

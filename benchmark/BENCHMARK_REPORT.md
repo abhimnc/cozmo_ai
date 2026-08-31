@@ -112,6 +112,43 @@ of the four modelled walls that line is.
 Heights are worse than widths — 0.77 m and 1.51 m against a 1.85 m truth — and
 carry a 50% interval to say so.
 
+## Does the estimator measure rooms at all?
+
+The most important diagnostic in this project, and it should be read before any
+per-room number below.
+
+Across all eight rooms, comparing our floor areas against magicplan's as a size
+reference:
+
+| | Before | After |
+|---|---|---|
+| Correlation with reference area | **+0.10** | **+0.50** |
+| Our spread | 2.5× | 6.0× |
+| Reference spread | 8.0× | 8.0× |
+| Whole-property footprint | 107.2 m² (+53%) | **85.5 m² (+22%)** |
+
+**A correlation of +0.10 means the estimator was barely tracking room size.** It
+compressed an eightfold true spread into two and a half, returning roughly 13 m²
+whatever it was shown. Two rooms happened to look accurate; six did not, and the
+bathrooms were over by 4.3×.
+
+**The cause was choosing the wrong line as the far wall.** The estimator took the
+most *distant* fitted floor line, assuming the far wall is the furthest thing
+visible. With an open doorway it is not — the floor continues through the
+opening and the furthest line lies in the next room. That is why small rooms with
+open doors failed worst.
+
+**The fix is to take the longest run instead.** Length is a property of walls
+rather than of viewpoint: a wall base is metres long, while a fragment glimpsed
+through a doorway is short, clipped by the door frame. Same data, same fitting,
+correlation +0.10 → +0.50.
+
+**It cost the one passing gate, and that is the right trade.** The living room's
+short wall moved from −0.4% to +12.9%. But with a correlation of +0.10 that
+−0.4% was chance — it sits well inside our own ±30% interval — and an estimator
+that actually scales with the room is worth more than a coincidence that flatters
+one row. Accuracy counts below are now 0/6.
+
 ## Adjacency — which rooms touch
 
 Recovered without poses, ordering or wall assignment. Every connection in this

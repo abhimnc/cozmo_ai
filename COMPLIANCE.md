@@ -55,8 +55,8 @@ All 8 deliverables written; **7 complete, 1 partial**.
 | 2.20 | Ceiling height ≤1.5 cm | `fixloop/after/score_photo.txt` | −12.0%, a prior not an estimate | **NOT DONE** |
 | 2.21 | Repeatability within 1 cm / 0.5% | `benchmark/BENCHMARK_REPORT.md` | Table produced: **0 of 8**, and the report states which failure mode it is (unrepeatable, not repeatable-but-biased) | **NOT DONE** — measured and diagnosed |
 | 2.22 | Drift accountability + ablation | `out/*/plan.json` | `stitch.drift` states `method: none, applied: false` because no placement stage exists. **Not** "poses used as-is" — the stage is absent, and the field says so | **PARTIAL** |
-| 2.23 | Photo-tier whole-property stitch | `out/*/plan.svg` | Per-room photo folders → **one stitched plan**: 8 rooms placed, correct adjacency on 4 of 5 links, **no room overlaps (0.0 m²)**. Footprint **107.2 m² against ~70 m² actual, +53%** — fails the ±8% row | **PARTIAL** — three of four conditions met |
-| 2.24 | Photo ±8% / video ±3% wall lengths | `fixloop/after2/` | Photo median 26.2% with **1 of 6 dimensions passing**; video median 38.3%, 0 of 6 | **NOT DONE** — measured and reported |
+| 2.23 | Photo-tier whole-property stitch | `out/*/plan.svg` | Per-room photo folders → **one stitched plan**: 8 rooms placed, correct adjacency on 4 of 5 links, **no room overlaps (0.0 m²)**. Footprint **85.5 m² against ~70 m² actual, +22%** — fails the ±8% row | **PARTIAL** — three of four conditions met |
+| 2.24 | Photo ±8% / video ±3% wall lengths | `benchmark/BENCHMARK_REPORT.md` | Photo median 27.3%, video 38.3%, **0 of 6 passing**. A single passing dimension was traded for a fivefold gain in size correlation (+0.10 → +0.50) — the pass was chance under an estimator that barely tracked room size | **NOT DONE** — measured and reported |
 | 2.25 | Calibration scored at every tier | `benchmark/BENCHMARK_REPORT.md` | **6 of 6** intervals contain the truth at the photo tier, 4 of 6 at video. Intervals average ±100% of their value, so coverage reflects how little is known rather than good calibration — stated in the report | **DONE** |
 
 ## Part 3 — Head-to-head
