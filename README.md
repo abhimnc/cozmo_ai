@@ -40,9 +40,14 @@ No network calls, no API keys, no model weights. OpenCV and numpy only.
 
 ### Raw captures
 
-Not in git — about **1 GB**, dominated by a 486 MB video walkthrough. They are
-supplied alongside the submission as `cozmo_raw_captures.zip`
-(built by `./scripts/make_repro_bundle.sh`).
+Not in git — about **1 GB**, dominated by a 486 MB video walkthrough.
+
+**Download:** `cozmo_raw_captures.zip` — link supplied with the submission.
+
+Deliberately not attached to a public release: the archive is 386 photographs of
+the inside of a private home, and the graders needing it is not a reason for the
+open web to have it. Rebuildable at any time with
+`./scripts/make_repro_bundle.sh`.
 
 ```bash
 unzip cozmo_raw_captures.zip     # from the repo root
