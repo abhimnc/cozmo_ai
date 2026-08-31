@@ -282,10 +282,15 @@ described as partial.
 
 ## 8. What we would do next
 
-1. **A blur or motion gate on video frame selection.** The single clearest
-   finding of iteration 2, and the reason one tier regressed while the other
-   improved.
-2. **Opening detection**, which unlocks adjacency, which unlocks the stitch.
+1. **Identify which wall each measurement belongs to before combining.** Room
+   dimensions are a distance and an extent taken from whichever wall a view
+   happened to fit, so views of different walls get averaged together — the Hall's
+   two whole-wall views read 6.00 m and 2.48 m and their median is meaningless.
+   This is the same registration problem that blocks wall assignment and room
+   placement: one problem wearing three hats, and the highest-value thing to
+   solve.
+2. **A blur or motion gate on video frame selection**, the reason one tier
+   regressed while the other improved.
 3. **Per-room ceiling estimation** from the wall/ceiling boundary at a known
    floor distance, replacing a prior that is wrong by construction here.
 4. **Quantify the tape**, so errors become measured rather than observed.

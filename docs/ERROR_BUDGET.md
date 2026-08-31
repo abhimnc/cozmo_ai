@@ -294,6 +294,40 @@ seeing a corner of it. That needs the fitted line's endpoints checked against th
 image border to tell a wall that ends from a wall that leaves the frame — which
 is a modest change, and the first thing to try next.
 
+## Two-cluster wall lengths — tried and rejected
+
+**The observation is sound.** The Hall's two whole-wall views read 6.00 m and
+2.48 m against a true 7.08 × 2.10 m room. Those are not two noisy readings of one
+wall; they are measurements of *two different walls*, and taking their median
+averages a long wall with a short one. It is why the Hall's short wall is the
+worst number in the benchmark at +102%.
+
+**The remedy tested:** a rectangular room has exactly two distinct wall lengths,
+so pool every wall length seen across a room's views and split them at their
+largest gap, taking the two group medians as the room's dimensions.
+
+| | Current | Two-cluster |
+|---|---|---|
+| Size correlation | **+0.84** | +0.59 |
+| Footprint vs ~67 m² | **79.5** | 111.5 |
+| Hall dimensions | 5.12 × 4.24 | **6.47 × 2.89** (truth 7.08 × 2.10) |
+
+**It fixes the Hall and breaks everything else.** Hall errors go from −27.7% and
++102.4% to −8.6% and +37.8%. But most rooms yield only one or two whole-wall
+views, and "split at the largest gap" over two samples is not a clustering — the
+kitchen collapses to 3.83 × 0.14 m.
+
+**Rejected**, because it trades a large systematic gain for a fix to one room.
+Applying it only where enough whole-wall views exist was considered and not done:
+that is a conditional branch justified by eight rooms, which is fitting the
+pipeline to this property.
+
+**It does name the real problem.** Room dimensions are currently a distance and
+an extent measured from whichever wall a view happened to fit, so views of
+different walls are averaged together. The fix is to identify *which* wall each
+measurement belongs to before combining — the same registration problem that
+blocks wall assignment and room placement. It is one problem wearing three hats.
+
 ## Known capture-side issues
 
 - A capture saved with zero photos still writes a manifest and survives the
