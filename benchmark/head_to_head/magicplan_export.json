@@ -1,0 +1,19 @@
+{
+  "app": "magicplan",
+  "developer": "Sensopia",
+  "export": "PDF report, 8 pages, 'My New Project', created 31 August 2026",
+  "plan": "free tier",
+  "device": "iPhone 13 (iPhone14,5), iOS 26.3.1",
+  "project_totals": {"total_area_m2": 69.81, "living_area_m2": 53.78, "floors": 1, "rooms": 9},
+  "rooms": [
+    {"name": "Living Room", "width_m": 2.87, "length_m": 4.00, "ceiling_m": 2.49, "area_m2": 11.47, "perimeter_m": 13.73},
+    {"name": "Hallway",     "width_m": 8.35, "length_m": 4.09, "ceiling_m": 3.59, "area_m2": 20.24, "perimeter_m": 25.36},
+    {"name": "Kitchen",     "width_m": 1.71, "length_m": 2.47, "ceiling_m": 3.33, "area_m2": 4.24,  "perimeter_m": 8.37},
+    {"name": "Bedroom A",   "width_m": 4.00, "length_m": 2.67, "ceiling_m": 3.28, "area_m2": 10.68, "perimeter_m": 13.34},
+    {"name": "Bedroom B",   "width_m": 2.16, "length_m": 2.17, "ceiling_m": 2.65, "area_m2": 4.47,  "perimeter_m": 8.66},
+    {"name": "Bedroom C",   "width_m": 2.61, "length_m": 3.94, "ceiling_m": 1.75, "area_m2": 10.27, "perimeter_m": 13.09},
+    {"name": "Bathroom A",  "width_m": 2.35, "length_m": 1.38, "ceiling_m": 1.96, "area_m2": 3.24,  "perimeter_m": 7.46},
+    {"name": "Bathroom B",  "width_m": 2.52, "length_m": 2.25, "ceiling_m": 1.79, "area_m2": 2.52,  "perimeter_m": 9.42},
+    {"name": "Other",       "width_m": 2.19, "length_m": 1.14, "ceiling_m": 3.28, "area_m2": 2.50,  "perimeter_m": 6.67}
+  ]
+}
