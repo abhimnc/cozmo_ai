@@ -22,6 +22,36 @@ from ..bundle import CaptureBundle
 # clip inside a walk-in test's patience.
 FRAMES_PER_ROOM = 6
 
+# Sharpest-frame selection was tried and **rejected**, 31 Aug 2026.
+#
+# The video tier's wall detection fails on motion blur - smeared edges are
+# elongated and straight, so they pass a straightness test and get fitted as
+# walls. The obvious remedy is to take the sharpest frame in a window around each
+# wanted timestamp instead of the frame at that instant.
+#
+# Measured: it made the tier *worse*, median wall error 38.3% -> 50.3%. The
+# reason is that variance-of-Laplacian rewards **texture**, not geometric
+# usefulness. A crisp close-up of a patterned bedspread scores far higher than a
+# slightly soft view down a hallway, so selecting on sharpness systematically
+# picks frames full of clutter and short of room structure.
+#
+# A useful frame score would have to reward *long straight edges at room scale*,
+# not high-frequency content. That is a different metric and is not attempted
+# here. Kept as a comment because the negative result is worth more than the
+# code: the next person to have this idea should know it was measured.
+BLUR_CANDIDATES = 1
+BLUR_WINDOW_S = 0.0
+
+# Variance of the Laplacian, the standard sharpness proxy: a blurred image has
+# little high-frequency content, so its second derivative is flat. The absolute
+# value depends on scene texture, so this is used to rank candidates within a
+# window rather than as a global pass/fail - a genuinely featureless white wall
+# would fail any fixed threshold while being perfectly in focus.
+def _sharpness(frame) -> float:
+    import cv2 as _cv2
+    grey = _cv2.cvtColor(frame, _cv2.COLOR_BGR2GRAY)
+    return float(_cv2.Laplacian(grey, _cv2.CV_64F).var())
+
 # Skip this much after entering a room: the operator is usually still moving
 # through the doorway, and those frames see the door frame rather than the room.
 ENTRY_SKIP_S = 2.0
@@ -33,6 +63,8 @@ def frames_by_room(bundle: CaptureBundle, cache: Path | None = None) -> dict[str
     meta = bundle.read_json("video_meta.json")
     duration = float(meta.get("durationSeconds") or 0.0)
 
+    # Cache key includes the selection policy: changing how frames are chosen
+    # must not silently reuse frames chosen the old way.
     cache = cache or (bundle.root.parent / f".cache_{bundle.capture_id}_frames")
     cache.mkdir(parents=True, exist_ok=True)
 
@@ -60,6 +92,11 @@ def frames_by_room(bundle: CaptureBundle, cache: Path | None = None) -> dict[str
             for k, t in enumerate(wanted):
                 dst = cache / f"{slug}_{k:03d}.jpg"
                 if not dst.exists():
+                    # Take the sharpest frame in a window rather than the frame
+                    # at an arbitrary instant. Motion blur was measured as the
+                    # cause of the video tier's wall-detection failure: smeared
+                    # edges are elongated and straight, so they pass a
+                    # straightness test and are then fitted as walls.
                     cap.set(cv2.CAP_PROP_POS_FRAMES, int(t * fps))
                     ok, frame = cap.read()
                     if not ok:

@@ -26,8 +26,15 @@ class Measurement:
         # value is legitimate on thin input - it is the honest way to say "this
         # could be almost anything" - but it must clamp at zero rather than run
         # below it, or two negative bounds multiply into a large positive area.
-        if self.unit in ("m", "m2", "cm") and self.ci_low < 0:
-            object.__setattr__(self, "ci_low", 0.0)
+        if self.unit in ("m", "m2", "cm"):
+            if self.value < 0:
+                raise ValueError(
+                    f"negative {self.unit}: {self.value}. A negative length is a failed fit "
+                    "upstream, not a measurement - it should be rejected where it arises, "
+                    "not clamped here."
+                )
+            if self.ci_low < 0:
+                object.__setattr__(self, "ci_low", 0.0)
         if not (self.ci_low <= self.value <= self.ci_high):
             raise ValueError(
                 f"interval does not contain its value: {self.ci_low} <= {self.value} <= {self.ci_high}"

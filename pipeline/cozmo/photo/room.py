@@ -192,11 +192,16 @@ def analyse(image_path: str, focal_35mm: float | None = None) -> RoomView:
         # wants - not the range to the furthest visible speck.
         chosen = max(strong, key=lambda l: l.distance_m)
         lateral = np.sort(chosen.inliers[:, 0])
+        depth = float(chosen.distance_m)
+        span = float(lateral[int(0.95 * len(lateral))] - lateral[int(0.05 * len(lateral))])
+        if depth <= 0 or span <= 0:
+            # A non-positive extent is not a small room, it is a failed fit. Let
+            # it through and it reaches Measurement as a negative length, whose
+            # interval cannot contain its own value.
+            return RoomView(image_path, False, "degenerate extent from the fitted wall line")
         found = openings_mod.detect(seg, strong, R, focal, principal, CAMERA_HEIGHT_M)
         return RoomView(image_path, True, "", focal_full, tilt, chosen.inliers,
-                        float(chosen.distance_m),
-                        float(lateral[int(0.95 * len(lateral))] - lateral[int(0.05 * len(lateral))]),
-                        None, found)
+                        depth, span, None, found)
 
     boundary = _floor_boundary(image_path, seg, horizon_y)
     if len(boundary) < 12:
@@ -247,6 +252,11 @@ def analyse(image_path: str, focal_35mm: float | None = None) -> RoomView:
     lateral = np.sort(far_band[:, 0])
     lo = float(lateral[int(0.05 * len(lateral))])
     hi = float(lateral[int(0.95 * len(lateral))])
+
+    # The forward component can be negative: a ray can meet the floor plane
+    # behind the camera when the fit is poor, and 'behind' is not a room size.
+    if depth_far <= 0 or (hi - lo) <= 0:
+        return RoomView(image_path, False, "degenerate extent from the floor boundary")
 
     return RoomView(image_path, True, "", focal_full, tilt, pts,
                     depth_far, hi - lo, None)

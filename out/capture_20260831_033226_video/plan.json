@@ -14,8 +14,8 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "6e403de",
-    "run_at": "2026-08-31T04:47:08.890667+00:00",
+    "git_commit": "4aceb9a",
+    "run_at": "2026-08-31T05:35:34.852603+00:00",
     "command": "cozmo run benchmark/raw/capture_20260831_033226_video",
     "runtime_seconds": 7.0
   },
@@ -121,7 +121,30 @@
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "bedroom_1_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 0.649,
+            "ci_low": 0.2921,
+            "ci_high": 1.006,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.8975,
+            "ci_low": 0.4487,
+            "ci_high": 1.3462,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.75
+        }
+      ],
       "source_frames": 6
     },
     {
@@ -225,7 +248,74 @@
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "hall_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 0.5365,
+            "ci_low": 0.2414,
+            "ci_high": 0.8316,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.8808,
+            "ci_low": 0.4404,
+            "ci_high": 1.3212,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.25
+        },
+        {
+          "id": "hall_opening_2",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 0.7182,
+            "ci_low": 0.3232,
+            "ci_high": 1.1132,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.6102,
+            "ci_low": 0.3051,
+            "ci_high": 0.9152,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.25
+        },
+        {
+          "id": "hall_opening_3",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 1.6033,
+            "ci_low": 0.7215,
+            "ci_high": 2.485,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.6138,
+            "ci_low": 0.3069,
+            "ci_high": 0.9207,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.75
+        }
+      ],
       "source_frames": 7
     },
     {
@@ -329,7 +419,74 @@
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "bedroom_2_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 0.8945,
+            "ci_low": 0.4025,
+            "ci_high": 1.3865,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.9474,
+            "ci_low": 0.4737,
+            "ci_high": 1.4211,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.5
+        },
+        {
+          "id": "bedroom_2_opening_2",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 1.2397,
+            "ci_low": 0.5579,
+            "ci_high": 1.9215,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 1.0898,
+            "ci_low": 0.5449,
+            "ci_high": 1.6347,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.5
+        },
+        {
+          "id": "bedroom_2_opening_3",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 2.1741,
+            "ci_low": 0.9783,
+            "ci_high": 3.3699,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.9949,
+            "ci_low": 0.4975,
+            "ci_high": 1.4924,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.5
+        }
+      ],
       "source_frames": 6
     },
     {
@@ -433,7 +590,30 @@
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "kitchen_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 1.5019,
+            "ci_low": 0.6759,
+            "ci_high": 2.328,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.6222,
+            "ci_low": 0.3111,
+            "ci_high": 0.9333,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.25
+        }
+      ],
       "source_frames": 6
     },
     {
@@ -537,7 +717,52 @@
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "puja_room_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 0.8636,
+            "ci_low": 0.3886,
+            "ci_high": 1.3386,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.7272,
+            "ci_low": 0.3636,
+            "ci_high": 1.0908,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 1.0
+        },
+        {
+          "id": "puja_room_opening_2",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 2.3227,
+            "ci_low": 1.0452,
+            "ci_high": 3.6001,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 1.1125,
+            "ci_low": 0.5562,
+            "ci_high": 1.6687,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.75
+        }
+      ],
       "source_frames": 5
     },
     {
@@ -641,7 +866,52 @@
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "bedroom_3_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 0.5481,
+            "ci_low": 0.2467,
+            "ci_high": 0.8496,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.4713,
+            "ci_low": 0.2357,
+            "ci_high": 0.707,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.25
+        },
+        {
+          "id": "bedroom_3_opening_2",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 1.754,
+            "ci_low": 0.7893,
+            "ci_high": 2.7188,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 1.1253,
+            "ci_low": 0.5627,
+            "ci_high": 1.688,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 1.0
+        }
+      ],
       "source_frames": 6
     },
     {
@@ -849,7 +1119,52 @@
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "bathroom_2_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 0.8739,
+            "ci_low": 0.3932,
+            "ci_high": 1.3545,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 1.0296,
+            "ci_low": 0.5148,
+            "ci_high": 1.5444,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.75
+        },
+        {
+          "id": "bathroom_2_opening_2",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 2.2125,
+            "ci_low": 0.9956,
+            "ci_high": 3.4294,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.1867,
+            "ci_low": 0.0933,
+            "ci_high": 0.28,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.25
+        }
+      ],
       "source_frames": 3
     },
     {
@@ -992,7 +1307,8 @@
       "Room depth measured 11% and 23% low against tape ground truth on the two rooms that have it.",
       "Far-wall width measured 96% and 382% high on those same rooms; its interval is +/-100% and it should not be relied on.",
       "Ceiling height is a residential prior, not an estimate.",
-      "No opening detection, so no openings are reported and no adjacency is claimed.",
+      "Opening detection finds doors and archways only - a window has no floor contact for the method to use - and found 2 of 3 in the room with ground truth, with widths off by -14.8% and +52.7% against a 2 cm gate.",
+      "Openings are not assigned to a wall, so no adjacency is claimed.",
       "Ground-truth tape uncertainty is unquantified, so these errors are observed rather than measured."
     ]
   },

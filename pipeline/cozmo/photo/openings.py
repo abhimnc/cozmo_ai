@@ -129,8 +129,13 @@ def detect(seg: Segments, wall_lines: list[FloorLine], rotation: np.ndarray,
                 # Elevation above horizontal, times ground distance, plus camera height.
                 elev = -u[1] / max(np.linalg.norm(u[[0, 2]]), 1e-6)
                 tops.append(camera_height + elev * dist)
-            if tops:
-                height = float(min(tops))
+            # A jamb top below the horizon yields a negative elevation and so a
+            # negative height, which is not a short doorway - it is a jamb whose
+            # top was never actually seen, usually because the frame cut it off.
+            # Drop the height rather than report a negative one; the opening's
+            # width is still usable.
+            tops = [t for t in tops if t > 0]
+            height = float(min(tops)) if tops else None
 
             if any(abs(o.width_m - width) < 0.05 and abs(o.wall_distance_m - dist) < 0.3
                    for o in openings):

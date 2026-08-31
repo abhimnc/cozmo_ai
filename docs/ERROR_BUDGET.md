@@ -201,6 +201,36 @@ rows should be read as unverifiable rather than as failures: our −12.0% ceilin
 error is real in direction, but the key cannot resolve the gate it is being
 scored against.
 
+## Video tier: sharpest-frame selection — **tried and rejected**
+
+**Hypothesis.** The video tier regressed when wall detection moved to floor-plane
+line fitting (38.3% median wall error against the photo tier's 26.2%). The
+diagnosis was motion blur: a smeared edge in a walking capture is elongated and
+straight, so it passes a straightness test and is fitted as a wall. The remedy
+would be to select the sharpest frame in a window around each wanted timestamp
+rather than the frame at that instant.
+
+**Result: worse.** Median wall error **38.3% → 50.3%**.
+
+**Why.** Variance-of-Laplacian, the standard sharpness proxy, measures
+high-frequency content — which is **texture**, not geometric usefulness. A crisp
+close-up of a patterned bedspread scores far above a slightly soft view down a
+hallway. Selecting on it therefore prefers frames full of clutter and short of
+room structure, which is the opposite of what the geometry stage needs.
+
+**Reverted**, with the reasoning left in `pipeline/cozmo/video/frames.py` beside
+the constant it would have used. A frame score that would actually help must
+reward *long straight edges at room scale* rather than high-frequency detail —
+a different metric, not a threshold on this one.
+
+**A real bug was found while testing it**, and kept: opening height could come
+out **negative** when a jamb's top fell below the horizon, which is not a short
+doorway but a jamb whose top was never in frame. It reached `Measurement` as a
+negative length, whose interval cannot contain its own value, and crashed the
+run. Negative physical quantities now raise at construction with a message
+saying they must be rejected where they arise rather than clamped, and the
+opening detector drops an unmeasurable height while keeping the usable width.
+
 ## Known capture-side issues
 
 - A capture saved with zero photos still writes a manifest and survives the
