@@ -4,16 +4,106 @@
   "export": "PDF report, 8 pages, 'My New Project', created 31 August 2026",
   "plan": "free tier",
   "device": "iPhone 13 (iPhone14,5), iOS 26.3.1",
-  "project_totals": {"total_area_m2": 69.81, "living_area_m2": 53.78, "floors": 1, "rooms": 9},
+  "project_totals": {
+    "total_area_m2": 69.81,
+    "living_area_m2": 53.78,
+    "floors": 1,
+    "rooms": 9
+  },
   "rooms": [
-    {"name": "Living Room", "width_m": 2.87, "length_m": 4.00, "ceiling_m": 2.49, "area_m2": 11.47, "perimeter_m": 13.73},
-    {"name": "Hallway",     "width_m": 8.35, "length_m": 4.09, "ceiling_m": 3.59, "area_m2": 20.24, "perimeter_m": 25.36},
-    {"name": "Kitchen",     "width_m": 1.71, "length_m": 2.47, "ceiling_m": 3.33, "area_m2": 4.24,  "perimeter_m": 8.37},
-    {"name": "Bedroom A",   "width_m": 4.00, "length_m": 2.67, "ceiling_m": 3.28, "area_m2": 10.68, "perimeter_m": 13.34},
-    {"name": "Bedroom B",   "width_m": 2.16, "length_m": 2.17, "ceiling_m": 2.65, "area_m2": 4.47,  "perimeter_m": 8.66},
-    {"name": "Bedroom C",   "width_m": 2.61, "length_m": 3.94, "ceiling_m": 1.75, "area_m2": 10.27, "perimeter_m": 13.09},
-    {"name": "Bathroom A",  "width_m": 2.35, "length_m": 1.38, "ceiling_m": 1.96, "area_m2": 3.24,  "perimeter_m": 7.46},
-    {"name": "Bathroom B",  "width_m": 2.52, "length_m": 2.25, "ceiling_m": 1.79, "area_m2": 2.52,  "perimeter_m": 9.42},
-    {"name": "Other",       "width_m": 2.19, "length_m": 1.14, "ceiling_m": 3.28, "area_m2": 2.50,  "perimeter_m": 6.67}
-  ]
+    {
+      "name": "Living Room",
+      "width_m": 2.87,
+      "length_m": 4.0,
+      "ceiling_m": 2.49,
+      "area_m2": 11.47,
+      "perimeter_m": 13.73
+    },
+    {
+      "name": "Hallway",
+      "width_m": 8.35,
+      "length_m": 4.09,
+      "ceiling_m": 3.59,
+      "area_m2": 20.24,
+      "perimeter_m": 25.36
+    },
+    {
+      "name": "Kitchen",
+      "width_m": 1.71,
+      "length_m": 2.47,
+      "ceiling_m": 3.33,
+      "area_m2": 4.24,
+      "perimeter_m": 8.37
+    },
+    {
+      "name": "Bedroom A",
+      "width_m": 4.0,
+      "length_m": 2.67,
+      "ceiling_m": 3.28,
+      "area_m2": 10.68,
+      "perimeter_m": 13.34
+    },
+    {
+      "name": "Bedroom B",
+      "width_m": 2.16,
+      "length_m": 2.17,
+      "ceiling_m": 2.65,
+      "area_m2": 4.47,
+      "perimeter_m": 8.66
+    },
+    {
+      "name": "Bedroom C",
+      "width_m": 2.61,
+      "length_m": 3.94,
+      "ceiling_m": 1.75,
+      "area_m2": 10.27,
+      "perimeter_m": 13.09
+    },
+    {
+      "name": "Bathroom A",
+      "width_m": 2.35,
+      "length_m": 1.38,
+      "ceiling_m": 1.96,
+      "area_m2": 3.24,
+      "perimeter_m": 7.46
+    },
+    {
+      "name": "Bathroom B",
+      "width_m": 2.52,
+      "length_m": 2.25,
+      "ceiling_m": 1.79,
+      "area_m2": 2.52,
+      "perimeter_m": 9.42
+    },
+    {
+      "name": "Other",
+      "width_m": 2.19,
+      "length_m": 1.14,
+      "ceiling_m": 3.28,
+      "area_m2": 2.5,
+      "perimeter_m": 6.67
+    }
+  ],
+  "rescan": {
+    "note": "Second magicplan scan of the Living room and one bedroom, same app, same device, same day. Export: magicplan_rescan.pdf",
+    "rooms": [
+      {
+        "name": "Living Room",
+        "width_m": 4.61,
+        "length_m": 3.24,
+        "ceiling_m": 3.13,
+        "area_m2": 13.96,
+        "perimeter_m": 15.69
+      },
+      {
+        "name": "Bedroom",
+        "width_m": 2.3,
+        "length_m": 2.32,
+        "ceiling_m": 3.09,
+        "area_m2": 4.97,
+        "perimeter_m": 9.24
+      }
+    ],
+    "bedroom_openings_note": "The rescan omits door and window. Per the operator, the first scan's openings for that bedroom stand: a window on the top wall and a door on the lower-left, read from the plan as roughly 1.02 m and 0.61 m respectively. Recorded as approximate - they are scaled off a drawing, not stated in the report's text."
+  }
 }

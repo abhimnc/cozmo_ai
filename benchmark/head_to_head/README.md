@@ -121,6 +121,41 @@ acceptable because it is never checked against them. magicplan at least
 13.8% against an ±8% photo-tier gate, and its ceilings miss a 1.5 cm gate by up
 to 1.5 m. The gates are demanding of the whole field, not just of us.
 
+## The incumbent is also unrepeatable
+
+magicplan was run twice on the Living room, same app, same device, same day
+(`magicplan_rescan.pdf`). The two scans disagree substantially, and the second is
+much better:
+
+| Quantity | Tape truth | Scan 1 | err | Scan 2 | err | Scan-to-scan |
+|---|---|---|---|---|---|---|
+| long wall | 5.017 m | 4.00 | −20.3% | **4.61** | **−8.1%** | 0.61 m |
+| short wall | 3.330 m | 2.87 | −13.8% | **3.24** | **−2.7%** | 0.37 m |
+| ceiling | 3.294 m | 2.49 | −24.4% | **3.13** | **−5.0%** | 0.64 m |
+| area | — | 11.47 m² | — | 13.96 m² | — | 2.49 m² |
+
+The bedroom moved too: ceiling 2.65 → 3.09 m, area 4.47 → 4.97 m².
+
+**Three things follow.**
+
+**magicplan fails the repeatability gate as well.** The gate is 1 cm or 0.5% per
+wall; its own scan-to-scan spread is 37–64 cm on one room. Our system is far
+worse — 0 of 8, worst 2.69 m — but "same room in, same plan out" is not something
+the incumbent delivers either. That is worth knowing before treating any single
+scan of it as truth.
+
+**Its best is much better than its first scan suggested.** Scan 2 lands within
+2.7% and 8.1% on the walls and 5.0% on the ceiling. On a like-for-like best-scan
+basis magicplan would beat us on every dimension, and the comparison table above
+— which uses scan 1, the scan taken alongside the rest of the property — flatters
+us. Stated because it does.
+
+**It also revises the ceiling correction above.** Scan 1 read the Living room at
+2.49 m and this bedroom at 2.65 m, and both were called wrong. Scan 2 reads them
+at 3.13 m and 3.09 m, close to the 3.294 m tape figure. So those two were scan
+error rather than a systematic ceiling problem, and the bedroom is **not**
+genuinely low the way the bathrooms and bedroom 3 are.
+
 ## Deviations recorded
 
 - Specified at the **LiDAR tier**; run at the photo tier because no LiDAR-capable
