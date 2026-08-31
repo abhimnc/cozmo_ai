@@ -34,11 +34,21 @@ rows stand. See `docs/ERROR_BUDGET.md`.
 | hall | short wall | 2.095 | 3.818 | +82.3% | yes | FAIL |
 | hall | ceiling | 3.294 | 2.900 | −12.0% | yes | FAIL |
 
-**Accuracy 1/6. Calibration 5/6.** Median wall error **26.2%**.
+**Accuracy 1/6. Calibration 6/6.** Median wall error **26.2%**.
 
 The living room's short wall at −0.4% is the project's only passing dimension.
 The Hall fails worst, and it is the room the rectangle model fits least — stepped
 wall, 1.75 m recess — so the failure is where the model is least applicable.
+
+**Calibration reached 6/6, and the number should not be celebrated.** Intervals
+are now a **predictive** spread rather than a standard error of the mean, which is
+the statistically correct choice — views of a non-rectangular room measure
+different walls, so they are not repeated readings of one quantity and dividing
+by √n made the interval shrink as disagreement grew. But the resulting intervals
+have a median half-width of **103% of their own value**. "This wall is 4.58 m,
+somewhere between 0.15 m and 9.01 m" is honest and very nearly useless. Full
+coverage here is a statement about how little the pipeline knows, not about how
+well it is calibrated.
 
 ### Video tier — `capture_20260831_033226_video`, 339 s, 14 room markers
 
@@ -49,7 +59,10 @@ wall, 1.75 m recess — so the failure is where the model is least applicable.
 | living_room | short wall | 3.330 | 2.529 | −24.1% | FAIL |
 | living_room | long wall | 5.017 | 2.382 | −52.5% | FAIL |
 
-**Accuracy 0/6. Calibration 4/6.** Median wall error **38.3%**.
+**Accuracy 0/6. Calibration 4/6.** Median wall error **38.3%**. Two long-wall
+estimates miss their intervals even at ±100% width, because they are low by 81%
+and 53% — the estimate is wrong by more than an interval spanning zero to double
+can absorb.
 
 **This tier regressed.** Before the second fix it was 27.2% and 5/6 calibration —
 better than the photo tier, as the tier ladder predicts. The floor-plane wall
@@ -122,9 +135,11 @@ One dimension passes a gate: the living room's short wall, −0.4%. Nothing else
 does.
 
 What works: all three tiers run end to end in seconds and emit schema-valid
-output, and intervals cover the truth 5 times in 6 at the photo tier — so the
+output, and intervals cover the truth 6 times in 6 at the photo tier — so the
 pipeline is wrong, but not *confidently* wrong, which is the distinction the
-brief scores. Two fixes shipped, both with before/after runs: the first moved the
+brief scores. That said, intervals averaging ±100% buy coverage at the price of
+saying almost nothing, and the report treats that as a limitation rather than a
+result. Two fixes shipped, both with before/after runs: the first moved the
 photo tier 41% and the video tier 70%; the second moved the photo tier a further
 21% and produced the first passing dimension, at the cost of a video-tier
 regression that is reported rather than reverted.

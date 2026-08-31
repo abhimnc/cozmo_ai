@@ -5,7 +5,7 @@ Handheld iPhone capture in, dimensioned room geometry out. Built 30–31 August
 
 **Summary in one line:** the pipeline runs end to end on **all three tiers** in
 under 11 seconds, produces schema-valid output whose intervals cover the truth
-5 times in 6, and passes **one** accuracy gate of six. Several contracted stages
+6 times in 6 at the photo tier, and passes **one** accuracy gate of six. Several contracted stages
 — opening detection, room placement, damage analysis — are absent, not merely
 inaccurate.
 
@@ -161,15 +161,19 @@ error, not from what would look good: room depth ±30% because it measured 11%
 and 23% low; far-wall width ±100% with an explicit warning because it measured
 96% and 382% high.
 
-**Coverage: 5 of 6 intervals contain the truth, at both tiers, before and after
-the fix.** That mattered more than the accuracy gain — a fix that bought accuracy
-by narrowing intervals until they stopped covering the truth would be worse than
-no fix.
+**Coverage: 6 of 6 at the photo tier, 4 of 6 at video.** Intervals come from a
+**predictive** spread (`1.96·sd`), not a standard error of the mean
+(`1.96·sd/√n`). The distinction matters: views of a non-rectangular room measure
+*different walls*, so they are not repeated readings of one quantity, and
+dividing by √n made the interval shrink as disagreement accumulated — treating
+contradiction as evidence of certainty. The Hall, stepped with a 1.75 m recess,
+was where that failed first.
 
-One interval fails to cover: the Hall's long wall. It is the room whose shape the
-rectangle model fits worst — stepped wall, 1.75 m recess — and the honest reading
-is that a rectangle model should widen its interval for non-convex rooms, which
-it does not.
+**The resulting intervals are ±100% of their own value.** Full coverage is
+therefore a statement about how little the pipeline knows, not about how well it
+is calibrated. An interval of "4.58 m, between 0.15 and 9.01" is honest and
+nearly useless, and narrowing it requires a better estimator, not better
+statistics.
 
 **Known calibration weakness.** Ceiling height is a single residential prior
 applied to every room. This property has two bathrooms with storage boxed above

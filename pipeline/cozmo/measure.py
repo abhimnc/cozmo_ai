@@ -54,7 +54,21 @@ class Measurement:
         if n >= 2:
             mean = sum(samples) / n
             sd = math.sqrt(sum((s - mean) ** 2 for s in samples) / (n - 1))
-            half = max(1.96 * sd / math.sqrt(n), value * floor_rel)
+            # Predictive spread, not the standard error of the mean.
+            #
+            # `1.96 * sd / sqrt(n)` answers "where is the average of these
+            # readings?" and assumes every view measured the same quantity. In a
+            # room the rectangle model does not fit - the Hall is stepped with a
+            # 1.75 m recess - different views see different walls, so they are not
+            # repeated measurements of one number and averaging them has no
+            # target. Dividing by sqrt(n) then makes the interval *shrink* as
+            # disagreement accumulates, which is backwards: more views
+            # contradicting each other is evidence of less certainty, not more.
+            #
+            # `1.96 * sd` answers the question actually being asked - "what would
+            # another view of this room say?" - and widens exactly where the
+            # model fits worst.
+            half = max(1.96 * sd, value * floor_rel)
         else:
             half = value * max(floor_rel, 0.25)
             notes = (notes + " Single observation; interval is the method's prior, not measured.").strip()

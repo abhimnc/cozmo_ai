@@ -14,8 +14,8 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "d42eebb",
-    "run_at": "2026-08-31T04:38:14.190699+00:00",
+    "git_commit": "6e403de",
+    "run_at": "2026-08-31T04:47:08.890667+00:00",
     "command": "cozmo run benchmark/raw/capture_20260831_033226_video",
     "runtime_seconds": 7.0
   },
@@ -28,8 +28,8 @@
           "id": "A",
           "length": {
             "value": 1.7343,
-            "ci_low": 1.214,
-            "ci_high": 2.2546,
+            "ci_low": 0.5975,
+            "ci_high": 2.8712,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -68,8 +68,8 @@
           "id": "C",
           "length": {
             "value": 1.7343,
-            "ci_low": 1.214,
-            "ci_high": 2.2546,
+            "ci_low": 0.5975,
+            "ci_high": 2.8712,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -116,7 +116,7 @@
       "floor_area": {
         "value": 2.9516,
         "ci_low": 0.0,
-        "ci_high": 7.674,
+        "ci_high": 9.7727,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -132,8 +132,8 @@
           "id": "A",
           "length": {
             "value": 1.3561,
-            "ci_low": 0.8674,
-            "ci_high": 1.8447,
+            "ci_low": 0.0633,
+            "ci_high": 2.6489,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 7,
@@ -153,7 +153,7 @@
           "length": {
             "value": 1.7448,
             "ci_low": 0.0,
-            "ci_high": 3.4896,
+            "ci_high": 4.186,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 7,
@@ -172,8 +172,8 @@
           "id": "C",
           "length": {
             "value": 1.3561,
-            "ci_low": 0.8674,
-            "ci_high": 1.8447,
+            "ci_low": 0.0633,
+            "ci_high": 2.6489,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 7,
@@ -193,7 +193,7 @@
           "length": {
             "value": 1.7448,
             "ci_low": 0.0,
-            "ci_high": 3.4896,
+            "ci_high": 4.186,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 7,
@@ -220,7 +220,7 @@
       "floor_area": {
         "value": 2.3661,
         "ci_low": 0.0,
-        "ci_high": 6.4374,
+        "ci_high": 11.0882,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -236,8 +236,8 @@
           "id": "A",
           "length": {
             "value": 3.5226,
-            "ci_low": 2.4659,
-            "ci_high": 4.5794,
+            "ci_low": 1.5839,
+            "ci_high": 5.4614,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -276,8 +276,8 @@
           "id": "C",
           "length": {
             "value": 3.5226,
-            "ci_low": 2.4659,
-            "ci_high": 4.5794,
+            "ci_low": 1.5839,
+            "ci_high": 5.4614,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -324,7 +324,7 @@
       "floor_area": {
         "value": 9.0712,
         "ci_low": 0.0,
-        "ci_high": 23.5852,
+        "ci_high": 28.1276,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -340,8 +340,8 @@
           "id": "A",
           "length": {
             "value": 2.3747,
-            "ci_low": 1.6623,
-            "ci_high": 3.0871,
+            "ci_low": 0.9985,
+            "ci_high": 3.7509,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -380,8 +380,8 @@
           "id": "C",
           "length": {
             "value": 2.3747,
-            "ci_low": 1.6623,
-            "ci_high": 3.0871,
+            "ci_low": 0.9985,
+            "ci_high": 3.7509,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -428,7 +428,7 @@
       "floor_area": {
         "value": 5.9348,
         "ci_low": 0.0,
-        "ci_high": 15.4306,
+        "ci_high": 18.7485,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -444,8 +444,8 @@
           "id": "A",
           "length": {
             "value": 1.6115,
-            "ci_low": 1.128,
-            "ci_high": 2.0949,
+            "ci_low": 0.7256,
+            "ci_high": 2.4973,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 5,
@@ -484,8 +484,8 @@
           "id": "C",
           "length": {
             "value": 1.6115,
-            "ci_low": 1.128,
-            "ci_high": 2.0949,
+            "ci_low": 0.7256,
+            "ci_high": 2.4973,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 5,
@@ -532,7 +532,7 @@
       "floor_area": {
         "value": 1.9865,
         "ci_low": 0.0,
-        "ci_high": 5.165,
+        "ci_high": 6.1571,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -549,7 +549,7 @@
           "length": {
             "value": 0.8255,
             "ci_low": 0.0,
-            "ci_high": 2.0289,
+            "ci_high": 3.7732,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -589,7 +589,7 @@
           "length": {
             "value": 0.8255,
             "ci_low": 0.0,
-            "ci_high": 2.0289,
+            "ci_high": 3.7732,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -636,7 +636,7 @@
       "floor_area": {
         "value": 1.2252,
         "ci_low": 0.0,
-        "ci_high": 6.0225,
+        "ci_high": 11.2002,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -652,8 +652,8 @@
           "id": "A",
           "length": {
             "value": 1.7594,
-            "ci_low": 0.9978,
-            "ci_high": 2.5211,
+            "ci_low": 0.0,
+            "ci_high": 3.6251,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -673,7 +673,7 @@
           "length": {
             "value": 1.6642,
             "ci_low": 0.0,
-            "ci_high": 3.3285,
+            "ci_high": 5.4411,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 6,
@@ -692,8 +692,8 @@
           "id": "C",
           "length": {
             "value": 1.7594,
-            "ci_low": 0.9978,
-            "ci_high": 2.5211,
+            "ci_low": 0.0,
+            "ci_high": 3.6251,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -713,7 +713,7 @@
           "length": {
             "value": 1.6642,
             "ci_low": 0.0,
-            "ci_high": 3.3285,
+            "ci_high": 5.4411,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 6,
@@ -740,7 +740,7 @@
       "floor_area": {
         "value": 2.9281,
         "ci_low": 0.0,
-        "ci_high": 8.3914,
+        "ci_high": 19.7245,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -756,8 +756,8 @@
           "id": "A",
           "length": {
             "value": 1.2652,
-            "ci_low": 0.1841,
-            "ci_high": 2.3463,
+            "ci_low": 0.0,
+            "ci_high": 3.1377,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -796,8 +796,8 @@
           "id": "C",
           "length": {
             "value": 1.2652,
-            "ci_low": 0.1841,
-            "ci_high": 2.3463,
+            "ci_low": 0.0,
+            "ci_high": 3.1377,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -844,7 +844,7 @@
       "floor_area": {
         "value": 2.6977,
         "ci_low": 0.0,
-        "ci_high": 10.0057,
+        "ci_high": 13.3806,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -860,8 +860,8 @@
           "id": "A",
           "length": {
             "value": 2.5291,
-            "ci_low": 0.9489,
-            "ci_high": 4.1094,
+            "ci_low": 0.0,
+            "ci_high": 6.4,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -881,7 +881,7 @@
           "length": {
             "value": 2.3822,
             "ci_low": 0.0,
-            "ci_high": 4.7644,
+            "ci_high": 4.8008,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 6,
@@ -900,8 +900,8 @@
           "id": "C",
           "length": {
             "value": 2.5291,
-            "ci_low": 0.9489,
-            "ci_high": 4.1094,
+            "ci_low": 0.0,
+            "ci_high": 6.4,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
@@ -921,7 +921,7 @@
           "length": {
             "value": 2.3822,
             "ci_low": 0.0,
-            "ci_high": 4.7644,
+            "ci_high": 4.8008,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 6,
@@ -948,7 +948,7 @@
       "floor_area": {
         "value": 6.0249,
         "ci_low": 0.0,
-        "ci_high": 19.5789,
+        "ci_high": 30.7247,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -962,7 +962,7 @@
     "footprint_area": {
       "value": 35.186,
       "ci_low": 0.0,
-      "ci_high": 102.291,
+      "ci_high": 148.924,
       "unit": "m2",
       "method": "sum_of_room_areas",
       "notes": "Sum of per-room areas, not a stitched footprint. No room placement has been solved."

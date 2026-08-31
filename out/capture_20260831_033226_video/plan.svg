@@ -1,41 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1744" height="342" viewBox="0 0 1744 342" font-family="ui-sans-serif,system-ui,sans-serif">
-<rect width="1744" height="342" fill="#fbfaf8"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1864" height="418" viewBox="0 0 1864 418" font-family="ui-sans-serif,system-ui,sans-serif">
+<rect width="1864" height="418" fill="#fbfaf8"/>
 <text x="40" y="26" font-size="15" font-weight="600" fill="#3d3a34">capture_20260831_033226_video &#183; video tier</text>
 <text x="40" y="44" font-size="11" fill="#8a8377">Rooms drawn at estimated size. Shaded band is the confidence interval. Layout is arbitrary: no room placement has been solved.</text>
-<rect x="40.0" y="70.0" width="143.0" height="94.7" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="40.0" y="70.0" width="143.0" height="120.6" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
 <rect x="40.0" y="70.0" width="71.5" height="72.8" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
 <text x="40.0" y="158.8" font-size="12" fill="#3d3a34">Bedroom 1</text>
 <text x="40.0" y="172.8" font-size="10" fill="#8a8377">1.73 &#215; 1.70 m</text>
-<rect x="208.2" y="70.0" width="146.6" height="77.5" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="208.2" y="70.0" width="175.8" height="111.3" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
 <rect x="208.2" y="70.0" width="73.3" height="57.0" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
 <text x="208.2" y="143.0" font-size="12" fill="#3d3a34">Hall</text>
 <text x="208.2" y="157.0" font-size="10" fill="#8a8377">1.36 &#215; 1.74 m</text>
-<rect x="379.9" y="70.0" width="216.3" height="192.3" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
-<rect x="379.9" y="70.0" width="108.2" height="147.9" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
-<text x="379.9" y="233.9" font-size="12" fill="#3d3a34">Bedroom 2</text>
-<text x="379.9" y="247.9" font-size="10" fill="#8a8377">3.52 &#215; 2.58 m</text>
-<rect x="621.4" y="70.0" width="209.9" height="129.7" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
-<rect x="621.4" y="70.0" width="105.0" height="99.7" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
-<text x="621.4" y="185.7" font-size="12" fill="#3d3a34">Kitchen</text>
-<text x="621.4" y="199.7" font-size="10" fill="#8a8377">2.37 &#215; 2.50 m</text>
-<rect x="856.6" y="70.0" width="103.6" height="88.0" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
-<rect x="856.6" y="70.0" width="51.8" height="67.7" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
-<text x="856.6" y="153.7" font-size="12" fill="#3d3a34">Puja room</text>
-<text x="856.6" y="167.7" font-size="10" fill="#8a8377">1.61 &#215; 1.23 m</text>
-<rect x="985.3" y="70.0" width="124.7" height="85.2" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
-<rect x="985.3" y="70.0" width="62.3" height="34.7" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
-<text x="985.3" y="120.7" font-size="12" fill="#3d3a34">Bedroom 3</text>
-<text x="985.3" y="134.7" font-size="10" fill="#8a8377">0.83 &#215; 1.48 m</text>
-<rect x="1135.2" y="70.0" width="139.8" height="105.9" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
-<rect x="1135.2" y="70.0" width="69.9" height="73.9" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
-<text x="1135.2" y="159.9" font-size="12" fill="#3d3a34">Bathroom 1</text>
-<text x="1135.2" y="173.9" font-size="10" fill="#8a8377">1.76 &#215; 1.66 m</text>
-<rect x="1300.2" y="70.0" width="179.1" height="98.5" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
-<rect x="1300.2" y="70.0" width="89.6" height="53.1" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
-<text x="1300.2" y="139.1" font-size="12" fill="#3d3a34">Bathroom 2</text>
-<text x="1300.2" y="153.1" font-size="10" fill="#8a8377">1.27 &#215; 2.13 m</text>
-<rect x="1504.5" y="70.0" width="200.1" height="172.6" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
-<rect x="1504.5" y="70.0" width="100.1" height="106.2" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
-<text x="1504.5" y="192.2" font-size="12" fill="#3d3a34">Living room</text>
-<text x="1504.5" y="206.2" font-size="10" fill="#8a8377">2.53 &#215; 2.38 m</text>
+<rect x="409.2" y="70.0" width="216.3" height="229.4" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="409.2" y="70.0" width="108.2" height="147.9" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="409.2" y="233.9" font-size="12" fill="#3d3a34">Bedroom 2</text>
+<text x="409.2" y="247.9" font-size="10" fill="#8a8377">3.52 &#215; 2.58 m</text>
+<rect x="650.7" y="70.0" width="209.9" height="157.5" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="650.7" y="70.0" width="105.0" height="99.7" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="650.7" y="185.7" font-size="12" fill="#3d3a34">Kitchen</text>
+<text x="650.7" y="199.7" font-size="10" fill="#8a8377">2.37 &#215; 2.50 m</text>
+<rect x="885.8" y="70.0" width="103.6" height="104.9" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="885.8" y="70.0" width="51.8" height="67.7" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="885.8" y="153.7" font-size="12" fill="#3d3a34">Puja room</text>
+<text x="885.8" y="167.7" font-size="10" fill="#8a8377">1.61 &#215; 1.23 m</text>
+<rect x="1014.6" y="70.0" width="124.7" height="158.5" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="1014.6" y="70.0" width="62.3" height="34.7" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="1014.6" y="120.7" font-size="12" fill="#3d3a34">Bedroom 3</text>
+<text x="1014.6" y="134.7" font-size="10" fill="#8a8377">0.83 &#215; 1.48 m</text>
+<rect x="1164.4" y="70.0" width="228.5" height="152.3" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="1164.4" y="70.0" width="69.9" height="73.9" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="1164.4" y="159.9" font-size="12" fill="#3d3a34">Bathroom 1</text>
+<text x="1164.4" y="173.9" font-size="10" fill="#8a8377">1.76 &#215; 1.66 m</text>
+<rect x="1418.2" y="70.0" width="179.1" height="131.8" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="1418.2" y="70.0" width="89.6" height="53.1" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="1418.2" y="139.1" font-size="12" fill="#3d3a34">Bathroom 2</text>
+<text x="1418.2" y="153.1" font-size="10" fill="#8a8377">1.27 &#215; 2.13 m</text>
+<rect x="1622.5" y="70.0" width="201.6" height="268.8" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="1622.5" y="70.0" width="100.1" height="106.2" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="1622.5" y="192.2" font-size="12" fill="#3d3a34">Living room</text>
+<text x="1622.5" y="206.2" font-size="10" fill="#8a8377">2.53 &#215; 2.38 m</text>
 </svg>
