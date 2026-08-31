@@ -4,7 +4,7 @@ Requirement → file path → artifact → status. Honest statuses only: **DONE*
 **PARTIAL**, **NOT DONE**. A requirement with no artifact is marked NOT DONE
 rather than described as in progress.
 
-Summary: **11 done, 8 partial, 12 not done** of 31 requirements.
+Summary: **12 done, 7 partial, 12 not done** of 31 requirements.
 
 ## Part 1 — Capture route and tiers
 
@@ -63,7 +63,7 @@ Summary: **11 done, 8 partial, 12 not done** of 31 requirements.
 | # | Requirement | Path | Artifact | Status |
 |---|---|---|---|---|
 | 3.1 | Compare on 2 rooms vs a consumer app | `benchmark/head_to_head/` | magicplan free tier, Living room + Hall | **DONE** |
-| 3.2 | Name app and version, submit export | `benchmark/head_to_head/` | magicplan (Sensopia), 8-page PDF; Polycam 6.0.21 attempt also recorded | **PARTIAL** — PDF pending transfer |
+| 3.2 | Name app and version, submit export | `benchmark/head_to_head/magicplan_export.pdf` | magicplan (Sensopia) 8-page PDF export committed; Polycam 6.0.21 attempt also recorded | **DONE** |
 | 3.3 | Beat or tie on ≥70% of shared dimensions | `benchmark/head_to_head/README.md` | **43% (3 of 7). Failed** | **NOT DONE** — measured and reported |
 
 ## Part 4 — Fix loop

@@ -47,7 +47,7 @@ substantive result about the incumbent, not an excuse.
 |---|---|
 | App | **magicplan** (Sensopia) |
 | Plan | free tier |
-| Export | 8-page PDF report, "My New Project", 31 August 2026 |
+| Export | 8-page PDF report, `magicplan_export.pdf` in this directory |
 | Device | iPhone 13 (iPhone14,5), iOS 26.3.1 |
 | Captured | 9 rooms, total area 69.81 m² |
 
