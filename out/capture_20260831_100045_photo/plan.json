@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "capture": {
+    "capture_id": "capture_20260831_100045_photo",
+    "tier": "photo",
+    "sensor_budget": [
+      "manifest.json",
+      "rooms.json",
+      "photos/**"
+    ],
+    "device_model": "iPhone 13",
+    "captured_at": "2026-08-31T04:30:46Z"
+  },
+  "pipeline": {
+    "version": "0.1.0",
+    "git_commit": "b816678",
+    "run_at": "2026-08-31T04:33:44.147671+00:00",
+    "command": "cozmo run benchmark/raw/capture_20260831_100045_photo",
+    "runtime_seconds": 1.3
+  },
+  "rooms": [
+    {
+      "id": "puja_room",
+      "name": "Puja room",
+      "walls": [
+        {
+          "id": "A",
+          "length": {
+            "value": 3.0731,
+            "ci_low": 2.1511,
+            "ci_high": 3.995,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 6,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "B",
+          "length": {
+            "value": 3.7236,
+            "ci_low": 0.0,
+            "ci_high": 7.4473,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 6,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "C",
+          "length": {
+            "value": 3.0731,
+            "ci_low": 2.1511,
+            "ci_high": 3.995,
+            "unit": "m",
+            "method": "floor_backprojection_camera_height_prior",
+            "n_observations": 6,
+            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        },
+        {
+          "id": "D",
+          "length": {
+            "value": 3.7236,
+            "ci_low": 0.0,
+            "ci_high": 7.4473,
+            "unit": "m",
+            "method": "far_wall_lateral_extent",
+            "n_observations": 6,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+          },
+          "height": {
+            "value": 2.9,
+            "ci_low": 2.175,
+            "ci_high": 3.625,
+            "unit": "m",
+            "method": "residential_prior_not_estimated",
+            "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+          }
+        }
+      ],
+      "ceiling_height": {
+        "value": 2.9,
+        "ci_low": 2.175,
+        "ci_high": 3.625,
+        "unit": "m",
+        "method": "residential_prior_not_estimated",
+        "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
+      },
+      "floor_area": {
+        "value": 11.443,
+        "ci_low": 0.0,
+        "ci_high": 29.7519,
+        "unit": "m2",
+        "method": "depth_times_width",
+        "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
+      },
+      "openings": [],
+      "source_frames": 6
+    }
+  ],
+  "stitch": {
+    "adjacency": [],
+    "footprint_area": {
+      "value": 11.443,
+      "ci_low": 0.0,
+      "ci_high": 29.752,
+      "unit": "m2",
+      "method": "sum_of_room_areas",
+      "notes": "Sum of per-room areas, not a stitched footprint. No room placement has been solved."
+    },
+    "room_overlap_area": {
+      "value": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "unit": "m2",
+      "method": "not_applicable_no_placement",
+      "notes": "Zero because no rooms have been placed, not because placement was checked for overlaps."
+    },
+    "drift": {
+      "method": "none",
+      "applied": false,
+      "notes": "No inter-room placement is solved at this tier yet, so there is no accumulated drift to correct. Stated explicitly: this is an absence of the stage, not poses used as-is."
+    }
+  },
+  "damage": [],
+  "concealed_flags": [],
+  "scope": [],
+  "calibration": {
+    "interval_basis": "empirical_from_benchmark",
+    "coverage_target": 0.95,
+    "scale_source": "exif_focal_length_and_camera_height_prior",
+    "warnings": [
+      "Room depth measured 11% and 23% low against tape ground truth on the two rooms that have it.",
+      "Far-wall width measured 96% and 382% high on those same rooms; its interval is +/-100% and it should not be relied on.",
+      "Ceiling height is a residential prior, not an estimate.",
+      "No opening detection, so no openings are reported and no adjacency is claimed.",
+      "Ground-truth tape uncertainty is unquantified, so these errors are observed rather than measured."
+    ]
+  },
+  "renders": {
+    "plan_svg": "plan.svg"
+  }
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="392" height="317" viewBox="0 0 392 317" font-family="ui-sans-serif,system-ui,sans-serif">
+<rect width="392" height="317" fill="#fbfaf8"/>
+<text x="40" y="26" font-size="15" font-weight="600" fill="#3d3a34">capture_20260831_100045_photo &#183; photo tier</text>
+<text x="40" y="44" font-size="11" fill="#8a8377">Rooms drawn at estimated size. Shaded band is the confidence interval. Layout is arbitrary: no room placement has been solved.</text>
+<rect x="40.0" y="70.0" width="312.8" height="167.8" fill="#e8642e" fill-opacity="0.10" stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>
+<rect x="40.0" y="70.0" width="156.4" height="129.1" fill="#ffffff" fill-opacity="0.7" stroke="#5c564a" stroke-width="1.6"/>
+<text x="40.0" y="215.1" font-size="12" fill="#3d3a34">Puja room</text>
+<text x="40.0" y="229.1" font-size="10" fill="#8a8377">3.07 &#215; 3.72 m</text>
+</svg>

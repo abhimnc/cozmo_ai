@@ -74,6 +74,6 @@
     "safe_to_join_note": "Single-instance rooms; no numbering to disagree about."
   },
   "missing_from_capture": [
-    "puja_room - present in the property graph, not captured here. The stitch will be scored against a floor plan that has it, so either capture it or record it as a known omission."
+    "puja_room - captured separately in capture_20260831_100045_photo (12 photos), not in the whole-floor pass. It therefore has no connector in its own bundle and cannot stitch; it completes property coverage but not the multi-room set."
   ]
 }
