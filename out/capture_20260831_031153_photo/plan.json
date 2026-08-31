@@ -13,10 +13,10 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "14ce19f",
-    "run_at": "2026-08-31T05:45:08.712190+00:00",
+    "git_commit": "c128832",
+    "run_at": "2026-08-31T06:01:51.882533+00:00",
     "command": "cozmo run benchmark/raw/capture_20260831_031153_photo",
-    "runtime_seconds": 10.1
+    "runtime_seconds": 18.0
   },
   "rooms": [
     {
@@ -1011,7 +1011,38 @@
     }
   ],
   "stitch": {
-    "adjacency": [],
+    "adjacency": [
+      {
+        "room_a": "hall",
+        "room_b": "kitchen",
+        "via": "shared_view_112_inliers",
+        "confidence": 1.0
+      },
+      {
+        "room_a": "bedroom_3",
+        "room_b": "hall",
+        "via": "shared_view_80_inliers",
+        "confidence": 1.0
+      },
+      {
+        "room_a": "bed_room_2",
+        "room_b": "hall",
+        "via": "shared_view_77_inliers",
+        "confidence": 1.0
+      },
+      {
+        "room_a": "bathroom_1",
+        "room_b": "bathroom_2",
+        "via": "shared_view_51_inliers",
+        "confidence": 1.0
+      },
+      {
+        "room_a": "bathroom_1",
+        "room_b": "hall",
+        "via": "shared_view_21_inliers",
+        "confidence": 0.53
+      }
+    ],
     "footprint_area": {
       "value": 107.235,
       "ci_low": 0.0,
@@ -1031,7 +1062,7 @@
     "drift": {
       "method": "none",
       "applied": false,
-      "notes": "No inter-room placement is solved at this tier yet, so there is no accumulated drift to correct. Stated explicitly: this is an absence of the stage, not poses used as-is."
+      "notes": "Adjacency is recovered but room *placement* is not, so there are no accumulated poses to correct. Stated explicitly: this is an absence of the placement stage, not poses used as-is."
     }
   },
   "damage": [],
@@ -1046,7 +1077,8 @@
       "Far-wall width measured 96% and 382% high on those same rooms; its interval is +/-100% and it should not be relied on.",
       "Ceiling height is a residential prior, not an estimate.",
       "Opening detection finds doors and archways only - a window has no floor contact for the method to use - and found 2 of 3 in the room with ground truth, with widths off by -14.8% and +52.7% against a 2 cm gate.",
-      "Openings are not assigned to a wall, so no adjacency is claimed.",
+      "Adjacency comes from verified image matches between rooms' photo sets, measured at 80% precision and 50% recall on the whole-floor capture. Rooms that merely look alike can match: this property's two bathrooms share tiling and are the known false positive.",
+      "Openings are not assigned to a wall. Adjacency is reported without room placement, so the plan is a graph of which rooms touch, not a laid-out floor plan.",
       "Ground-truth tape uncertainty is unquantified, so these errors are observed rather than measured."
     ]
   },

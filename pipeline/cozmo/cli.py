@@ -150,7 +150,12 @@ def cmd_run(args: argparse.Namespace) -> int:
     estimates = estimate_rooms(bundle, views_by_room)
 
     command = f"cozmo run {args.bundle}"
-    plan = build_plan(bundle, estimates, command, time.time() - started)
+    links = None
+    if bundle.tier == "photo":
+        from .photo.adjacency import find_links
+        links = find_links({s: [str(bundle.root / p) for p in ps]
+                            for s, ps in bundle.photos_by_room().items()})
+    plan = build_plan(bundle, estimates, command, time.time() - started, links)
     out_dir = args.output or (Path("out") / bundle.capture_id)
     json_path, svg_path = write_outputs(plan, out_dir)
 

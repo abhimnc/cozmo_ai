@@ -98,7 +98,7 @@ def estimate_rooms(bundle: CaptureBundle, views_by_room: dict[str, list[RoomView
 
 
 def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
-               command: str, runtime_s: float) -> dict:
+               command: str, runtime_s: float, links=None) -> dict:
     rooms_json = []
     for est in estimates:
         if not est.depth_m or not est.width_m:
@@ -156,6 +156,13 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
     footprint_lo = sum(r["floor_area"]["ci_low"] for r in rooms_json)
     footprint_hi = sum(r["floor_area"]["ci_high"] for r in rooms_json)
 
+    adjacency = [
+        {"room_a": l.room_a, "room_b": l.room_b,
+         "via": f"shared_view_{l.inliers}_inliers",
+         "confidence": round(l.confidence, 2)}
+        for l in (links or [])
+    ]
+
     return {
         "schema_version": 1,
         "capture": {
@@ -174,7 +181,7 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
         },
         "rooms": rooms_json,
         "stitch": {
-            "adjacency": [],
+            "adjacency": adjacency,
             "footprint_area": {
                 "value": round(footprint, 3), "ci_low": round(footprint_lo, 3),
                 "ci_high": round(footprint_hi, 3), "unit": "m2",
@@ -189,7 +196,7 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
             "drift": {
                 "method": "none",
                 "applied": False,
-                "notes": "No inter-room placement is solved at this tier yet, so there is no accumulated drift to correct. Stated explicitly: this is an absence of the stage, not poses used as-is.",
+                "notes": "Adjacency is recovered but room *placement* is not, so there are no accumulated poses to correct. Stated explicitly: this is an absence of the placement stage, not poses used as-is.",
             },
         },
         "damage": [],
@@ -204,7 +211,8 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
                 "Far-wall width measured 96% and 382% high on those same rooms; its interval is +/-100% and it should not be relied on.",
                 "Ceiling height is a residential prior, not an estimate.",
                 "Opening detection finds doors and archways only - a window has no floor contact for the method to use - and found 2 of 3 in the room with ground truth, with widths off by -14.8% and +52.7% against a 2 cm gate.",
-                "Openings are not assigned to a wall, so no adjacency is claimed.",
+                "Adjacency comes from verified image matches between rooms' photo sets, measured at 80% precision and 50% recall on the whole-floor capture. Rooms that merely look alike can match: this property's two bathrooms share tiling and are the known false positive.",
+                "Openings are not assigned to a wall. Adjacency is reported without room placement, so the plan is a graph of which rooms touch, not a laid-out floor plan.",
                 "Ground-truth tape uncertainty is unquantified, so these errors are observed rather than measured.",
             ],
         },

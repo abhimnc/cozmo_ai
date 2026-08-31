@@ -112,6 +112,45 @@ of the four modelled walls that line is.
 Heights are worse than widths — 0.77 m and 1.51 m against a 1.85 m truth — and
 carry a 50% interval to say so.
 
+## Adjacency — which rooms touch
+
+Recovered without poses, ordering or wall assignment. Every connection in this
+property is an open archway, so a photograph taken in one room and pointed at an
+archway contains part of the next room. Matching ORB features between the photo
+sets of every room pair, verified against a fundamental matrix, turns that into a
+measurement.
+
+**Operating point: 80% precision, 50% recall** — 4 correct edges, 1 false, 4
+missed, of 8 true adjacencies.
+
+| Threshold | Links | Correct | False | Missed | Precision | Recall |
+|---|---|---|---|---|---|---|
+| 12 | 15 | 6 | 9 | 2 | 40% | 75% |
+| 15 | 7 | 5 | 2 | 3 | 71% | 62% |
+| **20** | **5** | **4** | **1** | **4** | **80%** | **50%** |
+| 60 | 3 | 3 | 0 | 5 | 100% | 38% |
+
+20 is chosen deliberately above the F1 optimum at 15. On a floor plan a false
+adjacency is worse than a missing one — it places a room somewhere it is not —
+and the gate asks for *correct* adjacency.
+
+**The known false positive is instructive.** `bathroom_1 ↔ bathroom_2` matches at
+51 inliers and the two share no wall. They share **tiling**. Image matching
+conflates *adjacent* with *looks alike*, and a property with repeated finishes
+will produce these. A spatial-asymmetry test was tried to separate them and
+**made things worse** — correct links fell from 6 to 1 — because the strongest
+true links come from photographs taken *in* an archway, which see both rooms
+broadly and are therefore symmetric. The signal runs opposite to the hypothesis.
+
+**Missing: `hall ↔ living_room`**, despite being a real and wide archway. The
+living room photos that face it were shot from angles where the hall is barely
+visible through it.
+
+**This is adjacency, not a stitch.** Knowing the living room adjoins the hall does
+not say *where*. Placement needs relative pose between rooms and is not
+implemented, so `stitch.drift` reports `applied: false` with the placement stage
+recorded as absent.
+
 ## Repeatability — **unrepeatable, not repeatable-but-biased**
 
 Two photo-tier captures of the same four rooms, walked differently.
