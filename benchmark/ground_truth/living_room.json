@@ -15,7 +15,8 @@
     "v7 2026-08-31: openings relaid. Walls A, B, D carry openings; wall C carries only the window. Wall A has the largest opening (1.850 x 2.013 m). A and B are archways, D is the hinged door. This layout also resolves the 40 cm exactly.",
     "v8 2026-08-31: wall B archway measured at 1.850 x 0.855 m, confirming the inferred width. Both archways lead to the Hall, from different directions, so Living room and Hall are connected twice.",
     "v9 2026-08-31: operator confirmed archway A is 1.850 m high x 2.013 m wide (wider than tall, as recorded) and the 0.20 m wall thickness. Every Living room figure is now measured or operator-confirmed; none is inferred.",
-    "v10 2026-08-31: annotated sketch (capture_20260831_021355_photo) shows archway_b leads to the bathroom below the Living room, not to the Hall. Supersedes the earlier statement that both archways lead to the Hall."
+    "v10 2026-08-31: annotated sketch (capture_20260831_021355_photo) shows archway_b leads to the bathroom below the Living room, not to the Hall. Supersedes the earlier statement that both archways lead to the Hall.",
+    "v11 2026-08-31: tape uncertainty measured by repeat readings. Ground truth now carries per-quantity uncertainty instead of implying exactness."
   ],
   "units_note": "Source values are centimetres, recorded here in metres.",
   "precision_m": 0.001,
@@ -143,5 +144,61 @@
     "wall_thickness": "confirmed",
     "adjacency": "2 edges recorded, both to the Hall",
     "remaining": "tape uncertainty is still unquantified; the Hall end of the loop is unmeasured"
+  },
+  "tape_uncertainty": {
+    "protocol": "Same quantity measured three times, tape fully retracted and re-placed between readings.",
+    "measured_2026_08_31": {
+      "wall_length_cm": {
+        "readings": [
+          507.0,
+          510.1,
+          508.2
+        ],
+        "mean": 508.43,
+        "sd": 1.56,
+        "range": 3.1
+      },
+      "opening_width_cm": {
+        "readings": [
+          90.0,
+          88.2,
+          88.4
+        ],
+        "mean": 88.87,
+        "sd": 0.99,
+        "range": 1.8
+      },
+      "opening_height_cm": {
+        "readings": [
+          185.0,
+          190.0,
+          190.0
+        ],
+        "mean": 188.33,
+        "sd": 2.89,
+        "range": 5.0
+      },
+      "ceiling_height_cm": {
+        "readings": [
+          330.0,
+          302.0,
+          315.0
+        ],
+        "mean": 315.67,
+        "sd": 14.01,
+        "range": 28.0
+      }
+    },
+    "verdict_against_gates": {
+      "wall_length": "usable - sd 1.56 cm against a 40 cm gate (+/-8% of a 5 m wall), 4% of it",
+      "opening_width": "MARGINAL - sd 0.99 cm against a 2 cm gate, half of it",
+      "opening_height": "unmeasurable - sd 2.89 cm exceeds the 2 cm gate",
+      "ceiling_height": "UNMEASURABLE - sd 14.01 cm is 9.3x the 1.5 cm gate"
+    },
+    "recorded_values_outside_their_repeat_range": [
+      "Wall A recorded 505.7, repeat range 507.0-510.1. The recorded value sits below every repeat reading.",
+      "Door width recorded 85.5, repeat range 88.2-90.0. The recorded value sits 2.7 cm below every repeat reading."
+    ],
+    "interpretation": "Two of four recorded quantities fall outside the range of their own repeats, so the original single readings carry a bias on top of the random spread, not just noise. Recorded values are kept as the answer key because they were taken systematically across all walls in one session, but they are now quoted with uncertainty rather than as exact figures."
   }
 }

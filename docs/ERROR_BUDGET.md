@@ -148,26 +148,58 @@ numbers rather than a property of the room. The full 1.5 cm gate is available.
 Recorded rather than deleted because the reasoning still applies to any room
 whose ceiling genuinely is not flat, and we should check for it per room.
 
-## Ground-truth uncertainty — **deliberately unquantified**
+## Ground-truth uncertainty — **measured 2026-08-31**
 
-Tape uncertainty has not been measured: the repeat-three-times exercise was
-deferred on 2026-08-31. The consequence is precise and should be stated in the
-benchmark report rather than left implicit.
+One wall and one opening measured three times each, tape fully retracted and
+re-placed between readings.
 
-A single-pass tape run over a 5 m wall carries sag, corner-placement and reading
-error. We do not know its spread, so we cannot claim a pipeline error smaller
-than that spread has been *measured* — only that it was observed. Against a 2 cm
-opening gate and a 1.5 cm ceiling gate, plausible tape spread is the same order
-as the tolerance itself.
+| Quantity | Readings (cm) | sd | Gate | sd ÷ gate | Verdict |
+|---|---|---|---|---|---|
+| Wall length | 507.0, 510.1, 508.2 | **1.56** | 40 cm (±8% of 5 m) | 0.04 | usable |
+| Opening width | 90.0, 88.2, 88.4 | **0.99** | 2 cm | 0.50 | **marginal** |
+| Opening height | 185.0, 190.0, 190.0 | **2.89** | 2 cm | 1.44 | unmeasurable |
+| Ceiling height | 330.0, 302.0, 315.0 | **14.01** | 1.5 cm | **9.3** | **unmeasurable** |
 
-What this permits and forbids:
+### What each row permits
 
-- **Permitted:** reporting pipeline-versus-ground-truth differences as observed
-  numbers, and comparing tiers against each other, since all share one key.
-- **Forbidden:** quoting a ground-truth interval, or claiming a sub-centimetre
-  result is distinguishable from the key's own noise.
+**Wall length: sound.** Tape noise is 4% of the ±8% gate, so a pipeline error at
+that scale is genuinely distinguishable from the key's own noise. Every
+wall-length figure in the benchmark report stands.
 
-Cost to close: measuring one wall and one opening three times each.
+**Opening width: marginal.** Tape noise is half the 2 cm gate. A pipeline
+producing exactly 2 cm of error could not be reliably told from a pass. Moot
+today — there is no opening detector — but any future opening result needs a
+better key.
+
+**Ceiling height: the gate cannot be verified by tape at all.** A spread of
+28 cm against a 1.5 cm gate makes the ground truth **9.3 times coarser than the
+tolerance it would judge.** No ceiling result of any accuracy can be validated
+against this key.
+
+That is a finding about method, not only about us. The brief permits "laser or
+tape ground truth", and a tape reading to a 3.3 m ceiling — arm extended,
+overhead, reading at an angle — cannot resolve 1.5 cm. **Laser measurement is
+effectively mandatory for the ceiling gate**, whatever the brief allows.
+
+### Two recorded values sit outside their own repeat range
+
+| Quantity | Recorded | Repeat range | |
+|---|---|---|---|
+| Wall A length | 505.7 | 507.0 – 510.1 | below every repeat |
+| Door width | 85.5 | 88.2 – 90.0 | 2.7 cm below every repeat |
+
+Half the checked quantities fall outside the range of their own repeats, so the
+original single readings carry a **bias** on top of random spread. Recorded
+values are kept as the answer key — they were taken systematically across all
+walls in one session — but they are now quoted with uncertainty rather than as
+exact figures, and this is why.
+
+### What changes in the benchmark report
+
+Errors are now **measured**, not merely observed, for wall lengths. The ceiling
+rows should be read as unverifiable rather than as failures: our −12.0% ceiling
+error is real in direction, but the key cannot resolve the gate it is being
+scored against.
 
 ## Known capture-side issues
 
