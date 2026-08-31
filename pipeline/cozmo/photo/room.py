@@ -25,10 +25,16 @@ from .exif import read_camera
 CAMERA_HEIGHT_M = 1.45
 CAMERA_HEIGHT_REL = 0.10
 
-# Rays shallower than this carry no usable range: at 3 degrees a 1.45 m camera
-# puts the floor 28 m away, and the error grows without bound as the angle
-# closes. Set from the geometry, not tuned to the answer.
-MIN_DEPRESSION_DEG = 3.0
+# Rays shallower than this carry no usable range. Floor distance goes as
+# h / sin(depression), so at 3 degrees a 1.45 m camera puts the floor 28 m away
+# and a tenth of a degree of pixel noise moves it by metres. 8 degrees bounds
+# recoverable range at 10.4 m, which is generous for a residential room and is
+# set from indoor geometry rather than from our own error.
+#
+# Raised from 3 degrees on 2026-08-31; see fixloop/DECLARATION.md. At 3 degrees
+# bed_room_1 estimated 28.15 m against the 27.7 m cap - pinned at the threshold
+# rather than measuring anything.
+MIN_DEPRESSION_DEG = 8.0
 
 
 @dataclass
@@ -174,7 +180,12 @@ def analyse(image_path: str, focal_35mm: float | None = None) -> RoomView:
     # h / sin(depression), so a ray a degree below the horizon lands 80 m away
     # and a tenth of a degree of pixel noise moves it tens of metres. These rays
     # carry no usable range and, being the furthest, dominate any maximum.
-    d = d[d[:, 1] > np.sin(np.deg2rad(MIN_DEPRESSION_DEG))]
+    # The depression test must run on unit rays. `d` here is [x-cx, y-cy, f],
+    # whose magnitude is of order the focal length in pixels, so comparing its
+    # y component against sin(theta) directly compared a number near 1000 to one
+    # near 0.14 and admitted everything. Normalise first.
+    unit = d / np.linalg.norm(d, axis=1, keepdims=True)
+    d = d[unit[:, 1] > np.sin(np.deg2rad(MIN_DEPRESSION_DEG))]
     if len(d) < 12:
         return RoomView(image_path, False,
                         f"floor boundary lies within {MIN_DEPRESSION_DEG} deg of the horizon; no usable range")
@@ -184,8 +195,12 @@ def analyse(image_path: str, focal_35mm: float | None = None) -> RoomView:
 
     # Trim the tail: rays near the horizon diverge, so the furthest few points
     # carry almost no information and dominate a naive maximum.
+    # Upper quartile, not the 90th percentile. The far wall should be among the
+    # more distant boundary points, so an upper estimate is right - but the
+    # extreme tail is where the shallowest, least reliable rays land, and taking
+    # the 90th percentile selected for exactly those.
     forward = np.sort(pts[:, 1])
-    depth_far = float(forward[int(0.90 * len(forward))])
+    depth_far = float(forward[int(0.75 * len(forward))])
     # Lateral spread across all floor points is not a room dimension: the visible
     # width of the floor grows with distance, so a spread taken over every point
     # measures the camera's field of view, not the room. Measure it only among
