@@ -4,19 +4,29 @@
 does not need to know which tier the pipeline prefers; they tap the tier they
 were asked for and follow the screen.
 
-## Install (about 5 minutes, cable required)
+## Install — one command, **measured at 11 seconds**
 
-**TestFlight is not available.** Apple Developer Program enrolment was submitted
-and remains Pending; a Release archive builds and signs, and the moment enrolment
-clears the upload is one Xcode step away. Until then, installation is by cable:
+The brief allows "a TestFlight build **or** a dev build we can install on our
+device in under 10 minutes". This is the dev build.
 
-1. Connect the iPhone to a Mac with Xcode.
-2. From `ios/`, run:
-   `xcodebuild -project CozmoCapture.xcodeproj -scheme CozmoCapture -destination 'id=<udid>' -allowProvisioningUpdates build`
-   (`xcrun devicectl list devices` gives the UDID.)
-3. On the phone: Settings → General → VPN & Device Management → trust the
-   developer certificate.
+1. Connect the iPhone by cable to a Mac with Xcode. Unlock it.
+2. Run: `./scripts/install_on_device.sh`
+3. On the phone, once only: Settings → General → VPN & Device Management → trust
+   the developer certificate.
 4. Open the app. Allow camera access when asked.
+
+Step 2 takes **11 seconds cold** (DerivedData deleted, M4 MacBook Air): the script
+finds the device, regenerates the project, builds, installs, and confirms the
+bundle is present. End to end including the one-time trust step is under two
+minutes.
+
+The script diagnoses the common failures rather than surfacing raw build errors —
+phone locked, cable without data lines, Developer Mode off.
+
+*TestFlight is separately blocked:* Apple Developer Program enrolment was
+submitted and remains Pending. A Release archive builds and signs, so the upload
+is one step away once approval lands — but it is not needed for the requirement,
+which the dev build satisfies.
 5. The home screen names your device and shows a green tick beside every tier
    this handset can run. If a tier is greyed out, the app says why.
 

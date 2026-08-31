@@ -4,8 +4,8 @@ Requirement → file path → artifact → status. Honest statuses only: **DONE*
 **PARTIAL**, **NOT DONE**. A requirement with no artifact is marked NOT DONE
 rather than described as in progress.
 
-Summary: **15 done, 6 partial, 10 not done** of 31 requirements.
-All 8 deliverables written; 5 complete, 3 partial.
+Summary: **16 done, 5 partial, 10 not done** of 31 requirements.
+All 8 deliverables written; 6 complete, 2 partial.
 
 ## Part 1 — Capture route and tiers
 
@@ -13,7 +13,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 |---|---|---|---|---|
 | 1.1 | Choose a capture route | `docs/DECISIONS.md` | Route 1 chosen, with reasoning | **DONE** |
 | 1.2 | Own iOS capture app | `ios/` | CozmoCapture, builds and runs on device | **DONE** |
-| 1.3 | Installable in under 10 min | `docs/CAPTURE_PROTOCOL.md` | Cable install via Xcode/devicectl works and is documented (~5 min with a Mac present). **TestFlight blocked externally**: Developer Program enrolment submitted, still Pending at 31 Aug 10:50 IST. A Release archive builds and signs; only Apple's approval is missing | **PARTIAL** |
+| 1.3 | Installable in under 10 min | `scripts/install_on_device.sh` | **Measured: 11 s** cold (DerivedData deleted), M4 MacBook Air, one command. Under 2 min end to end including the one-time certificate trust on the phone. The brief allows "a TestFlight build **or** a dev build"; this is the dev build. TestFlight additionally blocked externally — enrolment Pending at Apple since 31 Aug 10:50 IST | **DONE** |
 | 1.4 | Photo tier | `ios/.../CaptureTier.swift` | Implemented, 5 real captures | **DONE** |
 | 1.5 | Video tier | `ios/.../VideoRecorder.swift` | Implemented, 339 s / 20,324-frame walkthrough captured | **DONE** |
 | 1.6 | LiDAR tier | `pipeline/cozmo/lidar/`, `scripts/make_synthetic_lidar.py` | Runs end to end on a synthetic bundle (4.1 s, schema-valid). **Never run on real LiDAR data** — no LiDAR device available, so no accuracy claim | **PARTIAL** |
@@ -89,7 +89,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 | # | Deliverable | Path | Status |
 |---|---|---|---|
 | D1 | Compliance matrix | `COMPLIANCE.md` | **DONE** |
-| D2 | Capture route + device matrix | `docs/CAPTURE_PROTOCOL.md`, `docs/DEVICE_MATRIX.md` | **PARTIAL** — no TestFlight |
+| D2 | Capture route + device matrix | `docs/CAPTURE_PROTOCOL.md`, `docs/DEVICE_MATRIX.md`, `scripts/install_on_device.sh` | **DONE** — dev-build route measured at 11 s, which the brief accepts as an alternative to TestFlight |
 | D3 | Repo + README, 15 min on a clean machine | `README.md` | **DONE** — verified by cloning fresh and running it |
 | D4 | Reproduction bundle | `benchmark/raw/`, `cozmo run` | **PARTIAL** — raw data supplied separately |
 | D5 | Benchmark report | `benchmark/BENCHMARK_REPORT.md` | **DONE** — gates at both runnable tiers, repeatability table, head-to-head, timing |
