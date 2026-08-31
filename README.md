@@ -42,7 +42,7 @@ No network calls, no API keys, no model weights. OpenCV and numpy only.
 
 Not in git — about **1 GB**, dominated by a 486 MB video walkthrough.
 
-**Download:** `cozmo_raw_captures.zip` — link supplied with the submission.
+**Download:** [`cozmo_raw_captures.zip`](https://drive.google.com/file/d/1K7o64UsY5goG9nawqMY-G9xkF2YTlfEn/view?usp=sharing) (1.0 GB, 386 files, 11 captures)
 
 Deliberately not attached to a public release: the archive is 386 photographs of
 the inside of a private home, and the graders needing it is not a reason for the

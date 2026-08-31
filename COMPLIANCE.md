@@ -91,7 +91,7 @@ All 8 deliverables written; **7 complete, 1 partial**.
 | D1 | Compliance matrix | `COMPLIANCE.md` | **DONE** |
 | D2 | Capture route + device matrix | `docs/CAPTURE_PROTOCOL.md`, `docs/DEVICE_MATRIX.md`, `scripts/install_on_device.sh` | **DONE** — dev-build route measured at 11 s, which the brief accepts as an alternative to TestFlight |
 | D3 | Repo + README, 15 min on a clean machine | `README.md` | **DONE** — verified by cloning fresh and running it |
-| D4 | Reproduction bundle | `scripts/make_repro_bundle.sh`, `benchmark/raw/` | **DONE** — `cozmo_raw_captures.zip` packages all 11 captures; unzip at the repo root and every documented command runs unchanged. Excluded from git only for size (~1 GB) |
+| D4 | Reproduction bundle | [download](https://drive.google.com/file/d/1K7o64UsY5goG9nawqMY-G9xkF2YTlfEn/view?usp=sharing), `scripts/make_repro_bundle.sh` | **DONE** — 1.0 GB, 386 files, all 11 captures. Unzip at the repo root and every documented command runs unchanged. Not in git for size, and not on a public release because it is 386 photographs of a private home |
 | D5 | Benchmark report | `benchmark/BENCHMARK_REPORT.md` | **DONE** — gates at both runnable tiers, repeatability table, head-to-head, timing |
 | D6 | Fix loop bundle | `fixloop/` | **DONE** |
 | D7 | Technical report, max 6 pages | `docs/TECHNICAL_REPORT.md` | **DONE** |
