@@ -17,10 +17,10 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "46b7cab",
-    "run_at": "2026-08-31T03:59:07.239657+00:00",
+    "git_commit": "0dbe2c8",
+    "run_at": "2026-08-31T04:42:31.774971+00:00",
     "command": "cozmo run benchmark/raw/capture_synthetic_lidar",
-    "runtime_seconds": 4.0
+    "runtime_seconds": 5.6
   },
   "rooms": [
     {
@@ -30,9 +30,9 @@
         {
           "id": "A",
           "length": {
-            "value": 3.2908,
-            "ci_low": 2.3035,
-            "ci_high": 4.278,
+            "value": 3.5146,
+            "ci_low": 2.4603,
+            "ci_high": 4.569,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -50,9 +50,9 @@
         {
           "id": "B",
           "length": {
-            "value": 4.0631,
+            "value": 1.9419,
             "ci_low": 0.0,
-            "ci_high": 8.1263,
+            "ci_high": 3.8839,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 3,
@@ -70,9 +70,9 @@
         {
           "id": "C",
           "length": {
-            "value": 3.2908,
-            "ci_low": 2.3035,
-            "ci_high": 4.278,
+            "value": 3.5146,
+            "ci_low": 2.4603,
+            "ci_high": 4.569,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -90,9 +90,9 @@
         {
           "id": "D",
           "length": {
-            "value": 4.0631,
+            "value": 1.9419,
             "ci_low": 0.0,
-            "ci_high": 8.1263,
+            "ci_high": 3.8839,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 3,
@@ -117,9 +117,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 13.3709,
+        "value": 6.8252,
         "ci_low": 0.0,
-        "ci_high": 34.7643,
+        "ci_high": 17.7456,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -134,9 +134,9 @@
         {
           "id": "A",
           "length": {
-            "value": 3.452,
-            "ci_low": 0.9551,
-            "ci_high": 5.9489,
+            "value": 2.6992,
+            "ci_low": 1.1483,
+            "ci_high": 4.25,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -154,9 +154,9 @@
         {
           "id": "B",
           "length": {
-            "value": 6.405,
+            "value": 4.5171,
             "ci_low": 0.0,
-            "ci_high": 12.81,
+            "ci_high": 9.0342,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 3,
@@ -174,9 +174,9 @@
         {
           "id": "C",
           "length": {
-            "value": 3.452,
-            "ci_low": 0.9551,
-            "ci_high": 5.9489,
+            "value": 2.6992,
+            "ci_low": 1.1483,
+            "ci_high": 4.25,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -194,9 +194,9 @@
         {
           "id": "D",
           "length": {
-            "value": 6.405,
+            "value": 4.5171,
             "ci_low": 0.0,
-            "ci_high": 12.81,
+            "ci_high": 9.0342,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 3,
@@ -221,9 +221,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 22.1101,
+        "value": 12.1924,
         "ci_low": 0.0,
-        "ci_high": 76.2062,
+        "ci_high": 38.3954,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -238,9 +238,9 @@
         {
           "id": "A",
           "length": {
-            "value": 5.7114,
+            "value": 5.7113,
             "ci_low": 0.0,
-            "ci_high": 13.8461,
+            "ci_high": 14.0598,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 2,
@@ -258,9 +258,9 @@
         {
           "id": "B",
           "length": {
-            "value": 2.9264,
+            "value": 1.9142,
             "ci_low": 0.0,
-            "ci_high": 6.3855,
+            "ci_high": 3.865,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 2,
@@ -278,9 +278,9 @@
         {
           "id": "C",
           "length": {
-            "value": 5.7114,
+            "value": 5.7113,
             "ci_low": 0.0,
-            "ci_high": 13.8461,
+            "ci_high": 14.0598,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 2,
@@ -298,9 +298,9 @@
         {
           "id": "D",
           "length": {
-            "value": 2.9264,
+            "value": 1.9142,
             "ci_low": 0.0,
-            "ci_high": 6.3855,
+            "ci_high": 3.865,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 2,
@@ -325,9 +325,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 16.7136,
+        "value": 10.9323,
         "ci_low": 0.0,
-        "ci_high": 88.4136,
+        "ci_high": 54.341,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -342,9 +342,9 @@
         {
           "id": "A",
           "length": {
-            "value": 6.3972,
-            "ci_low": 4.3036,
-            "ci_high": 8.4908,
+            "value": 6.3612,
+            "ci_low": 3.3845,
+            "ci_high": 9.3379,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -362,9 +362,9 @@
         {
           "id": "B",
           "length": {
-            "value": 6.0867,
+            "value": 5.23,
             "ci_low": 0.0,
-            "ci_high": 12.1734,
+            "ci_high": 10.4599,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 4,
@@ -382,9 +382,9 @@
         {
           "id": "C",
           "length": {
-            "value": 6.3972,
-            "ci_low": 4.3036,
-            "ci_high": 8.4908,
+            "value": 6.3612,
+            "ci_low": 3.3845,
+            "ci_high": 9.3379,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -402,9 +402,9 @@
         {
           "id": "D",
           "length": {
-            "value": 6.0867,
+            "value": 5.23,
             "ci_low": 0.0,
-            "ci_high": 12.1734,
+            "ci_high": 10.4599,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 4,
@@ -429,9 +429,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 38.938,
+        "value": 33.2689,
         "ci_low": 0.0,
-        "ci_high": 103.3623,
+        "ci_high": 97.6743,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -446,9 +446,9 @@
         {
           "id": "A",
           "length": {
-            "value": 1.9125,
-            "ci_low": 1.2373,
-            "ci_high": 2.5877,
+            "value": 2.6594,
+            "ci_low": 1.7798,
+            "ci_high": 3.539,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -466,9 +466,9 @@
         {
           "id": "B",
           "length": {
-            "value": 2.5874,
+            "value": 2.6895,
             "ci_low": 0.0,
-            "ci_high": 5.1749,
+            "ci_high": 5.379,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 3,
@@ -486,9 +486,9 @@
         {
           "id": "C",
           "length": {
-            "value": 1.9125,
-            "ci_low": 1.2373,
-            "ci_high": 2.5877,
+            "value": 2.6594,
+            "ci_low": 1.7798,
+            "ci_high": 3.539,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -506,9 +506,9 @@
         {
           "id": "D",
           "length": {
-            "value": 2.5874,
+            "value": 2.6895,
             "ci_low": 0.0,
-            "ci_high": 5.1749,
+            "ci_high": 5.379,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 3,
@@ -533,9 +533,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 4.9484,
+        "value": 7.1525,
         "ci_low": 0.0,
-        "ci_high": 13.391,
+        "ci_high": 19.0363,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -550,9 +550,9 @@
         {
           "id": "A",
           "length": {
-            "value": 3.8016,
-            "ci_low": 0.483,
-            "ci_high": 7.1202,
+            "value": 3.4449,
+            "ci_low": 0.4712,
+            "ci_high": 6.4185,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -570,9 +570,9 @@
         {
           "id": "B",
           "length": {
-            "value": 2.5233,
+            "value": 1.9233,
             "ci_low": 0.0,
-            "ci_high": 5.0466,
+            "ci_high": 3.8466,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 4,
@@ -590,9 +590,9 @@
         {
           "id": "C",
           "length": {
-            "value": 3.8016,
-            "ci_low": 0.483,
-            "ci_high": 7.1202,
+            "value": 3.4449,
+            "ci_low": 0.4712,
+            "ci_high": 6.4185,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -610,9 +610,9 @@
         {
           "id": "D",
           "length": {
-            "value": 2.5233,
+            "value": 1.9233,
             "ci_low": 0.0,
-            "ci_high": 5.0466,
+            "ci_high": 3.8466,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 4,
@@ -637,9 +637,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 9.5925,
+        "value": 6.6254,
         "ci_low": 0.0,
-        "ci_high": 35.9324,
+        "ci_high": 24.6891,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -654,9 +654,9 @@
         {
           "id": "A",
           "length": {
-            "value": 4.266,
-            "ci_low": 1.5627,
-            "ci_high": 6.9693,
+            "value": 3.6863,
+            "ci_low": 2.2882,
+            "ci_high": 5.0843,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -674,9 +674,9 @@
         {
           "id": "B",
           "length": {
-            "value": 4.2463,
+            "value": 3.2953,
             "ci_low": 0.0,
-            "ci_high": 8.4925,
+            "ci_high": 6.5907,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 3,
@@ -694,9 +694,9 @@
         {
           "id": "C",
           "length": {
-            "value": 4.266,
-            "ci_low": 1.5627,
-            "ci_high": 6.9693,
+            "value": 3.6863,
+            "ci_low": 2.2882,
+            "ci_high": 5.0843,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -714,9 +714,9 @@
         {
           "id": "D",
           "length": {
-            "value": 4.2463,
+            "value": 3.2953,
             "ci_low": 0.0,
-            "ci_high": 8.4925,
+            "ci_high": 6.5907,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 3,
@@ -741,9 +741,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 18.1146,
+        "value": 12.1475,
         "ci_low": 0.0,
-        "ci_high": 59.1869,
+        "ci_high": 33.509,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -758,9 +758,9 @@
         {
           "id": "A",
           "length": {
-            "value": 6.6327,
-            "ci_low": 2.8136,
-            "ci_high": 10.4518,
+            "value": 6.9568,
+            "ci_low": 3.282,
+            "ci_high": 10.6315,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -778,9 +778,9 @@
         {
           "id": "B",
           "length": {
-            "value": 4.8708,
+            "value": 3.5147,
             "ci_low": 0.0,
-            "ci_high": 9.7417,
+            "ci_high": 7.0293,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 4,
@@ -798,9 +798,9 @@
         {
           "id": "C",
           "length": {
-            "value": 6.6327,
-            "ci_low": 2.8136,
-            "ci_high": 10.4518,
+            "value": 6.9568,
+            "ci_low": 3.282,
+            "ci_high": 10.6315,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -818,9 +818,9 @@
         {
           "id": "D",
           "length": {
-            "value": 4.8708,
+            "value": 3.5147,
             "ci_low": 0.0,
-            "ci_high": 9.7417,
+            "ci_high": 7.0293,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 4,
@@ -845,9 +845,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 32.3067,
+        "value": 24.4507,
         "ci_low": 0.0,
-        "ci_high": 101.8181,
+        "ci_high": 74.7325,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -859,9 +859,9 @@
   "stitch": {
     "adjacency": [],
     "footprint_area": {
-      "value": 156.095,
+      "value": 113.595,
       "ci_low": 0.0,
-      "ci_high": 513.075,
+      "ci_high": 360.123,
       "unit": "m2",
       "method": "sum_of_room_areas",
       "notes": "Sum of per-room areas, not a stitched footprint. No room placement has been solved."
