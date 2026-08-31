@@ -120,12 +120,12 @@ per-room number below.
 Across all eight rooms, comparing our floor areas against magicplan's as a size
 reference:
 
-| | Before | After |
-|---|---|---|
-| Correlation with reference area | **+0.10** | **+0.50** |
-| Our spread | 2.5× | 6.0× |
-| Reference spread | 8.0× | 8.0× |
-| Whole-property footprint | 107.2 m² (+53%) | **85.5 m² (+22%)** |
+| | Original | Longest-run | **+ whole-wall views** |
+|---|---|---|---|
+| Correlation with reference area | +0.10 | +0.50 | **+0.84** |
+| Whole-property footprint | 107.2 m² (+60%) | 85.5 m² (+27%) | **79.5 m² (+19%)** |
+| Median wall error | 26.2% | 27.3% | **20.7%** |
+| Photo calibration | 6/6 | 6/6 | **6/6** |
 
 **A correlation of +0.10 means the estimator was barely tracking room size.** It
 compressed an eightfold true spread into two and a half, returning roughly 13 m²
@@ -143,11 +143,28 @@ rather than of viewpoint: a wall base is metres long, while a fragment glimpsed
 through a doorway is short, clipped by the door frame. Same data, same fitting,
 correlation +0.10 → +0.50.
 
+**A second change compounds it: prefer views where the wall stayed in frame.**
+A wall running out of the image was measured to where the *view* stopped, not
+where the wall did, so its length is a lower bound. Mixing lower bounds into a
+median drags the answer wherever the framing happened to fall. Detecting whether
+a fitted line's endpoints touch the frame border, and preferring the views where
+they do not, takes correlation from +0.50 to **+0.84**.
+
+The evidence is visible per room: bathroom_1's single whole-wall view reads
+1.88 m in a 1.38 × 2.35 m room, while its three truncated views read 3.3–3.7 m.
+
+**One variant was tried and rejected.** When no view sees a whole wall, the
+truncated ones are all there is, and the *largest* looked right — each is a lower
+bound, so the biggest should be the tightest. Measured, it was far worse:
+footprint 85.5 → 173.7 m². The bound only holds in principle; measurement noise
+pushes some truncated readings above the truth, and a maximum selects for exactly
+those. The median of truncated views is used instead.
+
 **It cost the one passing gate, and that is the right trade.** The living room's
-short wall moved from −0.4% to +12.9%. But with a correlation of +0.10 that
-−0.4% was chance — it sits well inside our own ±30% interval — and an estimator
-that actually scales with the room is worth more than a coincidence that flatters
-one row. Accuracy counts below are now 0/6.
+short wall moved from −0.4% to +12.9%. With a correlation of +0.10 that −0.4%
+was chance — it sits well inside our own ±30% interval — and an estimator that
+actually scales with the room is worth more than a coincidence flattering one
+row. Accuracy is now 0/6 while every systematic measure improved.
 
 ## Adjacency — which rooms touch
 

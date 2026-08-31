@@ -13,10 +13,10 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "c8407dc",
-    "run_at": "2026-08-31T06:24:44.625701+00:00",
+    "git_commit": "e865f9f",
+    "run_at": "2026-08-31T07:40:05.670067+00:00",
     "command": "cozmo run benchmark/raw/capture_20260831_031153_photo",
-    "runtime_seconds": 17.8
+    "runtime_seconds": 17.7
   },
   "rooms": [
     {
@@ -32,7 +32,7 @@
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 7,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "notes": "Scale from a 1.45 m camera-height prior. no view saw a whole wall; median of 7 truncated views. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -72,7 +72,7 @@
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 7,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "notes": "Scale from a 1.45 m camera-height prior. no view saw a whole wall; median of 7 truncated views. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -169,19 +169,19 @@
       "source_frames": 7,
       "polygon": [
         [
-          6.214,
+          6.955,
           -2.167
         ],
         [
-          9.974,
+          10.714,
           -2.167
         ],
         [
-          9.974,
+          10.714,
           2.167
         ],
         [
-          6.214,
+          6.955,
           2.167
         ]
       ]
@@ -193,13 +193,13 @@
         {
           "id": "A",
           "length": {
-            "value": 3.1279,
-            "ci_low": 0.0,
-            "ci_high": 6.7083,
+            "value": 5.116,
+            "ci_low": 0.0528,
+            "ci_high": 10.1791,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 8,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 2,
+            "notes": "Scale from a 1.45 m camera-height prior. 2 of 8 views saw a whole wall. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -213,12 +213,12 @@
         {
           "id": "B",
           "length": {
-            "value": 4.1811,
+            "value": 4.2398,
             "ci_low": 0.0,
-            "ci_high": 8.3623,
+            "ci_high": 9.1138,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 8,
+            "n_observations": 2,
             "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
           },
           "height": {
@@ -233,13 +233,13 @@
         {
           "id": "C",
           "length": {
-            "value": 3.1279,
-            "ci_low": 0.0,
-            "ci_high": 6.7083,
+            "value": 5.116,
+            "ci_low": 0.0528,
+            "ci_high": 10.1791,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 8,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 2,
+            "notes": "Scale from a 1.45 m camera-height prior. 2 of 8 views saw a whole wall. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -253,12 +253,12 @@
         {
           "id": "D",
           "length": {
-            "value": 4.1811,
+            "value": 4.2398,
             "ci_low": 0.0,
-            "ci_high": 8.3623,
+            "ci_high": 9.1138,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 8,
+            "n_observations": 2,
             "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
           },
           "height": {
@@ -280,9 +280,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 13.078,
+        "value": 21.6904,
         "ci_low": 0.0,
-        "ci_high": 56.0964,
+        "ci_high": 92.7704,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -336,20 +336,20 @@
       "source_frames": 8,
       "polygon": [
         [
-          -2.091,
-          -1.564
+          -2.12,
+          -2.558
         ],
         [
-          2.091,
-          -1.564
+          2.12,
+          -2.558
         ],
         [
-          2.091,
-          1.564
+          2.12,
+          2.558
         ],
         [
-          -2.091,
-          1.564
+          -2.12,
+          2.558
         ]
       ]
     },
@@ -366,7 +366,7 @@
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "notes": "Scale from a 1.45 m camera-height prior. no view saw a whole wall; median of 3 truncated views. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -406,7 +406,7 @@
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "notes": "Scale from a 1.45 m camera-height prior. no view saw a whole wall; median of 3 truncated views. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -458,20 +458,20 @@
       "source_frames": 3,
       "polygon": [
         [
-          -11.191,
-          -2.213
+          -11.425,
+          -1.848
         ],
         [
-          -6.434,
-          -2.213
+          -6.667,
+          -1.848
         ],
         [
-          -6.434,
-          1.483
+          -6.667,
+          1.848
         ],
         [
-          -11.191,
-          1.483
+          -11.425,
+          1.848
         ]
       ]
     },
@@ -482,13 +482,13 @@
         {
           "id": "A",
           "length": {
-            "value": 0.6714,
+            "value": 0.4279,
             "ci_low": 0.0,
-            "ci_high": 3.4676,
+            "ci_high": 1.098,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 6,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 2,
+            "notes": "Scale from a 1.45 m camera-height prior. 2 of 6 views saw a whole wall. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -502,12 +502,12 @@
         {
           "id": "B",
           "length": {
-            "value": 1.8005,
+            "value": 0.8016,
             "ci_low": 0.0,
-            "ci_high": 6.1334,
+            "ci_high": 1.888,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 6,
+            "n_observations": 2,
             "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
           },
           "height": {
@@ -522,13 +522,13 @@
         {
           "id": "C",
           "length": {
-            "value": 0.6714,
+            "value": 0.4279,
             "ci_low": 0.0,
-            "ci_high": 3.4676,
+            "ci_high": 1.098,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 6,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 2,
+            "notes": "Scale from a 1.45 m camera-height prior. 2 of 6 views saw a whole wall. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -542,12 +542,12 @@
         {
           "id": "D",
           "length": {
-            "value": 1.8005,
+            "value": 0.8016,
             "ci_low": 0.0,
-            "ci_high": 6.1334,
+            "ci_high": 1.888,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 6,
+            "n_observations": 2,
             "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
           },
           "height": {
@@ -569,9 +569,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 1.209,
+        "value": 0.343,
         "ci_low": 0.0,
-        "ci_high": 21.2683,
+        "ci_high": 2.073,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -603,20 +603,20 @@
       "source_frames": 6,
       "polygon": [
         [
-          2.091,
-          -0.336
+          2.558,
+          -0.214
         ],
         [
-          3.891,
-          -0.336
+          3.36,
+          -0.214
         ],
         [
-          3.891,
-          0.336
+          3.36,
+          0.214
         ],
         [
-          2.091,
-          0.336
+          2.558,
+          0.214
         ]
       ]
     },
@@ -627,13 +627,13 @@
         {
           "id": "A",
           "length": {
-            "value": 2.22,
+            "value": 0.6842,
             "ci_low": 0.0,
-            "ci_high": 4.5931,
+            "ci_high": 2.2821,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 7,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 2,
+            "notes": "Scale from a 1.45 m camera-height prior. 2 of 7 views saw a whole wall. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -647,12 +647,12 @@
         {
           "id": "B",
           "length": {
-            "value": 3.7363,
+            "value": 1.9873,
             "ci_low": 0.0,
-            "ci_high": 7.4727,
+            "ci_high": 7.0996,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 7,
+            "n_observations": 2,
             "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
           },
           "height": {
@@ -667,13 +667,13 @@
         {
           "id": "C",
           "length": {
-            "value": 2.22,
+            "value": 0.6842,
             "ci_low": 0.0,
-            "ci_high": 4.5931,
+            "ci_high": 2.2821,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 7,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 2,
+            "notes": "Scale from a 1.45 m camera-height prior. 2 of 7 views saw a whole wall. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -687,12 +687,12 @@
         {
           "id": "D",
           "length": {
-            "value": 3.7363,
+            "value": 1.9873,
             "ci_low": 0.0,
-            "ci_high": 7.4727,
+            "ci_high": 7.0996,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 7,
+            "n_observations": 2,
             "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
           },
           "height": {
@@ -714,9 +714,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 8.2948,
+        "value": 1.3598,
         "ci_low": 0.0,
-        "ci_high": 34.3229,
+        "ci_high": 16.2015,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -770,20 +770,20 @@
       "source_frames": 7,
       "polygon": [
         [
-          -0.645,
-          2.655
+          0.104,
+          3.036
         ],
         [
-          3.091,
-          2.655
+          2.091,
+          3.036
         ],
         [
-          3.091,
-          4.875
+          2.091,
+          3.72
         ],
         [
-          -0.645,
-          4.875
+          0.104,
+          3.72
         ]
       ]
     },
@@ -800,7 +800,7 @@
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "notes": "Scale from a 1.45 m camera-height prior. no view saw a whole wall; median of 6 truncated views. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -840,7 +840,7 @@
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 6,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "notes": "Scale from a 1.45 m camera-height prior. no view saw a whole wall; median of 6 truncated views. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -892,20 +892,20 @@
       "source_frames": 6,
       "polygon": [
         [
-          -4.752,
-          1.587
+          -5.715,
+          1.69
         ],
         [
-          -1.159,
-          1.587
+          -2.123,
+          1.69
         ],
         [
-          -1.159,
-          3.903
+          -2.123,
+          4.005
         ],
         [
-          -4.752,
-          3.903
+          -5.715,
+          4.005
         ]
       ]
     },
@@ -916,13 +916,13 @@
         {
           "id": "A",
           "length": {
-            "value": 3.2449,
-            "ci_low": 1.959,
-            "ci_high": 4.5307,
+            "value": 2.4913,
+            "ci_low": 1.7439,
+            "ci_high": 3.2386,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 4,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 1,
+            "notes": "Scale from a 1.45 m camera-height prior. 1 of 4 views saw a whole wall. Interval set from measured error against tape ground truth. Single observation; interval is the method's prior, not measured."
           },
           "height": {
             "value": 2.9,
@@ -936,13 +936,13 @@
         {
           "id": "B",
           "length": {
-            "value": 3.3208,
+            "value": 1.882,
             "ci_low": 0.0,
-            "ci_high": 6.6416,
+            "ci_high": 3.7639,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 4,
-            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+            "n_observations": 1,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld. Single observation; interval is the method's prior, not measured."
           },
           "height": {
             "value": 2.9,
@@ -956,13 +956,13 @@
         {
           "id": "C",
           "length": {
-            "value": 3.2449,
-            "ci_low": 1.959,
-            "ci_high": 4.5307,
+            "value": 2.4913,
+            "ci_low": 1.7439,
+            "ci_high": 3.2386,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 4,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 1,
+            "notes": "Scale from a 1.45 m camera-height prior. 1 of 4 views saw a whole wall. Interval set from measured error against tape ground truth. Single observation; interval is the method's prior, not measured."
           },
           "height": {
             "value": 2.9,
@@ -976,13 +976,13 @@
         {
           "id": "D",
           "length": {
-            "value": 3.3208,
+            "value": 1.882,
             "ci_low": 0.0,
-            "ci_high": 6.6416,
+            "ci_high": 3.7639,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 4,
-            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
+            "n_observations": 1,
+            "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld. Single observation; interval is the method's prior, not measured."
           },
           "height": {
             "value": 2.9,
@@ -1003,9 +1003,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 10.7756,
+        "value": 4.6885,
         "ci_low": 0.0,
-        "ci_high": 30.0913,
+        "ci_high": 12.19,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -1014,20 +1014,20 @@
       "source_frames": 4,
       "polygon": [
         [
-          -4.957,
-          -4.814
+          -3.76,
+          -5.053
         ],
         [
-          -1.636,
-          -4.814
+          -1.878,
+          -5.053
         ],
         [
-          -1.636,
-          -1.569
+          -1.878,
+          -2.562
         ],
         [
-          -4.957,
-          -1.569
+          -3.76,
+          -2.562
         ]
       ]
     },
@@ -1038,13 +1038,13 @@
         {
           "id": "A",
           "length": {
-            "value": 3.015,
-            "ci_low": 0.1767,
-            "ci_high": 5.8532,
+            "value": 4.0093,
+            "ci_low": 2.8065,
+            "ci_high": 5.2121,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 7,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 2,
+            "notes": "Scale from a 1.45 m camera-height prior. 2 of 7 views saw a whole wall. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -1058,12 +1058,12 @@
         {
           "id": "B",
           "length": {
-            "value": 3.3109,
+            "value": 2.2962,
             "ci_low": 0.0,
-            "ci_high": 6.6218,
+            "ci_high": 4.5925,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 7,
+            "n_observations": 2,
             "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
           },
           "height": {
@@ -1078,13 +1078,13 @@
         {
           "id": "C",
           "length": {
-            "value": 3.015,
-            "ci_low": 0.1767,
-            "ci_high": 5.8532,
+            "value": 4.0093,
+            "ci_low": 2.8065,
+            "ci_high": 5.2121,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
-            "n_observations": 7,
-            "notes": "Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth."
+            "n_observations": 2,
+            "notes": "Scale from a 1.45 m camera-height prior. 2 of 7 views saw a whole wall. Interval set from measured error against tape ground truth."
           },
           "height": {
             "value": 2.9,
@@ -1098,12 +1098,12 @@
         {
           "id": "D",
           "length": {
-            "value": 3.3109,
+            "value": 2.2962,
             "ci_low": 0.0,
-            "ci_high": 6.6218,
+            "ci_high": 4.5925,
             "unit": "m",
             "method": "far_wall_lateral_extent",
-            "n_observations": 7,
+            "n_observations": 2,
             "notes": "Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld."
           },
           "height": {
@@ -1125,9 +1125,9 @@
         "notes": "Not estimated from the capture. A prior over ordinary residential ceilings, quoted as a range because the pipeline has no ceiling estimator yet."
       },
       "floor_area": {
-        "value": 9.9823,
+        "value": 9.2063,
         "ci_low": 0.0,
-        "ci_high": 38.7587,
+        "ci_high": 23.9364,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -1136,20 +1136,20 @@
       "source_frames": 7,
       "polygon": [
         [
-          -1.588,
-          -5.144
+          -0.903,
+          -6.859
         ],
         [
-          1.723,
-          -5.144
+          1.393,
+          -6.859
         ],
         [
-          1.723,
-          -2.129
+          1.393,
+          -2.849
         ],
         [
-          -1.588,
-          -2.129
+          -0.903,
+          -2.849
         ]
       ]
     }
@@ -1188,9 +1188,9 @@
       }
     ],
     "footprint_area": {
-      "value": 85.536,
+      "value": 79.484,
       "ci_low": 0.0,
-      "ci_high": 392.178,
+      "ci_high": 358.811,
       "unit": "m2",
       "method": "union_of_placed_rooms",
       "notes": "Union of 8 placed room rectangles. Room sizes and adjacency are measured; room *positions* are solved from those, not observed, so the footprint is a sum of measured areas rather than a surveyed outline."
@@ -1207,8 +1207,8 @@
       "position_method": "topological_layout",
       "position_note": "Positions are solved so adjacent rooms touch and none overlap. Dimensions and adjacency are measured; positions are not - nothing observed says where along the hall a bedroom sits.",
       "overlap_area_m2": 0.0,
-      "footprint_m2": 85.54,
-      "bounding_box_m2": 212.05,
+      "footprint_m2": 79.48,
+      "bounding_box_m2": 240.52,
       "hub_room": "hall",
       "orphan_rooms": [
         "living_room",

@@ -80,12 +80,33 @@ def estimate_rooms(bundle: CaptureBundle, views_by_room: dict[str, list[RoomView
 
         depth = width = None
         if good:
-            depths = [v.depth_far_m for v in good]
-            widths = [v.width_span_m for v in good]
+            # Prefer views where the wall stayed inside the frame.
+            #
+            # A wall that runs out of the image was measured to where our view
+            # stopped, not where the wall did, so its length is a lower bound.
+            # Mixing lower bounds into a median drags the answer wherever the
+            # framing happened to fall. Measured on the benchmark: bathroom_1's
+            # single whole-wall view gives 1.88 m against a 1.38-2.35 m room,
+            # while its three truncated views give 3.3-3.7 m.
+            #
+            # When no view saw a whole wall the truncated ones are all there is,
+            # and the median of them is used. Taking the *largest* was tried on the
+            # reasoning that each is a lower bound so the biggest is the tightest.
+            # It was much worse - footprint 85.5 to 173.7 m2 against ~67 - because
+            # the bound only holds in principle: measurement noise pushes some
+            # truncated readings above the truth, and a maximum selects for
+            # exactly those.
+            whole = [v for v in good if not getattr(v, "truncated", False)]
+            source = whole or good
+            depths = [v.depth_far_m for v in source]
+            widths = [v.width_span_m for v in source]
+            basis = (f"{len(whole)} of {len(good)} views saw a whole wall"
+                     if whole else
+                     f"no view saw a whole wall; median of {len(good)} truncated views")
             depth = Measurement.from_samples(
                 depths, "m", "floor_backprojection_camera_height_prior",
                 floor_rel=DEPTH_REL_INTERVAL,
-                notes="Scale from a 1.45 m camera-height prior; interval set from measured error against tape ground truth.")
+                notes=f"Scale from a 1.45 m camera-height prior. {basis}. Interval set from measured error against tape ground truth.")
             width = Measurement.from_samples(
                 widths, "m", "far_wall_lateral_extent",
                 floor_rel=WIDTH_REL_INTERVAL,

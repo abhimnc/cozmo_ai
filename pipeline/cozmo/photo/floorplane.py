@@ -34,6 +34,7 @@ class FloorLine:
     inliers: np.ndarray      # (N, 2) supporting floor points
     length_m: float
     distance_m: float        # perpendicular distance from the camera
+    truncated: bool = False  # does this wall run out of the image frame?
 
     @property
     def support(self) -> int:
@@ -67,24 +68,38 @@ def candidate_points(image_path: str, width: int, height: int, horizon_y: float,
 
 def project_to_floor(pixels: np.ndarray, rotation: np.ndarray, focal: float,
                      principal: np.ndarray, camera_height: float,
-                     min_depression_deg: float) -> np.ndarray:
-    """Back-project image points onto the floor plane. Returns (lateral, forward) metres."""
+                     min_depression_deg: float, keep_pixels: bool = False):
+    """Back-project image points onto the floor plane. Returns (lateral, forward) metres.
+
+    With `keep_pixels`, also returns the surviving image coordinates, so a fitted
+    line can later be checked against the frame border.
+    """
     if len(pixels) == 0:
-        return np.empty((0, 2))
+        return (np.empty((0, 2)), np.empty((0, 2))) if keep_pixels else np.empty((0, 2))
     d = np.stack([pixels[:, 0] - principal[0],
                   pixels[:, 1] - principal[1],
                   np.full(len(pixels), focal)], axis=1) @ rotation.T
     unit = d / np.linalg.norm(d, axis=1, keepdims=True)
     d = d[unit[:, 1] > np.sin(np.deg2rad(min_depression_deg))]
     if len(d) == 0:
-        return np.empty((0, 2))
+        return (np.empty((0, 2)), np.empty((0, 2))) if keep_pixels else np.empty((0, 2))
+    kept_px = pixels[unit[:, 1] > np.sin(np.deg2rad(min_depression_deg))]
     t = camera_height / d[:, 1]
-    return np.stack([d[:, 0] * t, d[:, 2] * t], axis=1)
+    floor = np.stack([d[:, 0] * t, d[:, 2] * t], axis=1)
+    return (floor, kept_px) if keep_pixels else floor
+
+
+# A line endpoint within this fraction of the frame width from an edge is treated
+# as leaving the image. The wall almost certainly continues; we simply stopped
+# being able to see it.
+BORDER_FRAC = 0.04
 
 
 def find_floor_lines(points: np.ndarray, min_length_m: float = 1.2,
                      tolerance_m: float = 0.08, max_lines: int = 4,
-                     rng: np.random.Generator | None = None) -> list[FloorLine]:
+                     rng: np.random.Generator | None = None,
+                     pixels: np.ndarray | None = None,
+                     frame: tuple[int, int] | None = None) -> list[FloorLine]:
     """Greedy RANSAC for straight runs on the floor plane.
 
     `min_length_m` is what separates a wall from a sofa: a wall base visible in a
@@ -126,9 +141,23 @@ def find_floor_lines(points: np.ndarray, min_length_m: float = 1.2,
             break
         inliers, p, v, length = best
         normal = np.array([-v[1], v[0]])
+        # Does this wall leave the frame? If the line's extreme supporting points
+        # sit against an image edge, the run we measured is where our *view*
+        # ended, not where the wall did - so its length is a lower bound rather
+        # than a measurement, and downstream must treat it as one.
+        truncated = False
+        if pixels is not None and frame is not None and len(pixels) == len(points):
+            px = pixels[inliers]
+            along = (points[inliers] - p) @ v
+            ends = px[[int(np.argmin(along)), int(np.argmax(along))]]
+            w, h = frame
+            m = BORDER_FRAC * w
+            truncated = bool(np.any((ends[:, 0] < m) | (ends[:, 0] > w - m) |
+                                    (ends[:, 1] < m) | (ends[:, 1] > h - m)))
+
         found.append(FloorLine(
             point=p, direction=v, inliers=points[inliers], length_m=length,
-            distance_m=float(abs(np.dot(p, normal))),
+            distance_m=float(abs(np.dot(p, normal))), truncated=truncated,
         ))
         remaining &= ~inliers
 

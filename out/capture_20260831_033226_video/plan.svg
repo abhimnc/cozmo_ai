@@ -1,41 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="370" height="395" viewBox="0 0 370 395" font-family="ui-sans-serif,system-ui,sans-serif">
-<rect width="370" height="395" fill="#fbfaf8"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="426" height="385" viewBox="0 0 426 385" font-family="ui-sans-serif,system-ui,sans-serif">
+<rect width="426" height="385" fill="#fbfaf8"/>
 <text x="56" y="28" font-size="15" font-weight="600" fill="#3d3a34">capture_20260831_033226_video &#183; video tier</text>
 <text x="56" y="46" font-size="11" fill="#8a8377">Room sizes and adjacency are measured. Positions are solved so neighbours touch and none overlap &#8212; they are not surveyed.</text>
-<polygon points="247.2,185.6 314.8,185.6 314.8,221.8 247.2,221.8" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
-<text x="281.0" y="199.7" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bedroom 1</text>
-<text x="281.0" y="214.7" font-size="9.5" text-anchor="middle" fill="#8a8377">1.06 &#215; 1.99 m</text>
-<text x="281.0" y="227.7" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
-<polygon points="229.7,253.6 308.0,253.6 308.0,276.8 229.7,276.8" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
-<text x="268.8" y="261.2" font-size="11.5" text-anchor="middle" fill="#3d3a34">Hall</text>
-<text x="268.8" y="276.2" font-size="9.5" text-anchor="middle" fill="#8a8377">0.68 &#215; 2.30 m</text>
-<text x="268.8" y="289.2" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
-<polygon points="172.4,259.6 222.3,259.6 222.3,315.4 172.4,315.4" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
-<text x="197.4" y="283.5" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bedroom 2</text>
-<text x="197.4" y="298.5" font-size="9.5" text-anchor="middle" fill="#8a8377">1.64 &#215; 1.47 m</text>
-<text x="197.4" y="311.5" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
-<polygon points="61.6,257.4 162.1,257.4 162.1,292.2 61.6,292.2" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
-<text x="111.8" y="270.8" font-size="11.5" text-anchor="middle" fill="#3d3a34">Kitchen</text>
-<text x="111.8" y="285.8" font-size="9.5" text-anchor="middle" fill="#8a8377">1.02 &#215; 2.96 m</text>
-<text x="111.8" y="298.8" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
-<polygon points="56.0,203.6 143.3,203.6 143.3,203.8 56.0,203.8" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
-<text x="99.7" y="199.7" font-size="11.5" text-anchor="middle" fill="#3d3a34">Puja room</text>
-<text x="99.7" y="214.7" font-size="9.5" text-anchor="middle" fill="#8a8377">0.01 &#215; 2.57 m</text>
-<text x="99.7" y="227.7" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
-<polygon points="83.8,132.1 171.4,132.1 171.4,139.9 83.8,139.9" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
-<text x="127.6" y="132.0" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bedroom 3</text>
-<text x="127.6" y="147.0" font-size="9.5" text-anchor="middle" fill="#8a8377">0.23 &#215; 2.57 m</text>
-<text x="127.6" y="160.0" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
-<polygon points="160.8,108.0 229.8,108.0 229.8,126.4 160.8,126.4" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
-<text x="195.3" y="113.2" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bathroom 1</text>
-<text x="195.3" y="128.2" font-size="9.5" text-anchor="middle" fill="#8a8377">0.54 &#215; 2.03 m</text>
-<text x="195.3" y="141.2" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
-<polygon points="224.8,148.9 274.3,148.9 274.3,150.0 224.8,150.0" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
-<text x="249.5" y="145.4" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bathroom 2</text>
-<text x="249.5" y="160.4" font-size="9.5" text-anchor="middle" fill="#8a8377">0.03 &#215; 1.46 m</text>
-<text x="249.5" y="173.4" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
-<polygon points="146.7,178.4 243.9,178.4 243.9,228.9 146.7,228.9" fill="#ffffff" stroke="#5c564a" stroke-width="1.8"/>
-<text x="195.3" y="199.7" font-size="11.5" text-anchor="middle" fill="#3d3a34">Living room</text>
-<text x="195.3" y="214.7" font-size="9.5" text-anchor="middle" fill="#8a8377">1.48 &#215; 2.86 m</text>
-<text x="56" y="377" font-size="10.5" fill="#8a8377">9 rooms &#183; footprint 15.1 m&#178; &#183; overlap 0.0 m&#178; &#183; dashed outline = no adjacency recovered</text>
+<polygon points="163.5,174.6 288.5,174.6 288.5,223.8 163.5,223.8" fill="#ffffff" stroke="#5c564a" stroke-width="1.8"/>
+<text x="226.0" y="195.2" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bedroom 1</text>
+<text x="226.0" y="210.2" font-size="9.5" text-anchor="middle" fill="#8a8377">1.45 &#215; 3.68 m</text>
+<polygon points="291.9,192.9 370.2,192.9 370.2,205.4 291.9,205.4" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="331.0" y="195.2" font-size="11.5" text-anchor="middle" fill="#3d3a34">Hall</text>
+<text x="331.0" y="210.2" font-size="9.5" text-anchor="middle" fill="#8a8377">0.37 &#215; 2.30 m</text>
+<text x="331.0" y="223.2" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
+<polygon points="270.3,237.6 314.4,237.6 314.4,293.3 270.3,293.3" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="292.3" y="261.5" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bedroom 2</text>
+<text x="292.3" y="276.5" font-size="9.5" text-anchor="middle" fill="#8a8377">1.64 &#215; 1.30 m</text>
+<text x="292.3" y="289.5" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
+<polygon points="194.5,287.9 257.6,287.9 257.6,305.3 194.5,305.3" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="226.0" y="292.6" font-size="11.5" text-anchor="middle" fill="#3d3a34">Kitchen</text>
+<text x="226.0" y="307.6" font-size="9.5" text-anchor="middle" fill="#8a8377">0.51 &#215; 1.85 m</text>
+<text x="226.0" y="320.6" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
+<polygon points="94.8,280.1 194.0,280.1 194.0,281.6 94.8,281.6" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="144.4" y="276.8" font-size="11.5" text-anchor="middle" fill="#3d3a34">Puja room</text>
+<text x="144.4" y="291.8" font-size="9.5" text-anchor="middle" fill="#8a8377">0.05 &#215; 2.92 m</text>
+<text x="144.4" y="304.8" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
+<polygon points="56.0,192.4 160.1,192.4 160.1,206.0 56.0,206.0" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="108.1" y="195.2" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bedroom 3</text>
+<text x="108.1" y="210.2" font-size="9.5" text-anchor="middle" fill="#8a8377">0.40 &#215; 3.06 m</text>
+<text x="108.1" y="223.2" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
+<polygon points="120.5,114.7 189.6,114.7 189.6,141.7 120.5,141.7" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="155.0" y="124.2" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bathroom 1</text>
+<text x="155.0" y="139.2" font-size="9.5" text-anchor="middle" fill="#8a8377">0.79 &#215; 2.03 m</text>
+<text x="155.0" y="152.2" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
+<polygon points="201.3,108.0 250.8,108.0 250.8,109.2 201.3,109.2" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="226.0" y="104.6" font-size="11.5" text-anchor="middle" fill="#3d3a34">Bathroom 2</text>
+<text x="226.0" y="119.6" font-size="9.5" text-anchor="middle" fill="#8a8377">0.03 &#215; 1.46 m</text>
+<text x="226.0" y="132.6" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
+<polygon points="260.8,114.0 341.6,114.0 341.6,134.0 260.8,134.0" fill="#ffffff" stroke="#5c564a" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="301.2" y="120.0" font-size="11.5" text-anchor="middle" fill="#3d3a34">Living room</text>
+<text x="301.2" y="135.0" font-size="9.5" text-anchor="middle" fill="#8a8377">0.59 &#215; 2.38 m</text>
+<text x="301.2" y="148.0" font-size="8.5" text-anchor="middle" fill="#e8642e">no link recovered</text>
+<text x="56" y="367" font-size="10.5" fill="#8a8377">9 rooms &#183; footprint 13.6 m&#178; &#183; overlap 0.0 m&#178; &#183; dashed outline = no adjacency recovered</text>
 </svg>

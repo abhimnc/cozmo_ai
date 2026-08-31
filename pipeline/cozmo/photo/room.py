@@ -57,6 +57,7 @@ class RoomView:
     width_span_m: float = 0.0                   # lateral spread of floor points
     ceiling_height_m: float | None = None
     openings: list = None
+    truncated: bool = False   # the measured wall ran out of frame: a lower bound
 
 
 def _vertical_vanishing_point(seg: lines.Segments) -> np.ndarray | None:
@@ -173,9 +174,10 @@ def analyse(image_path: str, focal_35mm: float | None = None) -> RoomView:
     # lowest-edge heuristic when no run is long enough to be a wall - a very
     # cluttered or very small room may genuinely show none.
     candidates = floorplane.candidate_points(image_path, seg.width, seg.height, horizon_y)
-    floor_pts = floorplane.project_to_floor(candidates, R, focal, principal,
-                                            CAMERA_HEIGHT_M, MIN_DEPRESSION_DEG)
-    wall_lines = floorplane.find_floor_lines(floor_pts)
+    floor_pts, floor_px = floorplane.project_to_floor(
+        candidates, R, focal, principal, CAMERA_HEIGHT_M, MIN_DEPRESSION_DEG, keep_pixels=True)
+    wall_lines = floorplane.find_floor_lines(floor_pts, pixels=floor_px,
+                                             frame=(seg.width, seg.height))
     # Use the floor-plane method only where its preconditions actually hold.
     #
     # It needs enough floor points to tell a straight wall run from scatter. A
@@ -211,7 +213,7 @@ def analyse(image_path: str, focal_35mm: float | None = None) -> RoomView:
             return RoomView(image_path, False, "degenerate extent from the fitted wall line")
         found = openings_mod.detect(seg, strong, R, focal, principal, CAMERA_HEIGHT_M)
         return RoomView(image_path, True, "", focal_full, tilt, chosen.inliers,
-                        depth, span, None, found)
+                        depth, span, None, found, chosen.truncated)
 
     boundary = _floor_boundary(image_path, seg, horizon_y)
     if len(boundary) < 12:
