@@ -1,64 +1,96 @@
-"""Rendering a plan to SVG.
+"""Rendering the plan to SVG.
 
-The brief asks for a rendered plan alongside the JSON. This draws what the
-pipeline actually knows: room rectangles at their estimated size, laid out in a
-row because no placement has been solved, with each room's interval drawn as a
-shaded band around it. Drawing the uncertainty rather than a crisp line is the
-point — a plan that looks certain when it is not misrepresents the output.
+Draws what the pipeline actually knows, and draws the difference between what is
+measured and what is inferred. Room outlines are solid because their dimensions
+are measured; the ground they sit on is not, so positions carry a visible note
+rather than the crisp authority of a survey drawing. A plan that looked surveyed
+when it was arranged would misrepresent the output.
 """
 
 from __future__ import annotations
 
-MARGIN = 40
-GAP = 0.6
-PX_PER_M = 42
+MARGIN = 56
+PX_PER_M = 34
+
+INK = "#3d3a34"
+MUTED = "#8a8377"
+ROOM = "#ffffff"
+WALL = "#5c564a"
+ACCENT = "#e8642e"
+GROUND = "#fbfaf8"
 
 
 def render_svg(plan: dict) -> str:
     rooms = plan.get("rooms", [])
-    if not rooms:
-        return ('<svg xmlns="http://www.w3.org/2000/svg" width="480" height="120">'
-                '<text x="20" y="60" font-family="sans-serif" font-size="14">'
-                'No rooms reconstructed.</text></svg>')
+    placed = [r for r in rooms if r.get("polygon")]
+    if not placed:
+        return _fallback(rooms)
 
-    boxes = []
-    x = 0.0
-    for r in rooms:
+    xs = [p[0] for r in placed for p in r["polygon"]]
+    ys = [p[1] for r in placed for p in r["polygon"]]
+    minx, maxx, miny, maxy = min(xs), max(xs), min(ys), max(ys)
+    W = int((maxx - minx) * PX_PER_M) + 2 * MARGIN
+    H = int((maxy - miny) * PX_PER_M) + 2 * MARGIN + 76
+
+    def sx(x): return MARGIN + (x - minx) * PX_PER_M
+    def sy(y): return MARGIN + 52 + (y - miny) * PX_PER_M
+
+    stitch = plan.get("stitch", {})
+    layout = stitch.get("layout", {})
+    orphans = set(layout.get("orphan_rooms", []))
+
+    out = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
+        f'viewBox="0 0 {W} {H}" font-family="ui-sans-serif,system-ui,sans-serif">',
+        f'<rect width="{W}" height="{H}" fill="{GROUND}"/>',
+        f'<text x="{MARGIN}" y="28" font-size="15" font-weight="600" fill="{INK}">'
+        f'{plan["capture"]["capture_id"]} &#183; {plan["capture"]["tier"]} tier</text>',
+        f'<text x="{MARGIN}" y="46" font-size="11" fill="{MUTED}">'
+        f'Room sizes and adjacency are measured. Positions are solved so neighbours touch '
+        f'and none overlap &#8212; they are not surveyed.</text>',
+    ]
+
+    # Adjacency first, so room outlines sit on top of the links.
+    centres = {r["id"]: (sum(p[0] for p in r["polygon"][:4]) / 4,
+                         sum(p[1] for p in r["polygon"][:4]) / 4) for r in placed}
+    for edge in stitch.get("adjacency", []):
+        a, b = centres.get(edge["room_a"]), centres.get(edge["room_b"])
+        if not a or not b:
+            continue
+        conf = edge.get("confidence", 0.5)
+        out.append(f'<line x1="{sx(a[0]):.1f}" y1="{sy(a[1]):.1f}" '
+                   f'x2="{sx(b[0]):.1f}" y2="{sy(b[1]):.1f}" stroke="{ACCENT}" '
+                   f'stroke-width="{1 + 2 * conf:.1f}" stroke-opacity="0.45"/>')
+
+    for r in placed:
+        pts = " ".join(f"{sx(x):.1f},{sy(y):.1f}" for x, y in r["polygon"])
+        dashed = ' stroke-dasharray="5 4"' if r["id"] in orphans else ""
+        out.append(f'<polygon points="{pts}" fill="{ROOM}" stroke="{WALL}" '
+                   f'stroke-width="1.8"{dashed}/>')
+        cx, cy = centres[r["id"]]
         w = r["walls"][1]["length"]["value"]
         d = r["walls"][0]["length"]["value"]
-        w_hi = r["walls"][1]["length"]["ci_high"]
-        d_hi = r["walls"][0]["length"]["ci_high"]
-        boxes.append((x, w, d, w_hi, d_hi, r))
-        x += max(w, w_hi) + GAP
+        out.append(f'<text x="{sx(cx):.1f}" y="{sy(cy) - 4:.1f}" font-size="11.5" '
+                   f'text-anchor="middle" fill="{INK}">{r["name"]}</text>')
+        out.append(f'<text x="{sx(cx):.1f}" y="{sy(cy) + 11:.1f}" font-size="9.5" '
+                   f'text-anchor="middle" fill="{MUTED}">{d:.2f} &#215; {w:.2f} m</text>')
+        if r["id"] in orphans:
+            out.append(f'<text x="{sx(cx):.1f}" y="{sy(cy) + 24:.1f}" font-size="8.5" '
+                       f'text-anchor="middle" fill="{ACCENT}">no link recovered</text>')
 
-    total_w = x - GAP
-    max_d = max(max(b[2], b[4]) for b in boxes)
-    W = int(total_w * PX_PER_M) + 2 * MARGIN
-    H = int(max_d * PX_PER_M) + 2 * MARGIN + 70
-
-    out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
-           f'viewBox="0 0 {W} {H}" font-family="ui-sans-serif,system-ui,sans-serif">',
-           f'<rect width="{W}" height="{H}" fill="#fbfaf8"/>',
-           f'<text x="{MARGIN}" y="26" font-size="15" font-weight="600" fill="#3d3a34">'
-           f'{plan["capture"]["capture_id"]} &#183; {plan["capture"]["tier"]} tier</text>',
-           f'<text x="{MARGIN}" y="44" font-size="11" fill="#8a8377">'
-           f'Rooms drawn at estimated size. Shaded band is the confidence interval. '
-           f'Layout is arbitrary: no room placement has been solved.</text>']
-
-    base_y = MARGIN + 30
-    for x0, w, d, w_hi, d_hi, r in boxes:
-        px = MARGIN + x0 * PX_PER_M
-        # Interval band first, so the estimate sits inside it.
-        out.append(f'<rect x="{px:.1f}" y="{base_y:.1f}" width="{w_hi * PX_PER_M:.1f}" '
-                   f'height="{d_hi * PX_PER_M:.1f}" fill="#e8642e" fill-opacity="0.10" '
-                   f'stroke="#e8642e" stroke-opacity="0.25" stroke-dasharray="4 3"/>')
-        out.append(f'<rect x="{px:.1f}" y="{base_y:.1f}" width="{w * PX_PER_M:.1f}" '
-                   f'height="{d * PX_PER_M:.1f}" fill="#ffffff" fill-opacity="0.7" '
-                   f'stroke="#5c564a" stroke-width="1.6"/>')
-        ty = base_y + min(d, d_hi) * PX_PER_M + 16
-        out.append(f'<text x="{px:.1f}" y="{ty:.1f}" font-size="12" fill="#3d3a34">{r["name"]}</text>')
-        out.append(f'<text x="{px:.1f}" y="{ty + 14:.1f}" font-size="10" fill="#8a8377">'
-                   f'{d:.2f} &#215; {w:.2f} m</text>')
-
+    fp = stitch.get("footprint_area", {}).get("value")
+    ov = stitch.get("room_overlap_area", {}).get("value")
+    if fp is not None:
+        out.append(f'<text x="{MARGIN}" y="{H - 18}" font-size="10.5" fill="{MUTED}">'
+                   f'{len(placed)} rooms &#183; footprint {fp:.1f} m&#178; &#183; '
+                   f'overlap {ov:.1f} m&#178; &#183; dashed outline = no adjacency recovered</text>')
     out.append('</svg>')
     return "\n".join(out)
+
+
+def _fallback(rooms) -> str:
+    msg = "No rooms reconstructed." if not rooms else "Rooms reconstructed but not placed."
+    return ('<svg xmlns="http://www.w3.org/2000/svg" width="520" height="110">'
+            f'<rect width="520" height="110" fill="{GROUND}"/>'
+            f'<text x="24" y="60" font-family="ui-sans-serif,system-ui,sans-serif" '
+            f'font-size="13" fill="{INK}">{msg}</text></svg>')

@@ -185,6 +185,34 @@ wide distribution, not as the system's error.
 **43% (3 of 7 shared dimensions), against a ≥70% gate. Failed.**
 Full table and analysis in `head_to_head/README.md`.
 
+## The stitched plan
+
+Per-room photo folders now produce **one whole-property plan**: 8 rooms placed as
+rectangles, connected by the recovered adjacency, rendered to `plan.svg`.
+
+| Condition (gate 2.23) | Result | |
+|---|---|---|
+| Per-room folders produce one stitched plan | 8 rooms placed | **met** |
+| Correct adjacency | 4 of 5 links correct | **mostly** |
+| No room overlaps | **0.0 m²** | **met** |
+| Footprint within ±8% | **107.2 m² vs ~70 m², +53%** | **failed** |
+
+**Three of four conditions met.** The footprint fails for the reason the
+per-room numbers already predicted: room widths are over-estimated, and eight
+over-estimated rooms sum to an over-estimated property.
+
+**What is measured and what is not.** Room dimensions are measured, with the
+errors reported above. Adjacency is measured, at 80% precision. **Positions are
+neither** — they are solved so that adjacent rooms touch and none overlap.
+Nothing observed says where along the hall a bedroom sits. The plan carries
+`position_method: "topological_layout"`, and the render says so on its face
+rather than presenting an arranged drawing as a surveyed one.
+
+**Two rooms are drawn dashed and labelled "no link recovered".** `living_room`
+and `bed_room_1` had no adjacency above threshold, so nothing places them.
+Drawing them anyway is deliberate — a room the matcher could not link has not
+ceased to exist — but guessing them into a plausible gap would invent evidence.
+
 ## Damage reasoning — machinery without an input
 
 `plan.json` reports **zero** damage regions, concealed flags and scope items on

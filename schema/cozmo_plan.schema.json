@@ -109,6 +109,11 @@
           "$ref": "#/$defs/Measurement",
           "description": "Total area where room polygons overlap. The photo-tier gate requires no overlaps, so this is reported rather than silently resolved."
         },
+        "layout": {
+          "type": "object",
+          "description": "How room positions were arrived at. Present when rooms are placed.",
+          "additionalProperties": true
+        },
         "drift": {
           "type": "object",
           "description": "Required. 'Poses used as-is' is an automatic fail on the drift-accountability gate, so the field cannot be omitted.",

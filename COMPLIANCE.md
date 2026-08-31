@@ -4,7 +4,7 @@ Requirement → file path → artifact → status. Honest statuses only: **DONE*
 **PARTIAL**, **NOT DONE**. A requirement with no artifact is marked NOT DONE
 rather than described as in progress.
 
-Summary: **16 done, 8 partial, 7 not done** of 31 requirements.
+Summary: **16 done, 9 partial, 6 not done** of 31 requirements.
 All 8 deliverables written; **7 complete, 1 partial**.
 
 ## Part 1 — Capture route and tiers
@@ -27,7 +27,7 @@ All 8 deliverables written; **7 complete, 1 partial**.
 | 2.2 | Ceiling height | `out/*/plan.json` | Reported as a **residential prior, not an estimate** | **PARTIAL** |
 | 2.3 | Floor area | `out/*/plan.json` | Depth × width, interval propagated | **PARTIAL** |
 | 2.4 | Openings | `pipeline/cozmo/photo/openings.py` | Doors and archways detected as jamb pairs standing on a wall line, with metric widths and confidence, emitted in `plan.json`. **Windows not detectable** (no floor contact); widths off −14.8% and +52.7%; **wall assignment attempted and found structurally blocked** at this tier — see `docs/ERROR_BUDGET.md` | **PARTIAL** |
-| 2.5 | Stitched multi-room plan, correct adjacency | `pipeline/cozmo/photo/adjacency.py` | **Adjacency recovered** from verified image matches between rooms' photo sets — 80% precision, 50% recall on the whole-floor capture, emitted in `stitch.adjacency` with confidence. **No room placement**, so this is a graph of which rooms touch, not a laid-out plan | **PARTIAL** |
+| 2.5 | Stitched multi-room plan, correct adjacency | `photo/adjacency.py`, `layout.py`, `render.py` | **One stitched plan produced**: 8 rooms placed with polygons, adjacency at 80% precision, **zero overlap**, rendered to SVG. Positions are solved from dimensions + adjacency, **not surveyed** — stated in the plan and drawn on the render | **PARTIAL** |
 | 2.6 | Per-surface damage regions, class and extent | — | No damage detection | **NOT DONE** |
 | 2.7 | Concealed-damage flags with the rule that fired | `pipeline/cozmo/damage/rules.py` | **Rule engine implemented**: 5 rules, each carrying its statement in plain words; every flag names the rule and the regions that satisfied it. Fires 6 flags on a worked damage set (`cozmo demo-damage`). Empty on real captures because **no damage detector exists** | **PARTIAL** |
 | 2.8 | Scope line items keyed to surfaces | `pipeline/cozmo/damage/scope.py` | **Generator implemented**: remediation items carry a measured extent plus a labelled trade allowance; investigation items carry **no area**, since concealed damage cannot be quantified before opening up. Every item names what it derives from. 10 items on the worked set | **PARTIAL** |
@@ -55,7 +55,7 @@ All 8 deliverables written; **7 complete, 1 partial**.
 | 2.20 | Ceiling height ≤1.5 cm | `fixloop/after/score_photo.txt` | −12.0%, a prior not an estimate | **NOT DONE** |
 | 2.21 | Repeatability within 1 cm / 0.5% | `benchmark/BENCHMARK_REPORT.md` | Table produced: **0 of 8**, and the report states which failure mode it is (unrepeatable, not repeatable-but-biased) | **NOT DONE** — measured and diagnosed |
 | 2.22 | Drift accountability + ablation | `out/*/plan.json` | `stitch.drift` states `method: none, applied: false` because no placement stage exists. **Not** "poses used as-is" — the stage is absent, and the field says so | **PARTIAL** |
-| 2.23 | Photo-tier whole-property stitch | — | Not implemented | **NOT DONE** |
+| 2.23 | Photo-tier whole-property stitch | `out/*/plan.svg` | Per-room photo folders → **one stitched plan**: 8 rooms placed, correct adjacency on 4 of 5 links, **no room overlaps (0.0 m²)**. Footprint **107.2 m² against ~70 m² actual, +53%** — fails the ±8% row | **PARTIAL** — three of four conditions met |
 | 2.24 | Photo ±8% / video ±3% wall lengths | `fixloop/after2/` | Photo median 26.2% with **1 of 6 dimensions passing**; video median 38.3%, 0 of 6 | **NOT DONE** — measured and reported |
 | 2.25 | Calibration scored at every tier | `benchmark/BENCHMARK_REPORT.md` | **6 of 6** intervals contain the truth at the photo tier, 4 of 6 at video. Intervals average ±100% of their value, so coverage reflects how little is known rather than good calibration — stated in the report | **DONE** |
 

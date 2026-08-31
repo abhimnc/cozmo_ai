@@ -189,6 +189,20 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
                        notes=s.note).to_json(),
                    "derived_from": s.derived_from} for s in scope]
 
+    # Lay the rooms out from their dimensions and the recovered adjacency.
+    from .layout import PlacedRoom, solve as solve_layout
+
+    placed, layout_stats = solve_layout(
+        [PlacedRoom(r["id"], r["name"],
+                    r["walls"][1]["length"]["value"],
+                    r["walls"][0]["length"]["value"]) for r in rooms_json],
+        [(l.room_a, l.room_b) for l in (links or [])],
+    )
+    by_id = {p.room_id: p for p in placed}
+    for r in rooms_json:
+        if r["id"] in by_id:
+            r["polygon"] = [[round(c, 3) for c in pt] for pt in by_id[r["id"]].polygon()]
+
     adjacency = [
         {"room_a": l.room_a, "room_b": l.room_b,
          "via": f"shared_view_{l.inliers}_inliers",
@@ -218,13 +232,25 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
             "footprint_area": {
                 "value": round(footprint, 3), "ci_low": round(footprint_lo, 3),
                 "ci_high": round(footprint_hi, 3), "unit": "m2",
-                "method": "sum_of_room_areas",
-                "notes": "Sum of per-room areas, not a stitched footprint. No room placement has been solved.",
+                "method": "union_of_placed_rooms",
+                "notes": (f"Union of {layout_stats['placed']} placed room rectangles. Room sizes and "
+                          "adjacency are measured; room *positions* are solved from those, not "
+                          "observed, so the footprint is a sum of measured areas rather than a "
+                          "surveyed outline."),
             },
             "room_overlap_area": {
-                "value": 0.0, "ci_low": 0.0, "ci_high": 0.0, "unit": "m2",
-                "method": "not_applicable_no_placement",
-                "notes": "Zero because no rooms have been placed, not because placement was checked for overlaps.",
+                "value": layout_stats["overlap_area_m2"],
+                "ci_low": layout_stats["overlap_area_m2"],
+                "ci_high": layout_stats["overlap_area_m2"], "unit": "m2",
+                "method": "measured_from_placed_polygons",
+                "notes": "Checked directly against the placed rectangles, not assumed.",
+            },
+            "layout": {
+                "position_method": "topological_layout",
+                "position_note": ("Positions are solved so adjacent rooms touch and none overlap. "
+                                  "Dimensions and adjacency are measured; positions are not - "
+                                  "nothing observed says where along the hall a bedroom sits."),
+                **{k: v for k, v in layout_stats.items() if k != "placed"},
             },
             "drift": {
                 "method": "none",

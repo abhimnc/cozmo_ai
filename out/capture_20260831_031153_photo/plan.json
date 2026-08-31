@@ -13,8 +13,8 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "eafbc8c",
-    "run_at": "2026-08-31T06:05:07.899664+00:00",
+    "git_commit": "215eccb",
+    "run_at": "2026-08-31T06:16:56.958668+00:00",
     "command": "cozmo run benchmark/raw/capture_20260831_031153_photo",
     "runtime_seconds": 17.7
   },
@@ -166,7 +166,25 @@
           "detection_confidence": 0.5
         }
       ],
-      "source_frames": 7
+      "source_frames": 7,
+      "polygon": [
+        [
+          7.951,
+          -2.29
+        ],
+        [
+          11.268,
+          -2.29
+        ],
+        [
+          11.268,
+          2.29
+        ],
+        [
+          7.951,
+          2.29
+        ]
+      ]
     },
     {
       "id": "hall",
@@ -315,7 +333,25 @@
           "detection_confidence": 0.25
         }
       ],
-      "source_frames": 8
+      "source_frames": 8,
+      "polygon": [
+        [
+          -1.909,
+          -1.989
+        ],
+        [
+          1.909,
+          -1.989
+        ],
+        [
+          1.909,
+          1.989
+        ],
+        [
+          -1.909,
+          1.989
+        ]
+      ]
     },
     {
       "id": "bed_room_1",
@@ -419,7 +455,25 @@
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
       "openings": [],
-      "source_frames": 3
+      "source_frames": 3,
+      "polygon": [
+        [
+          -11.056,
+          -2.281
+        ],
+        [
+          -8.146,
+          -2.281
+        ],
+        [
+          -8.146,
+          2.281
+        ],
+        [
+          -11.056,
+          2.281
+        ]
+      ]
     },
     {
       "id": "bed_room_2",
@@ -546,7 +600,25 @@
           "detection_confidence": 0.25
         }
       ],
-      "source_frames": 6
+      "source_frames": 6,
+      "polygon": [
+        [
+          1.989,
+          -2.054
+        ],
+        [
+          7.219,
+          -2.054
+        ],
+        [
+          7.219,
+          2.054
+        ],
+        [
+          1.989,
+          2.054
+        ]
+      ]
     },
     {
       "id": "kitchen",
@@ -695,7 +767,25 @@
           "detection_confidence": 0.25
         }
       ],
-      "source_frames": 7
+      "source_frames": 7,
+      "polygon": [
+        [
+          -0.516,
+          2.119
+        ],
+        [
+          2.757,
+          2.119
+        ],
+        [
+          2.757,
+          4.778
+        ],
+        [
+          -0.516,
+          4.778
+        ]
+      ]
     },
     {
       "id": "bedroom_3",
@@ -799,7 +889,25 @@
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
       "openings": [],
-      "source_frames": 6
+      "source_frames": 6,
+      "polygon": [
+        [
+          -4.4,
+          0.238
+        ],
+        [
+          -2.477,
+          0.238
+        ],
+        [
+          -2.477,
+          4.758
+        ],
+        [
+          -4.4,
+          4.758
+        ]
+      ]
     },
     {
       "id": "bathroom_1",
@@ -903,7 +1011,25 @@
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
       "openings": [],
-      "source_frames": 4
+      "source_frames": 4,
+      "polygon": [
+        [
+          -5.301,
+          -5.622
+        ],
+        [
+          -1.915,
+          -5.622
+        ],
+        [
+          -1.915,
+          -1.536
+        ],
+        [
+          -5.301,
+          -1.536
+        ]
+      ]
     },
     {
       "id": "bathroom_2",
@@ -1007,7 +1133,25 @@
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
       "openings": [],
-      "source_frames": 7
+      "source_frames": 7,
+      "polygon": [
+        [
+          -0.693,
+          -6.528
+        ],
+        [
+          1.768,
+          -6.528
+        ],
+        [
+          1.768,
+          -2.12
+        ],
+        [
+          -0.693,
+          -2.12
+        ]
+      ]
     }
   ],
   "stitch": {
@@ -1048,16 +1192,29 @@
       "ci_low": 0.0,
       "ci_high": 503.885,
       "unit": "m2",
-      "method": "sum_of_room_areas",
-      "notes": "Sum of per-room areas, not a stitched footprint. No room placement has been solved."
+      "method": "union_of_placed_rooms",
+      "notes": "Union of 8 placed room rectangles. Room sizes and adjacency are measured; room *positions* are solved from those, not observed, so the footprint is a sum of measured areas rather than a surveyed outline."
     },
     "room_overlap_area": {
       "value": 0.0,
       "ci_low": 0.0,
       "ci_high": 0.0,
       "unit": "m2",
-      "method": "not_applicable_no_placement",
-      "notes": "Zero because no rooms have been placed, not because placement was checked for overlaps."
+      "method": "measured_from_placed_polygons",
+      "notes": "Checked directly against the placed rectangles, not assumed."
+    },
+    "layout": {
+      "position_method": "topological_layout",
+      "position_note": "Positions are solved so adjacent rooms touch and none overlap. Dimensions and adjacency are measured; positions are not - nothing observed says where along the hall a bedroom sits.",
+      "overlap_area_m2": 0.0,
+      "footprint_m2": 107.24,
+      "bounding_box_m2": 252.41,
+      "hub_room": "hall",
+      "orphan_rooms": [
+        "living_room",
+        "bed_room_1"
+      ],
+      "orphan_note": "Rooms with no recovered adjacency. They are drawn, because a room the matcher could not link has not ceased to exist, but nothing observed says where they belong - so they are placed outside the connected group rather than guessed into a plausible gap."
     },
     "drift": {
       "method": "none",
