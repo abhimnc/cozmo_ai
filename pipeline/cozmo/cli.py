@@ -62,7 +62,16 @@ def cmd_inspect(args: argparse.Namespace) -> int:
 
     if args.prove_budget:
         print("\nbudget enforcement check")
-        for candidate in ("_reference/poses.jsonl", "_reference/planes.json", "poses.jsonl"):
+        # Only attempt paths this tier genuinely may not read. poses.jsonl is in
+        # budget at the LiDAR tier and out of it at the others, so a fixed list
+        # reports a false violation - which is what the first synthetic LiDAR run
+        # did.
+        candidates = [c for c in ("_reference/poses.jsonl", "_reference/planes.json",
+                                  "_reference/note.txt", "poses.jsonl", "depth/000000.depth")
+                      if not bundle.budget.allows(c)]
+        if not candidates:
+            print("  (nothing outside this tier's budget to test)")
+        for candidate in candidates:
             try:
                 bundle.open(candidate).close()
             except BudgetViolation:

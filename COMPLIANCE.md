@@ -16,7 +16,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 | 1.3 | Installable in under 10 min | `docs/CAPTURE_PROTOCOL.md` | Xcode/devicectl install documented; **no TestFlight build** — needs a paid developer account | **PARTIAL** |
 | 1.4 | Photo tier | `ios/.../CaptureTier.swift` | Implemented, 5 real captures | **DONE** |
 | 1.5 | Video tier | `ios/.../VideoRecorder.swift` | Implemented, 339 s / 20,324-frame walkthrough captured | **DONE** |
-| 1.6 | LiDAR tier | `ios/.../CaptureController.swift`, `pipeline/cozmo/lidar/` | Code path complete, **never run on real LiDAR data** — no LiDAR device available | **PARTIAL** |
+| 1.6 | LiDAR tier | `pipeline/cozmo/lidar/`, `scripts/make_synthetic_lidar.py` | Runs end to end on a synthetic bundle (4.1 s, schema-valid). **Never run on real LiDAR data** — no LiDAR device available, so no accuracy claim | **PARTIAL** |
 | 1.7 | Device matrix | `docs/DEVICE_MATRIX.md` | Tier × hardware, probed at runtime, per-tier accuracy filled from benchmark | **DONE** |
 
 ## Part 2 — Output contract
@@ -42,7 +42,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 |---|---|---|---|---|
 | 2.13 | Multi-room capture, 3+ rooms plus connector | `benchmark/raw/capture_20260831_031153_photo` | 8 rooms, Hall connector, 61 photos | **DONE** |
 | 2.14 | Furnished room with staged damage, two classes | — | Not staged | **NOT DONE** |
-| 2.15 | Same rooms at all three tiers | `benchmark/raw/` | Photo and video done; LiDAR impossible on available hardware | **PARTIAL** |
+| 2.15 | Same rooms at all three tiers | `benchmark/raw/` | Photo and video captured on real hardware; LiDAR exercised synthetically only | **PARTIAL** |
 | 2.16 | One room captured twice, same tier | `benchmark/raw/` | Living room in two photo captures | **DONE** |
 | 2.17 | Laser or tape ground truth | `benchmark/ground_truth/` | Tape: Living room and Hall complete, walls/ceiling/openings/wall thickness | **PARTIAL** — 2 of 9 rooms |
 | 2.18 | Raw sensor data submitted | `benchmark/raw/` | 10 captures incl. 486 MB video; gitignored, supplied separately | **DONE** |

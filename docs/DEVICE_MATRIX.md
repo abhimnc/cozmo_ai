@@ -28,6 +28,27 @@ the benchmark exists is exactly the "confident garbage" the brief penalises.
 | Video | — | — | — | — | wall lengths ±3% |
 | Photo | — | — | — | — | wall lengths ±8%, footprint ±8% |
 
+## LiDAR tier readiness
+
+The tier has **never seen real LiDAR data** — no available device produces it.
+To ensure it does not fail cold at the walk-in test, where the grader chooses
+the tier on the day, it is exercised against a synthetic bundle built by
+`scripts/make_synthetic_lidar.py`:
+
+```
+python scripts/make_synthetic_lidar.py
+cozmo run benchmark/raw/capture_synthetic_lidar
+```
+
+That loads, enforces the tier's sensor budget, runs the geometry and emits a
+schema-valid plan in 4.1 s across 8 rooms. It proves the **path executes**; it
+proves nothing about accuracy, and no number from it appears in the benchmark
+report.
+
+The synthetic run also caught a real defect: `--prove-budget` used a fixed list
+of paths to attempt, and `poses.jsonl` is in budget at the LiDAR tier while out
+of it at the others, so it reported a false budget violation. Now tier-aware.
+
 ## Known hardware constraint
 
 The only device available to this project is an **iPhone 13**. It cannot run
