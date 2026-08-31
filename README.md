@@ -38,9 +38,26 @@ Outputs land in `out/<capture_id>/` as `plan.json` (validated against
 
 No network calls, no API keys, no model weights. OpenCV and numpy only.
 
-**Raw captures are not in git** — 500 MB of photos and a 486 MB video. They are
-supplied with the submission; unpack them into `benchmark/raw/` and the commands
-above work unchanged.
+### Raw captures
+
+Not in git — about **1 GB**, dominated by a 486 MB video walkthrough. They are
+supplied alongside the submission as `cozmo_raw_captures.zip`
+(built by `./scripts/make_repro_bundle.sh`).
+
+```bash
+unzip cozmo_raw_captures.zip     # from the repo root
+```
+
+That restores `benchmark/raw/` and every command on this page works unchanged.
+The archive contains 11 captures: the whole-floor photo set, the video
+walkthrough, the synthetic LiDAR bundle, the repeatability pair, and the earlier
+captures kept for provenance.
+
+**Verify what you have:**
+
+```bash
+cozmo inspect benchmark/raw/capture_20260831_031153_photo --prove-budget
+```
 
 ### Other commands
 

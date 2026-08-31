@@ -260,10 +260,23 @@ would propagate everywhere, being the connector.
 bathrooms, a kitchen — and **not analysed**. A named constraint in the brief, not
 addressed.
 
-**Absent stages, not inaccurate ones.** No opening detection, so no openings and
-no adjacency. No room placement, so no stitched plan — which the brief calls the
-product surface. No damage detection, concealed flags or scope line items. All
-marked NOT DONE in `COMPLIANCE.md` rather than described as partial.
+**Opening detection exists but does not pass.** Doors and archways are found as
+jamb pairs standing on a wall line; 2 of 3 were found in the room with ground
+truth, with widths off −14.8% and +52.7% against a 2 cm gate. Windows are not
+detectable by this method — no floor contact, so no base point to project — and
+none are claimed.
+
+**Openings cannot be assigned to named walls, and that is structural.** A single
+view distinguishes a wall the camera faces from one beside it, but an opening is
+only detectable when the camera faces its wall, so the classification returns
+"facing" for 8 of 9 detections and separates nothing. Naming a wall needs a
+coordinate frame shared between views, which the photo tier has not.
+
+**Absent stages, not inaccurate ones.** No room placement, so no stitched plan —
+which the brief calls the product surface, and which is blocked upstream by the
+wall-assignment problem above rather than by time. No damage detection, concealed
+flags or scope line items. All marked NOT DONE in `COMPLIANCE.md` rather than
+described as partial.
 
 ---
 
