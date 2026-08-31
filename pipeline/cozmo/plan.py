@@ -35,6 +35,10 @@ WIDTH_REL_INTERVAL = 1.00
 CEILING_PRIOR_M = 2.9
 CEILING_PRIOR_REL = 0.25
 
+# Opening widths measured -14.8% and +52.7% against tape truth on the two the
+# detector found in the Living room. The interval is set to cover that.
+OPENING_REL_INTERVAL = 0.55
+
 
 @dataclass
 class RoomEstimate:
@@ -45,6 +49,7 @@ class RoomEstimate:
     depth_m: Measurement | None
     width_m: Measurement | None
     rejected: list[str]
+    openings: list = None
 
 
 def _git_commit() -> str:
@@ -85,7 +90,10 @@ def estimate_rooms(bundle: CaptureBundle, views_by_room: dict[str, list[RoomView
                 widths, "m", "far_wall_lateral_extent",
                 floor_rel=WIDTH_REL_INTERVAL,
                 notes="Known weak: measured 96% and 382% high on the two rooms with ground truth. Reported with an interval that covers that rather than withheld.")
-        out.append(RoomEstimate(slug, name, len(good), len(views), depth, width, rejected))
+        from .photo.openings import aggregate
+        merged = aggregate([v.openings for v in good if getattr(v, "openings", None)])
+        out.append(RoomEstimate(slug, name, len(good), len(views), depth, width,
+                                rejected, merged))
     return out
 
 
@@ -119,7 +127,25 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
             "walls": walls,
             "ceiling_height": ceiling.to_json(),
             "floor_area": area.to_json(),
-            "openings": [],
+            "openings": [
+                {
+                    # Detected as a pair of vertical jambs standing on a wall
+                    # line. Windows are not detectable this way - they have no
+                    # floor contact - so every entry here is a door or archway
+                    # and none is claimed to be a window.
+                    "id": f"{est.room_id}_opening_{i + 1}",
+                    "type": "door",
+                    "wall_id": "unassigned",
+                    "width": Measurement.from_relative(
+                        o.width_m, OPENING_REL_INTERVAL, "m", "jamb_pair_on_floor_line",
+                        notes="Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is.").to_json(),
+                    "height": Measurement.from_relative(
+                        o.height_m or 2.0, 0.5, "m", "jamb_top_elevation",
+                        notes="Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so.").to_json(),
+                    "detection_confidence": round(o.jamb_confidence, 2),
+                }
+                for i, o in enumerate(est.openings or [])
+            ],
             "source_frames": est.views_used,
         })
 
@@ -177,7 +203,8 @@ def build_plan(bundle: CaptureBundle, estimates: list[RoomEstimate],
                 "Room depth measured 11% and 23% low against tape ground truth on the two rooms that have it.",
                 "Far-wall width measured 96% and 382% high on those same rooms; its interval is +/-100% and it should not be relied on.",
                 "Ceiling height is a residential prior, not an estimate.",
-                "No opening detection, so no openings are reported and no adjacency is claimed.",
+                "Opening detection finds doors and archways only - a window has no floor contact for the method to use - and found 2 of 3 in the room with ground truth, with widths off by -14.8% and +52.7% against a 2 cm gate.",
+                "Openings are not assigned to a wall, so no adjacency is claimed.",
                 "Ground-truth tape uncertainty is unquantified, so these errors are observed rather than measured.",
             ],
         },

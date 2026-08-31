@@ -83,6 +83,35 @@ constructed, so a number from that run would measure the generator, not the
 pipeline. It exists so the tier does not crash cold at the walk-in test, where
 the graders choose the tier on the day.
 
+## Opening detection
+
+Doors and archways are found as pairs of vertical jambs standing on a detected
+wall line, which turns their separation into a metric width. Scored against the
+Living room, the only room with opening ground truth:
+
+| | Truth | Detected | Error |
+|---|---|---|---|
+| archway B / door D | 0.855 m | 0.728 m | **−14.8%** |
+| the other 0.855 m opening | 0.855 m | 1.306 m | **+52.7%** |
+| archway A | 2.013 m | **not found** | miss |
+| window (1.413 m) | — | not detectable | see below |
+
+**2 of 3 doors/archways found, 0 within the 2 cm gate.** With one miss and no
+width inside tolerance, the gate fails outright.
+
+**Windows cannot be found by this method and none are claimed.** The detector
+locates an opening by projecting its jambs' base points onto the floor; a window
+has no floor contact, so it has no base point. Claiming windows we cannot see
+would cost twice, since the gate scores a phantom opening as harshly as a missed
+one.
+
+**Openings are not assigned to walls**, so they support no adjacency claim. The
+detector knows an opening sits on *a* wall line; the plan does not yet know which
+of the four modelled walls that line is.
+
+Heights are worse than widths — 0.77 m and 1.51 m against a 1.85 m truth — and
+carry a 50% interval to say so.
+
 ## Repeatability — **unrepeatable, not repeatable-but-biased**
 
 Two photo-tier captures of the same four rooms, walked differently.

@@ -17,10 +17,10 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "0dbe2c8",
-    "run_at": "2026-08-31T04:42:31.774971+00:00",
+    "git_commit": "39bef6d",
+    "run_at": "2026-08-31T04:54:43.740003+00:00",
     "command": "cozmo run benchmark/raw/capture_synthetic_lidar",
-    "runtime_seconds": 5.6
+    "runtime_seconds": 5.5
   },
   "rooms": [
     {
@@ -31,8 +31,8 @@
           "id": "A",
           "length": {
             "value": 3.5146,
-            "ci_low": 2.4603,
-            "ci_high": 4.569,
+            "ci_low": 1.8371,
+            "ci_high": 5.1922,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -71,8 +71,8 @@
           "id": "C",
           "length": {
             "value": 3.5146,
-            "ci_low": 2.4603,
-            "ci_high": 4.569,
+            "ci_low": 1.8371,
+            "ci_high": 5.1922,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -119,12 +119,57 @@
       "floor_area": {
         "value": 6.8252,
         "ci_low": 0.0,
-        "ci_high": 17.7456,
+        "ci_high": 20.166,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "living_room_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 0.7281,
+            "ci_low": 0.3276,
+            "ci_high": 1.1285,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.7694,
+            "ci_low": 0.3847,
+            "ci_high": 1.1541,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.25
+        },
+        {
+          "id": "living_room_opening_2",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 1.3055,
+            "ci_low": 0.5875,
+            "ci_high": 2.0235,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.8553,
+            "ci_low": 0.4276,
+            "ci_high": 1.2829,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.25
+        }
+      ],
       "source_frames": 3
     },
     {
@@ -135,8 +180,8 @@
           "id": "A",
           "length": {
             "value": 2.6992,
-            "ci_low": 1.1483,
-            "ci_high": 4.25,
+            "ci_low": 0.013,
+            "ci_high": 5.3853,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -175,8 +220,8 @@
           "id": "C",
           "length": {
             "value": 2.6992,
-            "ci_low": 1.1483,
-            "ci_high": 4.25,
+            "ci_low": 0.013,
+            "ci_high": 5.3853,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -223,12 +268,57 @@
       "floor_area": {
         "value": 12.1924,
         "ci_low": 0.0,
-        "ci_high": 38.3954,
+        "ci_high": 48.6519,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "hall_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 1.1931,
+            "ci_low": 0.5369,
+            "ci_high": 1.8492,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 1.1404,
+            "ci_low": 0.5702,
+            "ci_high": 1.7106,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.5
+        },
+        {
+          "id": "hall_opening_2",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 2.378,
+            "ci_low": 1.0701,
+            "ci_high": 3.6859,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.3611,
+            "ci_low": 0.1806,
+            "ci_high": 0.5417,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.25
+        }
+      ],
       "source_frames": 3
     },
     {
@@ -240,7 +330,7 @@
           "length": {
             "value": 5.7113,
             "ci_low": 0.0,
-            "ci_high": 14.0598,
+            "ci_high": 17.5179,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 2,
@@ -260,7 +350,7 @@
           "length": {
             "value": 1.9142,
             "ci_low": 0.0,
-            "ci_high": 3.865,
+            "ci_high": 4.673,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 2,
@@ -280,7 +370,7 @@
           "length": {
             "value": 5.7113,
             "ci_low": 0.0,
-            "ci_high": 14.0598,
+            "ci_high": 17.5179,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 2,
@@ -300,7 +390,7 @@
           "length": {
             "value": 1.9142,
             "ci_low": 0.0,
-            "ci_high": 3.865,
+            "ci_high": 4.673,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 2,
@@ -327,7 +417,7 @@
       "floor_area": {
         "value": 10.9323,
         "ci_low": 0.0,
-        "ci_high": 54.341,
+        "ci_high": 81.8618,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -343,8 +433,8 @@
           "id": "A",
           "length": {
             "value": 6.3612,
-            "ci_low": 3.3845,
-            "ci_high": 9.3379,
+            "ci_low": 0.4077,
+            "ci_high": 12.3147,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -383,8 +473,8 @@
           "id": "C",
           "length": {
             "value": 6.3612,
-            "ci_low": 3.3845,
-            "ci_high": 9.3379,
+            "ci_low": 0.4077,
+            "ci_high": 12.3147,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -431,12 +521,35 @@
       "floor_area": {
         "value": 33.2689,
         "ci_low": 0.0,
-        "ci_high": 97.6743,
+        "ci_high": 128.8107,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
       },
-      "openings": [],
+      "openings": [
+        {
+          "id": "bed_room_2_opening_1",
+          "type": "door",
+          "wall_id": "unassigned",
+          "width": {
+            "value": 0.9128,
+            "ci_low": 0.4108,
+            "ci_high": 1.4149,
+            "unit": "m",
+            "method": "jamb_pair_on_floor_line",
+            "notes": "Not assigned to a wall: the detector locates an opening on a wall line but the plan does not yet know which of the four modelled walls that line is."
+          },
+          "height": {
+            "value": 0.4253,
+            "ci_low": 0.2126,
+            "ci_high": 0.6379,
+            "unit": "m",
+            "method": "jamb_top_elevation",
+            "notes": "Height is badly estimated - measured 0.77 and 1.51 m against a 1.85 m truth - and carries a 50% interval to say so."
+          },
+          "detection_confidence": 0.25
+        }
+      ],
       "source_frames": 4
     },
     {
@@ -447,8 +560,8 @@
           "id": "A",
           "length": {
             "value": 2.6594,
-            "ci_low": 1.7798,
-            "ci_high": 3.539,
+            "ci_low": 1.136,
+            "ci_high": 4.1829,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -487,8 +600,8 @@
           "id": "C",
           "length": {
             "value": 2.6594,
-            "ci_low": 1.7798,
-            "ci_high": 3.539,
+            "ci_low": 1.136,
+            "ci_high": 4.1829,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -535,7 +648,7 @@
       "floor_area": {
         "value": 7.1525,
         "ci_low": 0.0,
-        "ci_high": 19.0363,
+        "ci_high": 22.4998,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -551,8 +664,8 @@
           "id": "A",
           "length": {
             "value": 3.4449,
-            "ci_low": 0.4712,
-            "ci_high": 6.4185,
+            "ci_low": 0.0,
+            "ci_high": 9.3921,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -572,7 +685,7 @@
           "length": {
             "value": 1.9233,
             "ci_low": 0.0,
-            "ci_high": 3.8466,
+            "ci_high": 5.2061,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 4,
@@ -591,8 +704,8 @@
           "id": "C",
           "length": {
             "value": 3.4449,
-            "ci_low": 0.4712,
-            "ci_high": 6.4185,
+            "ci_low": 0.0,
+            "ci_high": 9.3921,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -612,7 +725,7 @@
           "length": {
             "value": 1.9233,
             "ci_low": 0.0,
-            "ci_high": 3.8466,
+            "ci_high": 5.2061,
             "unit": "m",
             "method": "far_wall_lateral_extent",
             "n_observations": 4,
@@ -639,7 +752,7 @@
       "floor_area": {
         "value": 6.6254,
         "ci_low": 0.0,
-        "ci_high": 24.6891,
+        "ci_high": 48.8967,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -655,8 +768,8 @@
           "id": "A",
           "length": {
             "value": 3.6863,
-            "ci_low": 2.2882,
-            "ci_high": 5.0843,
+            "ci_low": 1.2648,
+            "ci_high": 6.1077,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -695,8 +808,8 @@
           "id": "C",
           "length": {
             "value": 3.6863,
-            "ci_low": 2.2882,
-            "ci_high": 5.0843,
+            "ci_low": 1.2648,
+            "ci_high": 6.1077,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 3,
@@ -743,7 +856,7 @@
       "floor_area": {
         "value": 12.1475,
         "ci_low": 0.0,
-        "ci_high": 33.509,
+        "ci_high": 40.2542,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -759,8 +872,8 @@
           "id": "A",
           "length": {
             "value": 6.9568,
-            "ci_low": 3.282,
-            "ci_high": 10.6315,
+            "ci_low": 0.0,
+            "ci_high": 14.3062,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -799,8 +912,8 @@
           "id": "C",
           "length": {
             "value": 6.9568,
-            "ci_low": 3.282,
-            "ci_high": 10.6315,
+            "ci_low": 0.0,
+            "ci_high": 14.3062,
             "unit": "m",
             "method": "floor_backprojection_camera_height_prior",
             "n_observations": 4,
@@ -847,7 +960,7 @@
       "floor_area": {
         "value": 24.4507,
         "ci_low": 0.0,
-        "ci_high": 74.7325,
+        "ci_high": 100.5635,
         "unit": "m2",
         "method": "depth_times_width",
         "notes": "Product of two independent estimates; the interval multiplies, which is why it is wide."
@@ -861,7 +974,7 @@
     "footprint_area": {
       "value": 113.595,
       "ci_low": 0.0,
-      "ci_high": 360.123,
+      "ci_high": 491.705,
       "unit": "m2",
       "method": "sum_of_room_areas",
       "notes": "Sum of per-room areas, not a stitched footprint. No room placement has been solved."
@@ -891,7 +1004,8 @@
       "Room depth measured 11% and 23% low against tape ground truth on the two rooms that have it.",
       "Far-wall width measured 96% and 382% high on those same rooms; its interval is +/-100% and it should not be relied on.",
       "Ceiling height is a residential prior, not an estimate.",
-      "No opening detection, so no openings are reported and no adjacency is claimed.",
+      "Opening detection finds doors and archways only - a window has no floor contact for the method to use - and found 2 of 3 in the room with ground truth, with widths off by -14.8% and +52.7% against a 2 cm gate.",
+      "Openings are not assigned to a wall, so no adjacency is claimed.",
       "Ground-truth tape uncertainty is unquantified, so these errors are observed rather than measured."
     ]
   },

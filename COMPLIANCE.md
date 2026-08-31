@@ -4,7 +4,7 @@ Requirement → file path → artifact → status. Honest statuses only: **DONE*
 **PARTIAL**, **NOT DONE**. A requirement with no artifact is marked NOT DONE
 rather than described as in progress.
 
-Summary: **15 done, 5 partial, 11 not done** of 31 requirements.
+Summary: **15 done, 6 partial, 10 not done** of 31 requirements.
 All 8 deliverables written; 5 complete, 3 partial.
 
 ## Part 1 — Capture route and tiers
@@ -26,7 +26,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 | 2.1 | Dimensioned per-room plan: walls | `schema/`, `out/*/plan.json` | 4 walls per room with intervals | **PARTIAL** — rectangle only, ±30% |
 | 2.2 | Ceiling height | `out/*/plan.json` | Reported as a **residential prior, not an estimate** | **PARTIAL** |
 | 2.3 | Floor area | `out/*/plan.json` | Depth × width, interval propagated | **PARTIAL** |
-| 2.4 | Openings | — | No opening detector | **NOT DONE** |
+| 2.4 | Openings | `pipeline/cozmo/photo/openings.py` | Doors and archways detected as jamb pairs standing on a wall line, with metric widths and confidence, emitted in `plan.json`. **Windows not detectable** (no floor contact); widths off −14.8% and +52.7%; not assigned to walls | **PARTIAL** |
 | 2.5 | Stitched multi-room plan, correct adjacency | — | No placement solved; `stitch.adjacency` empty with stated reason | **NOT DONE** |
 | 2.6 | Per-surface damage regions, class and extent | — | No damage detection | **NOT DONE** |
 | 2.7 | Concealed-damage flags with the rule that fired | `schema/` | Schema defines it, requires `rule_id` + `rule_statement`; no detector | **NOT DONE** |
@@ -51,7 +51,7 @@ All 8 deliverables written; 5 complete, 3 partial.
 
 | # | Gate | Path | Result | Status |
 |---|---|---|---|---|
-| 2.19 | Opening widths ≤2 cm on ≥85% | — | No opening detection; cannot be scored | **NOT DONE** |
+| 2.19 | Opening widths ≤2 cm on ≥85% | `benchmark/BENCHMARK_REPORT.md` | Now scorable: **2 of 3** doors/archways found in the room with ground truth, 0 of them within 2 cm. One miss plus width errors of −14.8% and +52.7% | **NOT DONE** — measured and reported |
 | 2.20 | Ceiling height ≤1.5 cm | `fixloop/after/score_photo.txt` | −12.0%, a prior not an estimate | **NOT DONE** |
 | 2.21 | Repeatability within 1 cm / 0.5% | `benchmark/BENCHMARK_REPORT.md` | Table produced: **0 of 8**, and the report states which failure mode it is (unrepeatable, not repeatable-but-biased) | **NOT DONE** — measured and diagnosed |
 | 2.22 | Drift accountability + ablation | `out/*/plan.json` | `stitch.drift` states `method: none, applied: false` because no placement stage exists. **Not** "poses used as-is" — the stage is absent, and the field says so | **PARTIAL** |

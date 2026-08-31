@@ -17,7 +17,7 @@ from dataclasses import dataclass, replace
 import cv2
 import numpy as np
 
-from . import floorplane, lines
+from . import floorplane, lines, openings as openings_mod
 from .exif import read_camera
 
 # Handheld capture height. Chest height for an adult holding a phone to frame a
@@ -56,6 +56,7 @@ class RoomView:
     depth_far_m: float = 0.0                    # furthest floor point ahead
     width_span_m: float = 0.0                   # lateral spread of floor points
     ceiling_height_m: float | None = None
+    openings: list = None
 
 
 def _vertical_vanishing_point(seg: lines.Segments) -> np.ndarray | None:
@@ -191,10 +192,11 @@ def analyse(image_path: str, focal_35mm: float | None = None) -> RoomView:
         # wants - not the range to the furthest visible speck.
         chosen = max(strong, key=lambda l: l.distance_m)
         lateral = np.sort(chosen.inliers[:, 0])
+        found = openings_mod.detect(seg, strong, R, focal, principal, CAMERA_HEIGHT_M)
         return RoomView(image_path, True, "", focal_full, tilt, chosen.inliers,
                         float(chosen.distance_m),
                         float(lateral[int(0.95 * len(lateral))] - lateral[int(0.05 * len(lateral))]),
-                        None)
+                        None, found)
 
     boundary = _floor_boundary(image_path, seg, horizon_y)
     if len(boundary) < 12:
