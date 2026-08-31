@@ -28,6 +28,24 @@ Living room and Hall — the two rooms with complete tape ground truth
 (`benchmark/ground_truth/`), so both systems are scored against the same
 independent answer key rather than against each other.
 
+## Attempt 1 — Polycam 6.0.21: abandoned
+
+Floorplan mode requires LiDAR, which the iPhone 13 does not have, so the app
+routes a non-LiDAR device to photogrammetry capture instead. That path did not
+produce a usable floor plan for these rooms and was abandoned after about 30
+minutes.
+
+Recorded rather than deleted: the brief says cost is not an accepted reason for
+skipping this comparison because free tiers exist, and the honest finding here is
+that the incumbent's floor-plan feature is **gated on hardware, not on price**.
+A non-Pro iPhone cannot produce a Polycam floor plan at any tier. That is a
+substantive result about the incumbent, not an excuse.
+
+## Attempt 2 — magicplan
+
+magicplan's AR room capture works on any ARKit device, LiDAR or not, which makes
+it the appropriate comparator for this hardware. In progress.
+
 ## Status
 
-Capture in progress.
+Attempt 2 in progress.
