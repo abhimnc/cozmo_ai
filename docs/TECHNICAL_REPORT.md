@@ -256,9 +256,12 @@ express it, and its interval does not widen to admit that.
 worst — and the Hall is simultaneously the hardest room and the one whose error
 would propagate everywhere, being the connector.
 
-**Mirrors, glass, wet-look surfaces, low light.** Present in the captures — two
-bathrooms, a kitchen — and **not analysed**. A named constraint in the brief, not
-addressed.
+**Mirrors, glass, wet-look surfaces, low light.** Analysed in
+`docs/HARD_SURFACES.md` against our own captures. Nothing detects them. Mirrors
+are the highest risk because they fail *silently*: a mirror shows a
+geometrically valid reflected room, and a wall base seen in one would be fitted
+as a wall behind the real wall, roughly doubling the room. The two darkest rooms
+in the property are also the two most over-estimated.
 
 **Opening detection exists but does not pass.** Doors and archways are found as
 jamb pairs standing on a wall line; 2 of 3 were found in the room with ground
