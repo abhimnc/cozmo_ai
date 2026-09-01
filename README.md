@@ -140,5 +140,7 @@ Openings are an empty list with a stated reason rather than a fabricated door.
 | How does it work? | `docs/TECHNICAL_REPORT.md` |
 | What was fixed, and did it work? | `fixloop/POSTMORTEM.md` |
 | How does it compare to a real product? | `benchmark/head_to_head/README.md` |
+| How do the modules fit together? | `docs/MODULE_GRAPH.md` |
+| How does the code run, step by step? | `docs/CODE_WALKTHROUGH.md` |
 | Why was it built this way? | `docs/DECISIONS.md` |
 | What is it not honest about? | `docs/ERROR_BUDGET.md`, `docs/RISKS.md` |
