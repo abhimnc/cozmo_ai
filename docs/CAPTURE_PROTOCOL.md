@@ -4,10 +4,23 @@
 does not need to know which tier the pipeline prefers; they tap the tier they
 were asked for and follow the screen.
 
-## Install — one command, **measured at 11 seconds**
+## Install — two routes
+
+### TestFlight (no Mac, no cable)
+
+**https://testflight.apple.com/join/WmZW3dZ7**
+
+Open on the iPhone, install TestFlight if prompted, then install Cozmo Capture.
+Nothing else is needed — no computer, no cable, no certificate to trust.
+
+*Submitted for Apple's Beta App Review on 1 September 2026. Until that clears the
+link will say testers cannot join; the cable route below works regardless.*
+
+### Cable — **measured at 11 seconds**
 
 The brief allows "a TestFlight build **or** a dev build we can install on our
-device in under 10 minutes". This is the dev build.
+device in under 10 minutes". This is the dev build, and it is the route with a
+measured install time.
 
 1. Connect the iPhone by cable to a Mac with Xcode. Unlock it.
 2. Run: `./scripts/install_on_device.sh`

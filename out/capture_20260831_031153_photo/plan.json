@@ -13,8 +13,8 @@
   },
   "pipeline": {
     "version": "0.1.0",
-    "git_commit": "51c205c",
-    "run_at": "2026-08-31T07:46:18.141399+00:00",
+    "git_commit": "ead6b98",
+    "run_at": "2026-09-01T14:25:54.815064+00:00",
     "command": "cozmo run benchmark/raw/capture_20260831_031153_photo",
     "runtime_seconds": 17.5
   },
