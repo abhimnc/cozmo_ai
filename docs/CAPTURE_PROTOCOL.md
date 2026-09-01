@@ -23,10 +23,11 @@ minutes.
 The script diagnoses the common failures rather than surfacing raw build errors —
 phone locked, cable without data lines, Developer Mode off.
 
-*TestFlight is separately blocked:* Apple Developer Program enrolment was
-submitted and remains Pending. A Release archive builds and signs, so the upload
-is one step away once approval lands — but it is not needed for the requirement,
-which the dev build satisfies.
+*TestFlight is also available.* A build was uploaded to App Store Connect on
+1 September 2026 and validated with no errors. Installing from a TestFlight link
+needs no Mac, no cable and no certificate trust — preferable when the device is
+not ours. The cable route above remains the fallback and is the one with a
+measured install time.
 5. The home screen names your device and shows a green tick beside every tier
    this handset can run. If a tier is greyed out, the app says why.
 
