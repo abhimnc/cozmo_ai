@@ -15,6 +15,7 @@
 		5B83B68878EA8EB93297AFDE /* CaptureTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E53B7BEE8143BC96F195D7 /* CaptureTier.swift */; };
 		690B5361BD9D32A5AD9275A1 /* CaptureBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240D1ACB6699A844A092368 /* CaptureBundle.swift */; };
 		7CA8CCA04B3300A3A3CD421A /* ARPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A626CE52113AB26A79882D /* ARPreview.swift */; };
+		E1E800F5E68EB5B421A3E1F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E61D42BFA674063B361CF78 /* Assets.xcassets */; };
 		E354850B3A52A8EA6C9001FE /* FrameWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C0C05738CFFCDB5F1D917 /* FrameWriter.swift */; };
 		EB92541E2468D694ED810519 /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA210DCDA3A139970A46203D /* CaptureView.swift */; };
 		ED46C2DC355F5D58F35DBFCA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7EDA9A93D67516E37F7F62 /* RootView.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		0C3AD99FE573E2F2B1615C19 /* CozmoCaptureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CozmoCaptureApp.swift; sourceTree = "<group>"; };
+		1E61D42BFA674063B361CF78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		419561608AE3B927788F5E98 /* CaptureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureController.swift; sourceTree = "<group>"; };
 		43529E94457C378B90610A31 /* BundleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleListView.swift; sourceTree = "<group>"; };
 		59E53B7BEE8143BC96F195D7 /* CaptureTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureTier.swift; sourceTree = "<group>"; };
@@ -36,7 +38,7 @@
 		D240D1ACB6699A844A092368 /* CaptureBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureBundle.swift; sourceTree = "<group>"; };
 		E9A626CE52113AB26A79882D /* ARPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPreview.swift; sourceTree = "<group>"; };
 		F9C3B3BE9D031099D471C09C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		"TEMP_8CA326E3-F51B-40CD-BFDF-BB23E9689DE9" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		"TEMP_831C5089-8432-4BCF-8116-0D4024BCA82B" /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -92,6 +94,7 @@
 		BF771FEC79F22972ED130080 /* CozmoCapture */ = {
 			isa = PBXGroup;
 			children = (
+				1E61D42BFA674063B361CF78 /* Assets.xcassets */,
 				F9C3B3BE9D031099D471C09C /* Info.plist */,
 				2F37ED14A5B084C04F813A5B /* App */,
 				BC01EC55FE4356DB3E083DE5 /* Capture */,
@@ -100,10 +103,10 @@
 			path = CozmoCapture;
 			sourceTree = "<group>";
 		};
-		"TEMP_4D090BAF-4FAA-45FD-8274-5AA48DC1B9A3" /* ios */ = {
+		"TEMP_0228D21D-0A4F-4694-A3B5-42EE9963BC99" /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				"TEMP_8CA326E3-F51B-40CD-BFDF-BB23E9689DE9" /* Signing.xcconfig */,
+				"TEMP_831C5089-8432-4BCF-8116-0D4024BCA82B" /* Signing.xcconfig */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -116,6 +119,7 @@
 			buildConfigurationList = 2768652C0EA8D1E713C96E41 /* Build configuration list for PBXNativeTarget "CozmoCapture" */;
 			buildPhases = (
 				EF2BD0D39E8D3CABA0F6B5F2 /* Sources */,
+				7132EC15D4CDFEC109E1A692 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -162,6 +166,17 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		7132EC15D4CDFEC109E1A692 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1E800F5E68EB5B421A3E1F8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EF2BD0D39E8D3CABA0F6B5F2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -187,7 +202,7 @@
 /* Begin XCBuildConfiguration section */
 		B86C8506216D0A0D838820D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_8CA326E3-F51B-40CD-BFDF-BB23E9689DE9" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_831C5089-8432-4BCF-8116-0D4024BCA82B" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -207,7 +222,7 @@
 		};
 		B9E9C04AD143530229A7E1FA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = "TEMP_8CA326E3-F51B-40CD-BFDF-BB23E9689DE9" /* Signing.xcconfig */;
+			baseConfigurationReference = "TEMP_831C5089-8432-4BCF-8116-0D4024BCA82B" /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
